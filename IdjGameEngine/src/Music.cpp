@@ -1,4 +1,5 @@
-﻿#include "Music.h"
+﻿#include <stdexcept>
+#include "Music.h"
 
 Music::Music(): music(nullptr) {}
 
@@ -21,7 +22,7 @@ void Music::Play(int times) {
     // TODO: music == nullptr
     auto mixPlayReturn = Mix_PlayMusic(music, -1);
     if (mixPlayReturn != 0) {
-        throw std::exception(Mix_GetError());
+        throw std::runtime_error(Mix_GetError());
     }
 }
 
@@ -35,7 +36,7 @@ void Music::Open(std::string file) {
     // TODO Close music if already opened?
     music = Mix_LoadMUS(file.c_str());
     if (music == nullptr) {
-        throw std::exception(Mix_GetError());
+        throw std::runtime_error(Mix_GetError());
     }
 }
 

@@ -1,4 +1,5 @@
-﻿#include "Sprite.h"
+﻿#include <stdexcept>
+#include "Sprite.h"
 #include "SDL_image.h"
 #include "Game.h"
 
@@ -28,7 +29,7 @@ void Sprite::Open(std::string file) {
 
     texture = IMG_LoadTexture(renderer, file.c_str());
     if (texture == nullptr) {
-        throw std::exception(SDL_GetError());
+        throw std::runtime_error(SDL_GetError());
     }
 
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
