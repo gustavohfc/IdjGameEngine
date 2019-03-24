@@ -58,6 +58,8 @@ Game::Game(std::string title, int width, int height) {
 
 
 Game::~Game() {
+    delete state;
+
     Mix_CloseAudio();
     Mix_Quit();
     IMG_Quit();
@@ -65,8 +67,6 @@ Game::~Game() {
     SDL_DestroyWindow(window);
     IMG_Quit();
     SDL_Quit();
-
-    delete state;
 }
 
 
@@ -74,6 +74,7 @@ void Game::Run() {
     while (!state->QuitRequested()) {
         state->Update(0);
         state->Render();
+        SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
 }

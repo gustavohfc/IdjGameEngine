@@ -5,15 +5,12 @@ Music::Music(): music(nullptr) {}
 
 
 Music::Music(std::string file) {
-    music = nullptr;
     Open(file);
-
-    // TODO
-    Play();
 }
 
 
 Music::~Music() {
+    // TODO: stop
     Mix_FreeMusic(music);
 }
 
