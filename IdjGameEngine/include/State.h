@@ -5,6 +5,7 @@
 class State {
 public:
     State();
+    ~State();
 
     bool QuitRequested() const;
     void LoadAssets();
@@ -12,7 +13,11 @@ public:
     void Render();
 
 private:
-    Sprite bg;
+    // Sprite bg;
     Music music;
     bool quitRequested;
+    std::vector<std::unique_ptr<GameObject>> objectArray;
+
+    void Input();
+    void AddObject(int mouseX, int mouseY);
 };

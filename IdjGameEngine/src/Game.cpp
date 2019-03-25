@@ -11,6 +11,8 @@ Game::Game(const std::string& title, int width, int height) {
 
     instance = this;
 
+    srand(time(nullptr));
+
     // Init the SDL
     auto initReturn = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
     if (initReturn != 0) {
