@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <string>
-#include "SDL.h"
 #include "State.h"
 
 class Game {
@@ -13,7 +11,7 @@ public:
     static Game& GetInstance();
 
 private:
-    Game(std::string title, int width, int height);
+    Game(const std::string& title, int width, int height);
 
     static Game* instance;
     SDL_Window* window;

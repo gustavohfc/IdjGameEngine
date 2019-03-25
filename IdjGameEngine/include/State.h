@@ -6,7 +6,7 @@ class State {
 public:
     State();
 
-    bool QuitRequested();
+    bool QuitRequested() const;
     void LoadAssets();
     void Update(float dt);
     void Render();

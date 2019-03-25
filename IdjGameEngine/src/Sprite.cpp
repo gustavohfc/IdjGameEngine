@@ -1,13 +1,11 @@
-﻿#include <stdexcept>
+﻿#include "pch.h"
 #include "Sprite.h"
-#include "SDL_image.h"
 #include "Game.h"
 
-Sprite::Sprite(): texture(nullptr) {}
+Sprite::Sprite() : texture(nullptr) {}
 
 
-Sprite::Sprite(std::string file) {
-    texture = nullptr;
+Sprite::Sprite(std::string file) : texture(nullptr) {
     Open(file);
 }
 
@@ -24,7 +22,6 @@ void Sprite::Open(std::string file) {
         SDL_DestroyTexture(texture);
     }
 
-    // TODO
     auto renderer = Game::GetInstance().GetRenderer();
 
     texture = IMG_LoadTexture(renderer, file.c_str());
@@ -47,7 +44,6 @@ void Sprite::SetClip(int x, int y, int w, int h) {
 
 
 void Sprite::Render(int x, int y) {
-    // TODO
     auto renderer = Game::GetInstance().GetRenderer();
 
     SDL_Rect dst = {
@@ -61,16 +57,16 @@ void Sprite::Render(int x, int y) {
 }
 
 
-int Sprite::GetWidth() {
+int Sprite::GetWidth() const {
     return width;
 }
 
 
-int Sprite::GetHeight() {
+int Sprite::GetHeight() const {
     return height;
 }
 
 
-bool Sprite::IsOpen() {
+bool Sprite::IsOpen() const {
     return texture != nullptr;
 }

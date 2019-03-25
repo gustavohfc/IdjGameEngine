@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <string>
-#include "SDL.h"
 
 class Sprite {
 public:
@@ -11,9 +9,9 @@ public:
     void Open(std::string file);
     void SetClip(int x, int y, int w, int h);
     void Render(int x, int y);
-    int GetWidth();
-    int GetHeight();
-    bool IsOpen();
+    int GetWidth() const;
+    int GetHeight() const;
+    bool IsOpen() const;
 
 private:
     SDL_Texture* texture;

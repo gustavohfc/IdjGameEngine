@@ -1,14 +1,12 @@
-﻿#include <stdexcept>
+﻿#include "pch.h"
 #include "Game.h"
-#include "SDL_image.h"
-#include "SDL_mixer.h"
-#include "SDL_ttf.h"
 
 Game* Game::instance = nullptr;
 
-Game::Game(std::string title, int width, int height) {
+
+Game::Game(const std::string& title, int width, int height) {
     if (instance != nullptr) {
-        throw std::runtime_error("Game instance already exists");
+        throw std::logic_error("Game instance already exists");
     }
 
     instance = this;
@@ -27,14 +25,14 @@ Game::Game(std::string title, int width, int height) {
     }
 
     // Init the SDL mixer
-    auto mixOpenAudioReturn = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024);
-    if (mixOpenAudioReturn != 0) {
-        throw std::runtime_error(Mix_GetError());
-    }
-
     auto mixFlags = MIX_INIT_OGG;
     auto mixInitReturn = Mix_Init(mixFlags);
     if (mixInitReturn != mixFlags) {
+        throw std::runtime_error(Mix_GetError());
+    }
+
+    auto mixOpenAudioReturn = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024);
+    if (mixOpenAudioReturn != 0) {
         throw std::runtime_error(Mix_GetError());
     }
 

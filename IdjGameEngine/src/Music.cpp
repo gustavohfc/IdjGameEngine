@@ -1,22 +1,24 @@
-﻿#include <stdexcept>
+﻿#include "pch.h"
 #include "Music.h"
 
-Music::Music(): music(nullptr) {}
+Music::Music() : music(nullptr) {}
 
 
-Music::Music(std::string file) {
+Music::Music(std::string file) : music(nullptr) {
     Open(file);
 }
 
 
 Music::~Music() {
-    // TODO: stop
     Mix_FreeMusic(music);
 }
 
 
 void Music::Play(int times) {
-    // TODO: music == nullptr
+    if (!IsOpen()) {
+        throw std::logic_error("Trying to play a nullptr music");
+    }
+
     auto mixPlayReturn = Mix_PlayMusic(music, -1);
     if (mixPlayReturn != 0) {
         throw std::runtime_error(Mix_GetError());
@@ -25,12 +27,18 @@ void Music::Play(int times) {
 
 
 void Music::Stop(int msToStop) {
-    Mix_FadeOutMusic(msToStop);
+    auto success = Mix_FadeOutMusic(msToStop);
+    if (!success) {
+        throw std::runtime_error("Mix_FadeOutMusic fail");
+    }
 }
 
 
 void Music::Open(std::string file) {
-    // TODO Close music if already opened?
+    if (IsOpen()) {
+        Mix_FreeMusic(music);
+    }
+
     music = Mix_LoadMUS(file.c_str());
     if (music == nullptr) {
         throw std::runtime_error(Mix_GetError());
@@ -38,6 +46,6 @@ void Music::Open(std::string file) {
 }
 
 
-bool Music::IsOpen() {
+bool Music::IsOpen() const {
     return music != nullptr;
 }

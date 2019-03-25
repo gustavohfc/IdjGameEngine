@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <string>
 #include "SDL_mixer.h"
 
 class Music {
@@ -11,7 +10,7 @@ public:
     void Play(int times = -1);
     void Stop(int msToStop = 1500);
     void Open(std::string file);
-    bool IsOpen();
+    bool IsOpen() const;
 
 private:
     Mix_Music* music;

@@ -1,5 +1,5 @@
-﻿#include "State.h"
-#include "SDL.h"
+﻿#include "pch.h"
+#include "State.h"
 
 
 State::State(): bg("resources/img/ocean.jpg"),
@@ -9,7 +9,7 @@ State::State(): bg("resources/img/ocean.jpg"),
 }
 
 
-bool State::QuitRequested() {
+bool State::QuitRequested() const {
     return quitRequested;
 }
 
@@ -23,5 +23,5 @@ void State::Update(float dt) {
 
 
 void State::Render() {
-    bg.Render(10, 10);
+    bg.Render(0, 0);
 }
