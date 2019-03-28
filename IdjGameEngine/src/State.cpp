@@ -2,8 +2,8 @@
 #include "State.h"
 
 
-State::State(): bg("resources/img/ocean.jpg"),
-                music("resources/audio/stageState.ogg"),
+State::State(): bg("assets/img/ocean.jpg"),
+                music("assets/audio/stageState.ogg"),
                 quitRequested(false) {
     music.Play();
 }
