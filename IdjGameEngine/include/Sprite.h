@@ -3,10 +3,10 @@
 class Sprite {
 public:
     Sprite();
-    Sprite(std::string file);
+    Sprite(const std::string& file);
     ~Sprite();
 
-    void Open(std::string file);
+    void Open(const std::string& file);
     void SetClip(int x, int y, int w, int h);
     void Render(int x, int y);
     int GetWidth() const;

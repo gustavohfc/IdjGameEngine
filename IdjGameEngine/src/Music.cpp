@@ -4,7 +4,7 @@
 Music::Music() : music(nullptr) {}
 
 
-Music::Music(std::string file) : music(nullptr) {
+Music::Music(const std::string& file) : music(nullptr) {
     Open(file);
 }
 
@@ -14,7 +14,7 @@ Music::~Music() {
 }
 
 
-void Music::Play(int times) {
+void Music::Play(int times) const {
     if (!IsOpen()) {
         throw std::logic_error("Trying to play a nullptr music");
     }
@@ -34,7 +34,7 @@ void Music::Stop(int msToStop) {
 }
 
 
-void Music::Open(std::string file) {
+void Music::Open(const std::string& file) {
     if (IsOpen()) {
         Mix_FreeMusic(music);
     }
