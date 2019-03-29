@@ -28,7 +28,7 @@ RM = del
 
 RUN =
 
-SDL_PATH = C:\SDL2\SDL2-2.0.5\x86_64-w64-mingw32
+SDL_PATH = C:\dev\SDL2-mingw
 
 DIRECTIVES += -I $(SDL_PATH)\include\SDL2
 
