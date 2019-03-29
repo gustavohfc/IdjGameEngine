@@ -7,7 +7,7 @@ public:
     Sprite(GameObject& associated, std::string file);
     ~Sprite();
 
-    void Open(std::string file);
+    void Open(const std::string& file);
     void SetClip(int x, int y, int w, int h);
     int GetWidth() const;
     int GetHeight() const;

@@ -80,12 +80,12 @@ void Game::Run() {
 }
 
 
-SDL_Renderer* Game::GetRenderer() {
+SDL_Renderer* Game::GetRenderer() const {
     return renderer;
 }
 
 
-State& Game::GetState() {
+State& Game::GetState() const {
     return *state;
 }
 

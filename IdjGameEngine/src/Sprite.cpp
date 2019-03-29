@@ -19,7 +19,7 @@ Sprite::~Sprite() {
 }
 
 
-void Sprite::Open(std::string file) {
+void Sprite::Open(const std::string& file) {
     if (texture != nullptr) {
         SDL_DestroyTexture(texture);
     }

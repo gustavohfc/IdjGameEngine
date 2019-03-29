@@ -5,7 +5,7 @@
 #include "Sound.h"
 
 
-State::State(): music("resources/audio/stageState.ogg"),
+State::State(): music("assets/audio/stageState.ogg"),
                 quitRequested(false) {
     auto background = new GameObject();
     background->AddComponent(new Sprite(*background, "resources/img/ocean.jpg"));
