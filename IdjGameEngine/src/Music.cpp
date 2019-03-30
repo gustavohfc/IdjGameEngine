@@ -4,7 +4,9 @@
 Music::Music() : music(nullptr) {}
 
 
-Music::Music(const std::string& file) : music(nullptr) {
+Music::Music(const std::string& file):
+    music(nullptr) {
+
     Open(file);
 }
 

@@ -2,10 +2,13 @@
 #include "Sound.h"
 
 
-Sound::Sound(GameObject& associated): Component(associated) {}
+Sound::Sound(GameObject& associated):
+    Component(associated) {}
 
 
-Sound::Sound(GameObject& associated, std::string file): Sound(associated) {
+Sound::Sound(GameObject& associated, std::string file):
+    Sound(associated) {
+
     Open(file);
 }
 
@@ -55,6 +58,7 @@ bool Sound::IsOpen() {
 void Sound::Update(float dt) {}
 
 void Sound::Render() {}
+
 
 bool Sound::Is(std::string type) {
     return type == "Sound";

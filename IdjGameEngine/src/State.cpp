@@ -5,10 +5,12 @@
 #include "Sound.h"
 
 
-State::State(): music("assets/audio/stageState.ogg"),
-                quitRequested(false) {
+State::State():
+    music("assets/audio/stageState.ogg"),
+    quitRequested(false) {
+
     auto background = new GameObject();
-    background->AddComponent(new Sprite(*background, "resources/img/ocean.jpg"));
+    background->AddComponent(new Sprite(*background, "assets/img/ocean.jpg"));
     objectArray.emplace_back(background);
 
     music.Play();
@@ -94,7 +96,8 @@ void State::Input() {
             }
                 // Se não, crie um objeto
             else {
-                Vec2 objPos = /*Vec2(200, 0).GetRotated(-M_PI + M_PI * (rand() % 1001) / 500.0) +*/ Vec2(mouseX, mouseY);
+                Vec2 objPos = /*Vec2(200, 0).GetRotated(-M_PI + M_PI * (rand() % 1001) / 500.0) +*/
+                    Vec2(mouseX, mouseY);
                 AddObject((int)objPos.x, (int)objPos.y);
             }
         }
@@ -104,8 +107,8 @@ void State::Input() {
 
 void State::AddObject(int mouseX, int mouseY) {
     auto gameObject = new GameObject();
-    gameObject->AddComponent(new Sprite(*gameObject, "resources/img/penguinface.png"));
-    gameObject->AddComponent(new Sound(*gameObject, "resources/audio/boom.wav"));
+    gameObject->AddComponent(new Sprite(*gameObject, "assets/img/penguinface.png"));
+    gameObject->AddComponent(new Sound(*gameObject, "assets/audio/boom.wav"));
     gameObject->AddComponent(new Face(*gameObject));
     //gameObject->box.CenterAt(mouseX, mouseY);
 

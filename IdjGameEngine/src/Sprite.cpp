@@ -3,11 +3,14 @@
 #include "Game.h"
 
 
-Sprite::Sprite(GameObject& associated) : Component(associated),
-                                         texture(nullptr) {}
+Sprite::Sprite(GameObject& associated):
+    Component(associated),
+    texture(nullptr) {}
 
 
-Sprite::Sprite(GameObject& associated, std::string file) : Sprite(associated) {
+Sprite::Sprite(GameObject& associated, std::string file):
+    Sprite(associated) {
+
     Open(file);
 }
 

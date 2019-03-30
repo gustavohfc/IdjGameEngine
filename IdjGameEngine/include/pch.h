@@ -21,5 +21,7 @@
 #include <vector>
 #include <algorithm>
 #include <ctime>
+#include <memory>
+#include <cmath>
 
 #endif //PCH_H
