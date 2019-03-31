@@ -6,8 +6,7 @@
 
 
 State::State():
-    music("assets/audio/stageState.ogg"),
-    quitRequested(false) {
+    music("assets/audio/stageState.ogg") {
 
     auto background = new GameObject();
     background->AddComponent(new Sprite(*background, "assets/img/ocean.jpg"));
@@ -39,13 +38,19 @@ void State::Update(float dt) {
             objectArray.erase(objectArray.begin() + i);
         }
     }
+
+    // Remove dead objects
+    objectArray.erase(
+        std::remove_if(objectArray.begin(), objectArray.end(),
+                       [](const std::unique_ptr<GameObject>& obj) { return obj->IsDead(); }),
+        objectArray.end()
+    );
 }
 
 
 void State::Render() {
-    // bg.Render(0, 0);
-    for (auto it = objectArray.begin(); it != objectArray.end(); ++it) {
-        (*it)->Render();
+    for (auto& it : objectArray) {
+        it->Render();
     }
 }
 
@@ -78,8 +83,8 @@ void State::Input() {
                 // Esse código, assim como a classe Face, é provisório. Futuramente, para
                 // chamar funções de GameObjects, use objectArray[i]->função() direto.
 
-                if (go->box.Contains({(float)mouseX, (float)mouseY})) {
-                    Face* face = (Face*)go->GetComponent("Face");
+                if (go->box.Contains({float(mouseX), float(mouseY)})) {
+                    Face* face = static_cast<Face*>(go->GetFace());
                     if (nullptr != face) {
                         // Aplica dano
                         face->Damage(std::rand() % 10 + 10);
@@ -96,9 +101,9 @@ void State::Input() {
             }
                 // Se não, crie um objeto
             else {
-                Vec2 objPos = /*Vec2(200, 0).GetRotated(-M_PI + M_PI * (rand() % 1001) / 500.0) +*/
+                Vec2 objPos = Vec2(200, 0).GetRotated(-M_PI + M_PI * (rand() % 1001) / 500.0) +
                     Vec2(mouseX, mouseY);
-                AddObject((int)objPos.x, (int)objPos.y);
+                AddObject(int(objPos.x), int(objPos.y));
             }
         }
     }
@@ -107,10 +112,12 @@ void State::Input() {
 
 void State::AddObject(int mouseX, int mouseY) {
     auto gameObject = new GameObject();
+
     gameObject->AddComponent(new Sprite(*gameObject, "assets/img/penguinface.png"));
     gameObject->AddComponent(new Sound(*gameObject, "assets/audio/boom.wav"));
     gameObject->AddComponent(new Face(*gameObject));
-    //gameObject->box.CenterAt(mouseX, mouseY);
+
+    gameObject->box.SetCenter(mouseX, mouseY);
 
     objectArray.emplace_back(gameObject);
 }

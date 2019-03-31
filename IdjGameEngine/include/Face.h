@@ -4,13 +4,13 @@
 
 class Face : public Component {
 public:
-    Face(GameObject associated);
+    Face(GameObject& associated);
 
     void Damage(int damage);
 
     void Update(float dt) override;
     void Render() override;
-    bool Is(std::string type) override;
+    bool Is(const std::string& type) override;
 
 private:
     int hitpoints;

@@ -30,11 +30,14 @@ Vec2 Vec2::Norm() const {
     };
 }
 
-void Vec2::Rotate(float angle) {
+Vec2 Vec2::GetRotated(float angle) const {
     auto sin = std::sin(angle);
     auto cos = std::cos(angle);
-    x = x * cos - y * sin;
-    y = y * cos - x * sin;
+
+    return{
+        x * cos - y * sin,
+        y * cos - x * sin
+    };
 }
 
 

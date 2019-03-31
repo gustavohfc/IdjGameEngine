@@ -3,6 +3,8 @@
 #include "Component.h"
 
 class Component;
+class Sound;
+class Face;
 
 class GameObject {
 public:
@@ -13,11 +15,13 @@ public:
 
     void Update(float dt);
     void Render();
-    bool IsDead();
+    bool IsDead() const;
     void RequestDelete();
     void AddComponent(Component* cpt);
     void RemoveComponent(Component* cpt);
-    Component* GetComponent(std::string type);
+    Component* GetComponent(const std::string& type) const;
+    Sound* GetSound() const;
+    Face* GetFace() const;
 
 private:
     std::vector<Component*> components;

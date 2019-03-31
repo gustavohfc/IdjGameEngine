@@ -1,11 +1,10 @@
 ﻿#include "pch.h"
 #include "Music.h"
 
-Music::Music() : music(nullptr) {}
+Music::Music() {}
 
 
-Music::Music(const std::string& file):
-    music(nullptr) {
+Music::Music(const std::string& file) {
 
     Open(file);
 }

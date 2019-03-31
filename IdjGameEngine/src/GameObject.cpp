@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "GameObject.h"
+#include "Sound.h"
+#include "Face.h"
 
 
 GameObject::GameObject():
@@ -30,7 +32,7 @@ void GameObject::Render() {
 }
 
 
-bool GameObject::IsDead() {
+bool GameObject::IsDead() const {
     return isDead;
 }
 
@@ -55,7 +57,21 @@ void GameObject::RemoveComponent(Component* cpt) {
 }
 
 
-Component* GameObject::GetComponent(std::string type) {
-    // TODO
+Component* GameObject::GetComponent(const std::string& type) const {
+    for (auto component : components) {
+        if (component->Is(type)) {
+            return component;
+        }
+    }
     return nullptr;
+}
+
+
+Sound* GameObject::GetSound() const {
+    return static_cast<Sound*>(GetComponent("Sound"));
+}
+
+
+Face* GameObject::GetFace() const {
+    return static_cast<Face*>(GetComponent("Face"));
 }

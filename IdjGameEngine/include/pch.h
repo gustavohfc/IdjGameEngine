@@ -23,5 +23,6 @@
 #include <ctime>
 #include <memory>
 #include <cmath>
+#include <string>
 
 #endif //PCH_H

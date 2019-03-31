@@ -12,5 +12,5 @@ public:
     bool IsOpen() const;
 
 private:
-    Mix_Music* music;
+    Mix_Music* music = nullptr;
 };

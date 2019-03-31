@@ -15,7 +15,7 @@ public:
 private:
     // Sprite bg;
     Music music;
-    bool quitRequested;
+    bool quitRequested = false;
     std::vector<std::unique_ptr<GameObject>> objectArray;
 
     void Input();

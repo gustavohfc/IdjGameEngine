@@ -8,6 +8,8 @@ public:
     Rect();
     Rect(float x, float y, float w, float h);
 
-    Vec2 Center() const;
+    Vec2 GetCenter() const;
+    void SetCenter(float centerX, float centerY);
+    float Dist(const Rect& other) const;
     bool Contains(const Vec2& v) const;
 };

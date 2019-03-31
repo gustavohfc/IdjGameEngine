@@ -4,11 +4,10 @@
 
 
 Sprite::Sprite(GameObject& associated):
-    Component(associated),
-    texture(nullptr) {}
+    Component(associated) {}
 
 
-Sprite::Sprite(GameObject& associated, std::string file):
+Sprite::Sprite(GameObject& associated, const std::string& file):
     Sprite(associated) {
 
     Open(file);
@@ -43,10 +42,7 @@ void Sprite::Open(const std::string& file) {
 
 
 void Sprite::SetClip(int x, int y, int w, int h) {
-    clipRect.x = x;
-    clipRect.y = y;
-    clipRect.w = w;
-    clipRect.h = h;
+    clipRect = {x, y, w, h};
 }
 
 
@@ -69,10 +65,10 @@ void Sprite::Render() {
     auto renderer = Game::GetInstance().GetRenderer();
 
     SDL_Rect dst = {
-        (int)associated.box.x,
-        (int)associated.box.y,
-        (int)associated.box.w,
-        (int)associated.box.h
+        int(associated.box.x),
+        int(associated.box.y),
+        int(associated.box.w),
+        int(associated.box.h)
     };
 
     SDL_RenderCopy(renderer, texture, &clipRect, &dst);
@@ -82,6 +78,6 @@ void Sprite::Render() {
 void Sprite::Update(float dt) {}
 
 
-bool Sprite::Is(std::string type) {
+bool Sprite::Is(const std::string& type) {
     return type == "Sprite";
 }

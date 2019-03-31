@@ -10,7 +10,7 @@ public:
     float Abs() const;
     float Angle() const;
     Vec2 Norm() const;
-    void Rotate(float angle);
+    Vec2 GetRotated(float angle) const;
     float Dist(const Vec2& other) const;
 
     // Operator overloading

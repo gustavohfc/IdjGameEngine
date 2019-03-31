@@ -4,7 +4,7 @@
 class Sprite : public Component {
 public:
     Sprite(GameObject& associated);
-    Sprite(GameObject& associated, std::string file);
+    Sprite(GameObject& associated, const std::string& file);
     ~Sprite();
 
     void Open(const std::string& file);
@@ -15,10 +15,10 @@ public:
 
     void Render() override;
     void Update(float dt) override;
-    bool Is(std::string type) override;
+    bool Is(const std::string& type) override;
 
 private:
-    SDL_Texture* texture;
+    SDL_Texture* texture = nullptr;
     int width;
     int height;
     SDL_Rect clipRect;

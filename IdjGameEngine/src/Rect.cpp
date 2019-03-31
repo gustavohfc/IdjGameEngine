@@ -16,15 +16,22 @@ Rect::Rect(float x, float y, float w, float h):
     h(h) {}
 
 
-Vec2 Rect::Center() const {
+Vec2 Rect::GetCenter() const {
     return {
         (x + w) / 2,
         (y + h) / 2
     };
 }
 
+
+void Rect::SetCenter(float centerX, float centerY) {
+    x = centerX - (w / 2);
+    y = centerY - (h / 2);
+}
+
+
 float Rect::Dist(const Rect& other) const {
-    return this->Center().Dist(other.Center());
+    return this->GetCenter().Dist(other.GetCenter());
 }
 
 bool Rect::Contains(const Vec2& v) const {

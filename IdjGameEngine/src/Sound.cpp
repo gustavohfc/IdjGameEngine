@@ -6,7 +6,7 @@ Sound::Sound(GameObject& associated):
     Component(associated) {}
 
 
-Sound::Sound(GameObject& associated, std::string file):
+Sound::Sound(GameObject& associated, const std::string& file):
     Sound(associated) {
 
     Open(file);
@@ -14,8 +14,11 @@ Sound::Sound(GameObject& associated, std::string file):
 
 
 Sound::~Sound() {
-    if (IsOpen()) {
+    if (channel != -1) {
         Stop();
+    }
+
+    if (IsOpen()) {
         Mix_FreeChunk(chunk);
     }
 }
@@ -39,10 +42,12 @@ void Sound::Stop() {
     }
 
     Mix_HaltChannel(channel);
+
+    channel = -1;
 }
 
 
-void Sound::Open(std::string file) {
+void Sound::Open(const std::string& file) {
     chunk = Mix_LoadWAV(file.c_str());
     if (chunk == nullptr) {
         throw std::runtime_error(Mix_GetError());
@@ -60,6 +65,6 @@ void Sound::Update(float dt) {}
 void Sound::Render() {}
 
 
-bool Sound::Is(std::string type) {
+bool Sound::Is(const std::string& type) {
     return type == "Sound";
 }
