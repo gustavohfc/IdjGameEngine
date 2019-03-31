@@ -32,11 +32,8 @@ void State::LoadAssets() {}
 void State::Update(float dt) {
     Input();
 
-    for (unsigned i = 0; i < objectArray.size(); ++i) {
-        objectArray[i]->Update(dt);
-        if (objectArray[i]->IsDead()) {
-            objectArray.erase(objectArray.begin() + i);
-        }
+    for (auto& obj : objectArray) {
+        obj->Update(dt);
     }
 
     // Remove dead objects
@@ -49,8 +46,8 @@ void State::Update(float dt) {
 
 
 void State::Render() {
-    for (auto& it : objectArray) {
-        it->Render();
+    for (auto& obj : objectArray) {
+        obj->Render();
     }
 }
 

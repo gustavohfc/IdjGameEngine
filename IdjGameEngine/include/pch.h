@@ -1,6 +1,8 @@
 #ifndef PCH_H
 #define PCH_H
 
+//#define VS_LEAK_CHECK
+
 // SDL
 #ifdef _WIN32
     #include "SDL.h"
@@ -24,5 +26,12 @@
 #include <memory>
 #include <cmath>
 #include <string>
+
+#ifdef VS_LEAK_CHECK
+    #define _CRTDBG_MAP_ALLOC
+    #include <stdlib.h>
+    #include <crtdbg.h>
+    #define new new( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#endif
 
 #endif //PCH_H

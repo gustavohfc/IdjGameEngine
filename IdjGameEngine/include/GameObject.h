@@ -24,6 +24,6 @@ public:
     Face* GetFace() const;
 
 private:
-    std::vector<Component*> components;
+    std::vector<std::unique_ptr<Component>> components;
     bool isDead;
 };
