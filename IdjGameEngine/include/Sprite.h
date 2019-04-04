@@ -4,6 +4,7 @@
 class Sprite : public Component {
 public:
     Sprite(GameObject& associated);
+    Sprite(const std::string& file);
     Sprite(GameObject& associated, const std::string& file);
     ~Sprite();
 

@@ -26,6 +26,7 @@
 #include <memory>
 #include <cmath>
 #include <string>
+#include <fstream>
 
 #ifdef VS_LEAK_CHECK
     #define _CRTDBG_MAP_ALLOC

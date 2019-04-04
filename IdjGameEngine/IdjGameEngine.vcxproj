@@ -160,6 +160,8 @@
     </ClCompile>
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\State.cpp" />
+    <ClCompile Include="src\TileMap.cpp" />
+    <ClCompile Include="src\TileSet.cpp" />
     <ClCompile Include="src\Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +176,8 @@
     <ClInclude Include="include\Rect.h" />
     <ClInclude Include="include\Vec2.h" />
     <ClInclude Include="include\Sound.h" />
+    <ClInclude Include="include\TileSet.h" />
+    <ClInclude Include="include\TileMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
