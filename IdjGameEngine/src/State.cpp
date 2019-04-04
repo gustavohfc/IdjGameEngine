@@ -33,13 +33,15 @@ void State::Update(float dt) {
     Input();
 
     for (auto& obj : objectArray) {
-        obj->Update(dt);
+        if (!obj->IsDead()) {
+            obj->Update(dt);
+        }
     }
 
     // Remove dead objects
     objectArray.erase(
         std::remove_if(objectArray.begin(), objectArray.end(),
-                       [](const std::unique_ptr<GameObject>& obj) { return obj->IsDead(); }),
+                       [](const std::unique_ptr<GameObject>& obj) { return obj->ReadyToBeDeleted(); }),
         objectArray.end()
     );
 }
@@ -47,7 +49,9 @@ void State::Update(float dt) {
 
 void State::Render() {
     for (auto& obj : objectArray) {
-        obj->Render();
+        if (!obj->IsDead()) {
+            obj->Render();
+        }
     }
 }
 

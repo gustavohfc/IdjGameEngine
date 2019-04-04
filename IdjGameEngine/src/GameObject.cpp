@@ -32,6 +32,11 @@ bool GameObject::IsDead() const {
 }
 
 
+bool GameObject::ReadyToBeDeleted() const {
+    return isDead && !GetSound()->IsPlaying();
+}
+
+
 void GameObject::RequestDelete() {
     isDead = true;
 }
