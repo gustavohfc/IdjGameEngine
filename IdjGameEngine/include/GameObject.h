@@ -16,6 +16,7 @@ public:
     void Update(float dt);
     void Render();
     bool IsDead() const;
+    bool ReadyToBeDeleted() const;
     void RequestDelete();
     void AddComponent(Component* cpt);
     void RemoveComponent(Component* cpt);

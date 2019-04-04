@@ -60,6 +60,15 @@ bool Sound::IsOpen() {
 }
 
 
+bool Sound::IsPlaying() const {
+    if (channel == -1) {
+        return false;
+    }
+
+    return Mix_Playing(channel);
+}
+
+
 void Sound::Update(float dt) {}
 
 void Sound::Render() {}
