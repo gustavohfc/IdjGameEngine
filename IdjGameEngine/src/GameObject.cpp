@@ -38,18 +38,19 @@ bool GameObject::ReadyToBeDeleted() const {
 
 
 void GameObject::RequestDelete() {
+    box.Reset();
     isDead = true;
 }
 
 
-void GameObject::AddComponent(Component* cpt) {
-    components.emplace_back(cpt);
+void GameObject::AddComponent(const std::shared_ptr<Component>& cpt) {
+    components.push_back(cpt);
 }
 
 
-void GameObject::RemoveComponent(Component* cpt) {
+void GameObject::RemoveComponent(const std::shared_ptr<Component>& cpt) {
     auto it = std::find_if(components.begin(), components.end(),
-                           [cpt](const std::unique_ptr<Component>& c) { return c.get() == cpt; });
+                           [cpt](const std::shared_ptr<Component>& c) { return c == cpt; });
 
     if (it != components.end()) {
         components.erase(it);

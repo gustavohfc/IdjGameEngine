@@ -8,9 +8,9 @@
 State::State():
     music("assets/audio/stageState.ogg") {
 
-    auto background = new GameObject();
-    background->AddComponent(new Sprite(*background, "assets/img/ocean.jpg"));
-    objectArray.emplace_back(background);
+    auto background = std::make_shared<GameObject>();
+    background->AddComponent(std::make_shared<Sprite>(*background, "assets/img/ocean.jpg"));
+    objectArray.push_back(background);
 
     music.Play();
 }
@@ -41,7 +41,7 @@ void State::Update(float dt) {
     // Remove dead objects
     objectArray.erase(
         std::remove_if(objectArray.begin(), objectArray.end(),
-                       [](const std::unique_ptr<GameObject>& obj) { return obj->ReadyToBeDeleted(); }),
+                       [](const std::shared_ptr<GameObject>& obj) { return obj->ReadyToBeDeleted(); }),
         objectArray.end()
     );
 }
@@ -112,13 +112,13 @@ void State::Input() {
 
 
 void State::AddObject(int mouseX, int mouseY) {
-    auto gameObject = new GameObject();
+    auto gameObject = std::make_shared<GameObject>();
 
-    gameObject->AddComponent(new Sprite(*gameObject, "assets/img/penguinface.png"));
-    gameObject->AddComponent(new Sound(*gameObject, "assets/audio/boom.wav"));
-    gameObject->AddComponent(new Face(*gameObject));
+    gameObject->AddComponent(std::make_shared<Sprite>(*gameObject, "assets/img/penguinface.png"));
+    gameObject->AddComponent(std::make_shared<Sound>(*gameObject, "assets/audio/boom.wav"));
+    gameObject->AddComponent(std::make_shared<Face>(*gameObject));
 
     gameObject->box.SetCenter(mouseX, mouseY);
 
-    objectArray.emplace_back(gameObject);
+    objectArray.push_back(gameObject);
 }

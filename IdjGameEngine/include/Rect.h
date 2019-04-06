@@ -8,6 +8,7 @@ public:
     Rect();
     Rect(float x, float y, float w, float h);
 
+    void Reset();
     Vec2 GetCenter() const;
     void SetCenter(float centerX, float centerY);
     float Dist(const Rect& other) const;

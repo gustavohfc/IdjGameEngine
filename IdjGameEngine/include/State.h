@@ -16,7 +16,7 @@ private:
     // Sprite bg;
     Music music;
     bool quitRequested = false;
-    std::vector<std::unique_ptr<GameObject>> objectArray;
+    std::vector<std::shared_ptr<GameObject>> objectArray;
 
     void Input();
     void AddObject(int mouseX, int mouseY);

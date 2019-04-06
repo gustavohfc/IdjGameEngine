@@ -16,6 +16,14 @@ Rect::Rect(float x, float y, float w, float h):
     h(h) {}
 
 
+void Rect::Reset() {
+    x = 0;
+    y = 0;
+    w = 0;
+    h = 0;
+}
+
+
 Vec2 Rect::GetCenter() const {
     return {
         (x + w) / 2,
