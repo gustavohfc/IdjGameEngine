@@ -11,13 +11,13 @@ Face::Face(GameObject& associated):
 void Face::Damage(int damage) {
     hitpoints -= damage;
 
-    auto sound = associated.GetSound();
-    if (sound != nullptr) {
-        sound->Play();
-    }
-
     if (hitpoints < 0) {
         associated.RequestDelete();
+
+        auto sound = associated.GetSound();
+        if (sound != nullptr) {
+            sound->Play();
+        }
     }
 }
 

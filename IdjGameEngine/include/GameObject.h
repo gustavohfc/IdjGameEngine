@@ -18,13 +18,13 @@ public:
     bool IsDead() const;
     bool ReadyToBeDeleted() const;
     void RequestDelete();
-    void AddComponent(Component* cpt);
-    void RemoveComponent(Component* cpt);
+    void AddComponent(const std::shared_ptr<Component>& cpt);
+    void RemoveComponent(const std::shared_ptr<Component>& cpt);
     Component* GetComponent(const std::string& type) const;
     Sound* GetSound() const;
     Face* GetFace() const;
 
 private:
-    std::vector<std::unique_ptr<Component>> components;
+    std::vector<std::shared_ptr<Component>> components;
     bool isDead;
 };
