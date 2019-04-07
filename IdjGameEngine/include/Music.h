@@ -4,7 +4,6 @@ class Music {
 public:
     Music();
     Music(const std::string& file);
-    ~Music();
 
     void Play(int times = -1) const;
     void Stop(int msToStop = 1500);

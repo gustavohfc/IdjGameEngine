@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Sound.h"
+#include "Resources.h"
 
 
 Sound::Sound(GameObject& associated):
@@ -10,17 +11,6 @@ Sound::Sound(GameObject& associated, const std::string& file):
     Sound(associated) {
 
     Open(file);
-}
-
-
-Sound::~Sound() {
-    if (channel != -1) {
-        Stop();
-    }
-
-    if (IsOpen()) {
-        Mix_FreeChunk(chunk);
-    }
 }
 
 
@@ -48,10 +38,7 @@ void Sound::Stop() {
 
 
 void Sound::Open(const std::string& file) {
-    chunk = Mix_LoadWAV(file.c_str());
-    if (chunk == nullptr) {
-        throw std::runtime_error(Mix_GetError());
-    }
+    chunk = Resources::GetSound(file);
 }
 
 

@@ -4,9 +4,7 @@
 class Sprite : public Component {
 public:
     Sprite(GameObject& associated);
-    Sprite(const std::string& file);
     Sprite(GameObject& associated, const std::string& file);
-    ~Sprite();
 
     void Open(const std::string& file);
     void SetClip(int x, int y, int w, int h);

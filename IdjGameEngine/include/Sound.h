@@ -5,7 +5,6 @@ class Sound : public Component {
 public:
     Sound(GameObject& associated);
     Sound(GameObject& associated, const std::string& file);
-    ~Sound();
 
     void Play(int times = 1);
     void Stop();

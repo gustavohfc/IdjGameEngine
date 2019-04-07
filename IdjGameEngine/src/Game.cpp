@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "Game.h"
+#include "Resources.h"
 
 Game* Game::instance = nullptr;
 
@@ -77,6 +78,10 @@ void Game::Run() {
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
+
+    Resources::ClearImages();
+    Resources::ClearMusics();
+    Resources::ClearSounds();
 }
 
 

@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "Sprite.h"
 #include "Game.h"
+#include "Resources.h"
 
 
 Sprite::Sprite(GameObject& associated):
@@ -14,24 +15,8 @@ Sprite::Sprite(GameObject& associated, const std::string& file):
 }
 
 
-Sprite::~Sprite() {
-    if (texture != nullptr) {
-        SDL_DestroyTexture(texture);
-    }
-}
-
-
 void Sprite::Open(const std::string& file) {
-    if (texture != nullptr) {
-        SDL_DestroyTexture(texture);
-    }
-
-    auto renderer = Game::GetInstance().GetRenderer();
-
-    texture = IMG_LoadTexture(renderer, file.c_str());
-    if (texture == nullptr) {
-        throw std::runtime_error(SDL_GetError());
-    }
+    texture = Resources::GetImage(file);
 
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 

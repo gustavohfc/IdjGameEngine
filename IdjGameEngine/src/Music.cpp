@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "Music.h"
+#include "Resources.h"
 
 Music::Music() {}
 
@@ -7,11 +8,6 @@ Music::Music() {}
 Music::Music(const std::string& file) {
 
     Open(file);
-}
-
-
-Music::~Music() {
-    Mix_FreeMusic(music);
 }
 
 
@@ -36,14 +32,7 @@ void Music::Stop(int msToStop) {
 
 
 void Music::Open(const std::string& file) {
-    if (IsOpen()) {
-        Mix_FreeMusic(music);
-    }
-
-    music = Mix_LoadMUS(file.c_str());
-    if (music == nullptr) {
-        throw std::runtime_error(Mix_GetError());
-    }
+    music = Resources::GetMusic(file);
 }
 
 
