@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Face.h"
 #include "Sound.h"
+#include "InputManager.h"
 
 
 Face::Face(GameObject& associated):
@@ -22,7 +23,16 @@ void Face::Damage(int damage) {
 }
 
 
-void Face::Update(float dt) {}
+void Face::Update(float dt) {
+    auto& inputManager = InputManager::GetInstance();
+
+    if (inputManager.MousePress(LEFT_MOUSE_BUTTON) &&
+        associated.box.Contains({float(inputManager.GetMouseX()), float(inputManager.GetMouseY())})) {
+
+        Damage(std::rand() % 10 + 10);
+    }
+}
+
 
 void Face::Render() {}
 

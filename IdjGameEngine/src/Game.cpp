@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "Game.h"
 #include "Resources.h"
+#include "InputManager.h"
 
 Game* Game::instance = nullptr;
 
@@ -72,7 +73,10 @@ Game::~Game() {
 
 
 void Game::Run() {
+    auto& inputManager = InputManager::GetInstance();
+
     while (!state->QuitRequested()) {
+        inputManager.Update();
         state->Update(0);
         state->Render();
         SDL_RenderPresent(renderer);

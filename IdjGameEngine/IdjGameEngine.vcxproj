@@ -160,6 +160,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Sprite.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\State.cpp" />
     <ClCompile Include="src\TileMap.cpp" />
     <ClCompile Include="src\TileSet.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="include\TileSet.h" />
     <ClInclude Include="include\TileMap.h" />
     <ClInclude Include="include\Resources.h" />
+    <ClInclude Include="include\InputManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
