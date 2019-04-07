@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "TileMap.h"
+#include "Camera.h"
 
 
 TileMap::TileMap(GameObject& associated, const std::string& file, std::shared_ptr<TileSet>& tileSet):
@@ -50,7 +51,7 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
         for (int y = 0; y < mapHeight; ++y) {
             auto tileIndex = At(x, y, layer);
             if (tileIndex != -1) {
-                tileSet->RenderTile(At(x, y, layer), x, y);
+                tileSet->RenderTile(At(x, y, layer), x - cameraX, y - cameraY);
             }
         }
     }
@@ -74,7 +75,7 @@ int TileMap::GetDepth() const {
 
 void TileMap::Render() {
     for (unsigned i = 0; i < mapDepth; ++i) {
-        RenderLayer(i);
+        RenderLayer(i, Camera::pos.x, Camera::pos.y);
     }
 }
 

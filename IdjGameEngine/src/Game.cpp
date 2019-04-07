@@ -81,7 +81,7 @@ void Game::Run() {
     while (!state->QuitRequested()) {
         CalculateDeltaTime();
         inputManager.Update();
-        state->Update(0);
+        state->Update(dt);
         state->Render();
         SDL_RenderPresent(renderer);
         SDL_Delay(33);

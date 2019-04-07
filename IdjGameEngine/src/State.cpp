@@ -5,6 +5,7 @@
 #include "Sound.h"
 #include "TileMap.h"
 #include "InputManager.h"
+#include "Camera.h"
 
 
 State::State():
@@ -48,6 +49,8 @@ void State::Update(float dt) {
     auto& inputManager = InputManager::GetInstance();
 
     quitRequested = inputManager.QuitRequested();
+
+    Camera::Update(dt);
 
     // Add face when the space bar is pressed
     if (inputManager.KeyPress(SDLK_SPACE)) {

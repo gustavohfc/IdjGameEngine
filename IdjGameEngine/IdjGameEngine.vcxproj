@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Face.cpp" />
     <ClCompile Include="src\Resources.cpp" />
     <ClCompile Include="src\Sound.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="src\Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Face.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\Component.h" />
