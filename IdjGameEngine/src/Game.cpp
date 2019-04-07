@@ -6,7 +6,10 @@
 Game* Game::instance = nullptr;
 
 
-Game::Game(const std::string& title, int width, int height) {
+Game::Game(const std::string& title, int width, int height):
+    frameStart(0),
+    dt(0) {
+
     if (instance != nullptr) {
         throw std::logic_error("Game instance already exists");
     }
@@ -76,6 +79,7 @@ void Game::Run() {
     auto& inputManager = InputManager::GetInstance();
 
     while (!state->QuitRequested()) {
+        CalculateDeltaTime();
         inputManager.Update();
         state->Update(0);
         state->Render();
@@ -104,4 +108,16 @@ Game& Game::GetInstance() {
         instance = new Game("Gustavo Henrique Fernandes Carvalho 14/0021671", 1024, 600);
     }
     return *instance;
+}
+
+
+float Game::GetDeltaTime() {
+    return dt;
+}
+
+
+void Game::CalculateDeltaTime() {
+    auto currentTime = SDL_GetTicks() / 1000;
+    dt = currentTime - frameStart;
+    frameStart = currentTime;
 }

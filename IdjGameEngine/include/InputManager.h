@@ -20,10 +20,10 @@ public:
     bool MouseRelease(int button);
     bool IsMouseDown(int button);
 
-    int GetMouseX();
-    int GetMouseY();
+    int GetMouseX() const;
+    int GetMouseY() const;
 
-    bool QuitRequested();
+    bool QuitRequested() const;
 
     static InputManager& GetInstance();
 

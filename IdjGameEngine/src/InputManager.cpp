@@ -72,17 +72,17 @@ bool InputManager::IsMouseDown(int button) {
 }
 
 
-int InputManager::GetMouseX() {
+int InputManager::GetMouseX() const {
     return mouseX;
 }
 
 
-int InputManager::GetMouseY() {
+int InputManager::GetMouseY() const {
     return mouseY;
 }
 
 
-bool InputManager::QuitRequested() {
+bool InputManager::QuitRequested() const {
     return quitRequested;
 }
 
