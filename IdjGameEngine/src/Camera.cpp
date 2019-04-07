@@ -19,26 +19,33 @@ void Camera::Unfollow() {
 void Camera::Update(float dt) {
     auto& inputManager = InputManager::GetInstance();
 
-    if (focus != nullptr) {
+    std::cout << inputManager.axisX << " --- " << inputManager.axisY << std::endl;
 
-        //TODO
+    speed.x = (inputManager.axisX / 10000) * dt;
+    speed.y = (inputManager.axisY / 10000) * dt;
+    pos.x += speed.x;
+    pos.y += speed.y;
 
-    } else {
-        if (InputManager::GetInstance().IsKeyDown(UP_ARROW_KEY)) {
-            speed.y = -dt;
-            pos.y += speed.y;
-        }
-        if (InputManager::GetInstance().IsKeyDown(DOWN_ARROW_KEY)) {
-            speed.y = dt;
-            pos.y += speed.y;
-        }
-        if (InputManager::GetInstance().IsKeyDown(LEFT_ARROW_KEY)) {
-            speed.x = -dt;
-            pos.x += speed.x;
-        }
-        if (InputManager::GetInstance().IsKeyDown(RIGHT_ARROW_KEY)) {
-            speed.x = dt;
-            pos.x += speed.x;
-        }
-    }
+    //if (focus != nullptr) {
+
+    //    //TODO
+
+    //} else {
+    //    if (InputManager::GetInstance().IsKeyDown(UP_ARROW_KEY)) {
+    //        speed.y = -2 * dt;
+    //        pos.y += speed.y;
+    //    }
+    //    if (InputManager::GetInstance().IsKeyDown(DOWN_ARROW_KEY)) {
+    //        speed.y = 2 * dt;
+    //        pos.y += speed.y;
+    //    }
+    //    if (InputManager::GetInstance().IsKeyDown(LEFT_ARROW_KEY)) {
+    //        speed.x = -2 * dt;
+    //        pos.x += speed.x;
+    //    }
+    //    if (InputManager::GetInstance().IsKeyDown(RIGHT_ARROW_KEY)) {
+    //        speed.x = 2 * dt;
+    //        pos.x += speed.x;
+    //    }
+    //}
 }

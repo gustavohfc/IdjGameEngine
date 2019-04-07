@@ -27,6 +27,8 @@ public:
 
     static InputManager& GetInstance();
 
+    int axisX, axisY;
+
 private:
     InputManager();
     ~InputManager();

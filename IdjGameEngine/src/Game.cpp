@@ -19,7 +19,7 @@ Game::Game(const std::string& title, int width, int height):
     srand(time(nullptr));
 
     // Init the SDL
-    auto initReturn = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
+    auto initReturn = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER);
     if (initReturn != 0) {
         throw std::runtime_error(SDL_GetError());
     }

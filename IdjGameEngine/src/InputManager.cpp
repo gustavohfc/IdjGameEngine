@@ -3,6 +3,11 @@
 
 
 void InputManager::Update() {
+    static auto controller = SDL_GameControllerOpen(0);
+
+    axisX = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTX);
+    axisY = SDL_GameControllerGetAxis(controller, SDL_CONTROLLER_AXIS_RIGHTY);
+
     quitRequested = false;
 
     SDL_GetMouseState(&mouseX, &mouseY);
