@@ -3,8 +3,8 @@
 
 class TileSet {
 public:
-    TileSet(int tileWidth, int tileHeight, const std::string& file);
-    
+    TileSet(GameObject& associated, int tileWidth, int tileHeight, const std::string& file);
+
     void RenderTile(unsigned index, float x, float y);
     int GetTileWidth() const;
     int GetTileHeight() const;
@@ -12,5 +12,5 @@ public:
 private:
     Sprite tileSet;
 
-    int rows, columns, tileWidth, tileHeight;
+    unsigned rows, columns, tileWidth, tileHeight;
 };

@@ -3,6 +3,7 @@
 #include "Vec2.h"
 #include "Face.h"
 #include "Sound.h"
+#include "TileMap.h"
 
 
 State::State():
@@ -11,6 +12,19 @@ State::State():
     auto background = std::make_shared<GameObject>();
     background->AddComponent(std::make_shared<Sprite>(*background, "assets/img/ocean.jpg"));
     objectArray.push_back(background);
+
+    auto map = std::make_shared<GameObject>();
+    auto tileSet = new TileSet(*map, 64, 64, "assets/img/tileset.png"); // TODO: use shared_ptr
+    auto tileMap = std::make_shared<TileMap>(*map, "assets/map/tileMap.txt", tileSet);
+
+    // TODO: why set to (0, 0)?
+    map->box.x = 0;
+    map->box.y = 0;
+    //map->box.w = tileMap->GetWidth() * 64;
+    //map->box.h = tileMap->GetHeight() * 64;
+
+    map->AddComponent(tileMap);
+    objectArray.push_back(map);
 
     music.Play();
 }

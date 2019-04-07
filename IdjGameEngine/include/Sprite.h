@@ -13,6 +13,7 @@ public:
     int GetWidth() const;
     int GetHeight() const;
     bool IsOpen() const;
+    void Render(int x, int y, int w, int h);
 
     void Render() override;
     void Update(float dt) override;

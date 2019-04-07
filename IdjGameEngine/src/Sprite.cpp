@@ -61,17 +61,17 @@ bool Sprite::IsOpen() const {
 }
 
 
-void Sprite::Render() {
+void Sprite::Render(int x, int y, int w, int h) {
     auto renderer = Game::GetInstance().GetRenderer();
 
-    SDL_Rect dst = {
-        int(associated.box.x),
-        int(associated.box.y),
-        int(associated.box.w),
-        int(associated.box.h)
-    };
+    SDL_Rect dst = {x, y, w, h};
 
     SDL_RenderCopy(renderer, texture, &clipRect, &dst);
+}
+
+
+void Sprite::Render() {
+    Render(associated.box.x, associated.box.y, associated.box.w, associated.box.h);
 }
 
 

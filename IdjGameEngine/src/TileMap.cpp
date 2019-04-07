@@ -41,30 +41,47 @@ void TileMap::SetTileSet(TileSet* tileSet) {
 
 
 int& TileMap::At(int x, int y, int z) {
-    auto index = x + y * mapWidth + z * mapWidth * mapHeight;
-    return tileMatrix.at(index);
+    return tileMatrix.at(x + y * mapWidth + z * mapWidth * mapHeight);
 }
 
-void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {}
 
-int TileMap::GetWidth() {
+void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
+    for (int x = 0; x < mapWidth; ++x) {
+        for (int y = 0; y < mapHeight; ++y) {
+            auto tileIndex = At(x, y, layer);
+            if (tileIndex != -1) {
+                tileSet->RenderTile(At(x, y, layer), x, y);
+            }
+        }
+    }
+}
+
+
+int TileMap::GetWidth() const {
     return mapWidth;
 }
 
-int TileMap::GetHeight() {
-    return  mapHeight;
+
+int TileMap::GetHeight() const {
+    return mapHeight;
 }
 
-int TileMap::GetDepth() {
+
+int TileMap::GetDepth() const {
     return mapDepth;
 }
 
-void TileMap::Render() {}
+
+void TileMap::Render() {
+    for (unsigned i = 0; i < mapDepth; ++i) {
+        RenderLayer(i);
+    }
+}
+
 
 void TileMap::Update(float dt) {}
 
 
 bool TileMap::Is(const std::string& type) {
-    // TODO
-    return false;
+    return type == "TileMap";
 }
