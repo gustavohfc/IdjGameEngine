@@ -55,7 +55,7 @@ void State::Update(float dt) {
     // Remove dead objects
     objectArray.erase(
         std::remove_if(objectArray.begin(), objectArray.end(),
-                       [](const std::shared_ptr<GameObject>& obj) { return obj->ReadyToBeDeleted(); }),
+                       [](const std::shared_ptr<GameObject>& obj) { return obj->IsDead(); }),
         objectArray.end()
     );
 }
@@ -63,9 +63,7 @@ void State::Update(float dt) {
 
 void State::Render() {
     for (auto& obj : objectArray) {
-        if (!obj->IsDead()) {
-            obj->Render();
-        }
+        obj->Render();
     }
 }
 

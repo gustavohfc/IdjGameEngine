@@ -16,7 +16,6 @@ public:
     void Update(float dt);
     void Render();
     bool IsDead() const;
-    bool ReadyToBeDeleted() const;
     void RequestDelete();
     void AddComponent(const std::shared_ptr<Component>& cpt);
     void RemoveComponent(const std::shared_ptr<Component>& cpt);
