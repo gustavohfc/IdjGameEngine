@@ -20,9 +20,9 @@ public:
     void RequestDelete();
     void AddComponent(const std::shared_ptr<Component>& cpt);
     void RemoveComponent(const std::shared_ptr<Component>& cpt);
-    Component* GetComponent(const std::string& type) const;
-    Sound* GetSound() const;
-    Face* GetFace() const;
+    std::shared_ptr<Component> GetComponent(const std::string& type) const;
+    std::shared_ptr<Sound> GetSound() const;
+    std::shared_ptr<Face> GetFace() const;
 
 private:
     std::vector<std::shared_ptr<Component>> components;

@@ -58,21 +58,21 @@ void GameObject::RemoveComponent(const std::shared_ptr<Component>& cpt) {
 }
 
 
-Component* GameObject::GetComponent(const std::string& type) const {
+std::shared_ptr<Component> GameObject::GetComponent(const std::string& type) const {
     for (auto& component : components) {
         if (component->Is(type)) {
-            return component.get();
+            return component;
         }
     }
     return nullptr;
 }
 
 
-Sound* GameObject::GetSound() const {
-    return static_cast<Sound*>(GetComponent("Sound"));
+std::shared_ptr<Sound> GameObject::GetSound() const {
+    return std::static_pointer_cast<Sound>(GetComponent("Sound"));
 }
 
 
-Face* GameObject::GetFace() const {
-    return static_cast<Face*>(GetComponent("Face"));
+std::shared_ptr<Face> GameObject::GetFace() const {
+    return std::static_pointer_cast<Face>(GetComponent("Face"));
 }

@@ -14,7 +14,7 @@ State::State():
     objectArray.push_back(background);
 
     auto map = std::make_shared<GameObject>();
-    auto tileSet = new TileSet(*map, 64, 64, "assets/img/tileset.png"); // TODO: use shared_ptr
+    auto tileSet = std::make_shared<TileSet>(*map, 64, 64, "assets/img/tileset.png"); // TODO: use shared_ptr
     auto tileMap = std::make_shared<TileMap>(*map, "assets/map/tileMap.txt", tileSet);
 
     // TODO: why set to (0, 0)?
@@ -99,7 +99,7 @@ void State::Input() {
                 // chamar funções de GameObjects, use objectArray[i]->função() direto.
 
                 if (go->box.Contains({float(mouseX), float(mouseY)})) {
-                    Face* face = static_cast<Face*>(go->GetFace());
+                    std::shared_ptr<Face> face = go->GetFace();
                     if (nullptr != face) {
                         // Aplica dano
                         face->Damage(std::rand() % 10 + 10);

@@ -2,7 +2,7 @@
 #include "TileMap.h"
 
 
-TileMap::TileMap(GameObject& associated, const std::string& file, TileSet* tileSet):
+TileMap::TileMap(GameObject& associated, const std::string& file, std::shared_ptr<TileSet>& tileSet):
     Component(associated),
     tileSet(tileSet) {
 
@@ -35,7 +35,7 @@ void TileMap::Load(const std::string& file) {
 }
 
 
-void TileMap::SetTileSet(TileSet* tileSet) {
+void TileMap::SetTileSet(const std::shared_ptr<TileSet>& tileSet) {
     this->tileSet = tileSet;
 }
 

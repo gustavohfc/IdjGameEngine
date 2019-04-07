@@ -4,10 +4,10 @@
 
 class TileMap : public Component {
 public:
-    TileMap(GameObject& associated, const std::string& file, TileSet* tileSet);
+    TileMap(GameObject& associated, const std::string& file, std::shared_ptr<TileSet>& tileSet);
 
     void Load(const std::string& file);
-    void SetTileSet(TileSet* tileSet);
+    void SetTileSet(const std::shared_ptr<TileSet>& tileSet);
     int& At(int x, int y, int z);
     void RenderLayer(int layer, int cameraX = 0, int cameraY = 0);
     int GetWidth() const;
@@ -20,6 +20,6 @@ public:
 
 private:
     std::vector<int> tileMatrix;
-    TileSet* tileSet;
+    std::shared_ptr<TileSet> tileSet;
     unsigned mapWidth, mapHeight, mapDepth;
 };
