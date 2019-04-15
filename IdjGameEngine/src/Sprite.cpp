@@ -2,6 +2,7 @@
 #include "Sprite.h"
 #include "Game.h"
 #include "Resources.h"
+#include "Camera.h"
 
 
 Sprite::Sprite(GameObject& associated):
@@ -56,7 +57,10 @@ void Sprite::Render(int x, int y, int w, int h) {
 
 
 void Sprite::Render() {
-    Render(associated.box.x, associated.box.y, associated.box.w, associated.box.h);
+    Render(associated.box.x - Camera::pos.x,
+           associated.box.y - Camera::pos.y,
+           associated.box.w,
+           associated.box.h);
 }
 
 

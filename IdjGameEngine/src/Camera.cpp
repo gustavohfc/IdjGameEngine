@@ -17,28 +17,32 @@ void Camera::Unfollow() {
 
 
 void Camera::Update(float dt) {
-    auto& inputManager = InputManager::GetInstance();
 
     if (focus != nullptr) {
 
-        //TODO
+        pos = focus->box.GetCenter();
 
     } else {
+
+        auto& inputManager = InputManager::GetInstance();
+        speed = { 0, 0 };
+
         if (InputManager::GetInstance().IsKeyDown(UP_ARROW_KEY)) {
-            speed.y = -dt;
-            pos.y += speed.y;
+            speed.y = -100;
         }
+
         if (InputManager::GetInstance().IsKeyDown(DOWN_ARROW_KEY)) {
-            speed.y = dt;
-            pos.y += speed.y;
+            speed.y = 100;
         }
+
         if (InputManager::GetInstance().IsKeyDown(LEFT_ARROW_KEY)) {
-            speed.x = -dt;
-            pos.x += speed.x;
+            speed.x = -100;
         }
+
         if (InputManager::GetInstance().IsKeyDown(RIGHT_ARROW_KEY)) {
-            speed.x = dt;
-            pos.x += speed.x;
+            speed.x = 100;
         }
+
+        pos += speed * dt;
     }
 }

@@ -111,13 +111,13 @@ Game& Game::GetInstance() {
 }
 
 
-float Game::GetDeltaTime() {
+float Game::GetDeltaTime() const {
     return dt;
 }
 
 
 void Game::CalculateDeltaTime() {
-    auto currentTime = SDL_GetTicks() / 1000;
+    auto currentTime = SDL_GetTicks() / 1000.0;
     dt = currentTime - frameStart;
     frameStart = currentTime;
 }

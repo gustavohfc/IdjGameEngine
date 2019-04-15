@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Vec2.h"
 
 #define LEFT_ARROW_KEY SDLK_LEFT
 #define RIGHT_ARROW_KEY SDLK_RIGHT
@@ -6,7 +7,6 @@
 #define DOWN_ARROW_KEY SDLK_DOWN
 #define ESCAPE_KEY SDLK_ESCAPE
 #define LEFT_MOUSE_BUTTON SDL_BUTTON_LEFT
-
 
 class InputManager {
 public:
@@ -22,6 +22,7 @@ public:
 
     int GetMouseX() const;
     int GetMouseY() const;
+    Vec2 GetMouseMapPos() const;
 
     bool QuitRequested() const;
 

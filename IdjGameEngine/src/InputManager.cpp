@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "InputManager.h"
+#include "Camera.h"
 
 
 void InputManager::Update() {
@@ -79,6 +80,14 @@ int InputManager::GetMouseX() const {
 
 int InputManager::GetMouseY() const {
     return mouseY;
+}
+
+
+Vec2 InputManager::GetMouseMapPos() const {
+    return {
+        mouseX + Camera::pos.x,
+        mouseY + Camera::pos.y
+    };
 }
 
 

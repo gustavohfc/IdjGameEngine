@@ -30,11 +30,12 @@ Vec2 Vec2::Norm() const {
     };
 }
 
+
 Vec2 Vec2::GetRotated(float angle) const {
     auto sin = std::sin(angle);
     auto cos = std::cos(angle);
 
-    return{
+    return {
         x * cos - y * sin,
         y * cos - x * sin
     };
@@ -67,4 +68,11 @@ Vec2 Vec2::operator*(const float scalar) const {
         x * scalar,
         y * scalar
     };
+}
+
+
+Vec2& Vec2::operator+=(const Vec2& other) {
+    this->x += other.x;
+    this->y += other.y;
+    return *this;
 }
