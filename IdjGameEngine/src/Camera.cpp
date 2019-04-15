@@ -17,7 +17,6 @@ void Camera::Unfollow() {
 
 
 void Camera::Update(float dt) {
-
     if (focus != nullptr) {
 
         pos = focus->box.GetCenter();
@@ -27,19 +26,19 @@ void Camera::Update(float dt) {
         auto& inputManager = InputManager::GetInstance();
         speed = { 0, 0 };
 
-        if (InputManager::GetInstance().IsKeyDown(UP_ARROW_KEY)) {
+        if (inputManager.IsKeyDown(UP_ARROW_KEY)) {
             speed.y = -10;
         }
 
-        if (InputManager::GetInstance().IsKeyDown(DOWN_ARROW_KEY)) {
+        if (inputManager.IsKeyDown(DOWN_ARROW_KEY)) {
             speed.y = 10;
         }
 
-        if (InputManager::GetInstance().IsKeyDown(LEFT_ARROW_KEY)) {
+        if (inputManager.IsKeyDown(LEFT_ARROW_KEY)) {
             speed.x = -10;
         }
 
-        if (InputManager::GetInstance().IsKeyDown(RIGHT_ARROW_KEY)) {
+        if (inputManager.IsKeyDown(RIGHT_ARROW_KEY)) {
             speed.x = 10;
         }
 
