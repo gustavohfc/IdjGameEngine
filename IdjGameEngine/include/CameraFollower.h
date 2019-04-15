@@ -5,6 +5,7 @@ class CameraFollower : public Component {
 public:
     CameraFollower(GameObject& associated);
 
+    void Start() override;
     void Update(float dt) override;
     void Render() override;
     bool Is(const std::string& type) override;

@@ -56,6 +56,9 @@ void Sprite::Render(int x, int y, int w, int h) {
 }
 
 
+void Sprite::Start() {}
+
+
 void Sprite::Render() {
     Render(associated.box.x - Camera::pos.x,
            associated.box.y - Camera::pos.y,

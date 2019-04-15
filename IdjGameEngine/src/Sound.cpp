@@ -56,6 +56,8 @@ bool Sound::IsPlaying() const {
 }
 
 
+void Sound::Start() {}
+
 void Sound::Update(float dt) {}
 
 void Sound::Render() {}

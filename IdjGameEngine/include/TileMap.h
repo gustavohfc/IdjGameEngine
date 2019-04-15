@@ -14,6 +14,7 @@ public:
     int GetHeight() const;
     int GetDepth() const;
 
+    void Start() override;
     void Render() override;
     void Update(float dt) override;
     bool Is(const std::string& type) override;

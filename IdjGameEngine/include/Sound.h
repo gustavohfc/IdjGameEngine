@@ -12,6 +12,7 @@ public:
     bool IsOpen();
     bool IsPlaying() const;
 
+    void Start() override;
     void Update(float dt) override;
     void Render() override;
     bool Is(const std::string& type) override;

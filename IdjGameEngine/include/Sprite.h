@@ -13,6 +13,7 @@ public:
     bool IsOpen() const;
     void Render(int x, int y, int w, int h);
 
+    void Start() override;
     void Render() override;
     void Update(float dt) override;
     bool Is(const std::string& type) override;

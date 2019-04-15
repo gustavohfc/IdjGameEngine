@@ -34,5 +34,6 @@
 #include <string>
 #include <fstream>
 #include <unordered_map>
+#include <queue>
 
 #endif //PCH_H
