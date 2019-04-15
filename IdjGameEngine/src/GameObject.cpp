@@ -4,12 +4,22 @@
 #include "Face.h"
 
 
-GameObject::GameObject():
-    isDead(false) {}
+GameObject::GameObject() {}
 
 
 GameObject::~GameObject() {
     components.clear();
+}
+
+
+void GameObject::Start() {
+    for (auto& component : components) {
+        component->Start();
+    }
+
+    started = true;
+
+    // TODO: Start new components from AddComponent??
 }
 
 

@@ -39,6 +39,26 @@ State::~State() {
 }
 
 
+void State::Start() {
+    LoadAssets();
+
+    for (auto& obj : objectArray) {
+        obj->Start();
+    }
+
+    started = true;
+}
+
+
+void State::AddObject(const std::shared_ptr<GameObject>& go) {
+    objectArray.push_back(go);
+
+    if (started) {
+        go->Start();
+    }
+}
+
+
 bool State::QuitRequested() const {
     return quitRequested;
 }
