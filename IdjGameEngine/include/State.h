@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "Sprite.h"
 #include "Music.h"
-#include "Game.h"
 
 class State {
 public:

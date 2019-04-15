@@ -1,7 +1,6 @@
 ﻿#include "pch.h"
 #include "State.h"
 #include "Vec2.h"
-#include "Face.h"
 #include "Sound.h"
 #include "TileMap.h"
 #include "InputManager.h"
@@ -101,11 +100,12 @@ void State::Render() {
 
 
 void State::AddObject(int mouseX, int mouseY) {
+    // TODO: Remove?
     auto gameObject = std::make_shared<GameObject>();
 
     gameObject->AddComponent(std::make_shared<Sprite>(*gameObject, "assets/img/penguinface.png"));
     gameObject->AddComponent(std::make_shared<Sound>(*gameObject, "assets/audio/boom.wav"));
-    gameObject->AddComponent(std::make_shared<Face>(*gameObject));
+    //gameObject->AddComponent(std::make_shared<Face>(*gameObject));
 
     gameObject->box.SetCenter(mouseX, mouseY);
 

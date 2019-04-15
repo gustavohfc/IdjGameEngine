@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "GameObject.h"
 #include "Sound.h"
-#include "Face.h"
 
 
 GameObject::GameObject() {}
@@ -74,9 +73,4 @@ std::shared_ptr<Component> GameObject::GetComponent(const std::string& type) con
 
 std::shared_ptr<Sound> GameObject::GetSound() const {
     return std::static_pointer_cast<Sound>(GetComponent("Sound"));
-}
-
-
-std::shared_ptr<Face> GameObject::GetFace() const {
-    return std::static_pointer_cast<Face>(GetComponent("Face"));
 }
