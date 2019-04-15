@@ -28,19 +28,19 @@ void Camera::Update(float dt) {
         speed = { 0, 0 };
 
         if (InputManager::GetInstance().IsKeyDown(UP_ARROW_KEY)) {
-            speed.y = -100;
+            speed.y = -10;
         }
 
         if (InputManager::GetInstance().IsKeyDown(DOWN_ARROW_KEY)) {
-            speed.y = 100;
+            speed.y = 10;
         }
 
         if (InputManager::GetInstance().IsKeyDown(LEFT_ARROW_KEY)) {
-            speed.x = -100;
+            speed.x = -10;
         }
 
         if (InputManager::GetInstance().IsKeyDown(RIGHT_ARROW_KEY)) {
-            speed.x = 100;
+            speed.x = 10;
         }
 
         pos += speed * dt;
