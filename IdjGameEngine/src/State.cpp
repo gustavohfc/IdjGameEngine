@@ -6,6 +6,7 @@
 #include "TileMap.h"
 #include "InputManager.h"
 #include "Camera.h"
+#include "CameraFollower.h"
 
 
 State::State():
@@ -13,6 +14,7 @@ State::State():
 
     auto background = std::make_shared<GameObject>();
     background->AddComponent(std::make_shared<Sprite>(*background, "assets/img/ocean.jpg"));
+    background->AddComponent(std::make_shared<CameraFollower>(*background));
     objectArray.push_back(background);
 
     auto map = std::make_shared<GameObject>();
@@ -54,8 +56,7 @@ void State::Update(float dt) {
 
     // Add face when the space bar is pressed
     if (inputManager.KeyPress(SDLK_SPACE)) {
-        Vec2 objPos = Vec2(200, 0).GetRotated(-M_PI + M_PI * (rand() % 1001) / 500.0) +
-            Vec2(inputManager.GetMouseX(), inputManager.GetMouseY());
+        Vec2 objPos = Vec2(200, 0).GetRotated(-M_PI + M_PI * (rand() % 1001) / 500.0) + inputManager.GetMouseMapPos();
         AddObject(int(objPos.x), int(objPos.y));
     }
 
