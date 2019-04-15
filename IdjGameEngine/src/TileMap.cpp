@@ -49,8 +49,8 @@ int& TileMap::At(int x, int y, int z) {
 void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
     auto parallaxOffset = layer * 0.5;
 
-    for (unsigned i = 0; i < mapWidth; ++i) {
-        for (unsigned j = 0; j < mapHeight; ++j) {
+    for (int i = 0; i < mapWidth; ++i) {
+        for (int j = 0; j < mapHeight; ++j) {
             auto tileIndex = At(i, j, layer);
             if (tileIndex != -1) {
                 auto x = (i * tileSet->GetTileWidth() - cameraX) - (cameraX * parallaxOffset);
