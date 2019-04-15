@@ -44,7 +44,7 @@ void GameObject::AddComponent(const std::shared_ptr<Component>& cpt) {
 
 void GameObject::RemoveComponent(const std::shared_ptr<Component>& cpt) {
     auto it = std::find_if(components.begin(), components.end(),
-                           [cpt](const std::shared_ptr<Component>& c) { return c == cpt; });
+                           [&cpt](const std::shared_ptr<Component>& c) { return c == cpt; });
 
     if (it != components.end()) {
         components.erase(it);

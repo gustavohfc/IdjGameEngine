@@ -47,11 +47,11 @@ int& TileMap::At(int x, int y, int z) {
 
 
 void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
-    for (int x = 0; x < mapWidth; ++x) {
-        for (int y = 0; y < mapHeight; ++y) {
-            auto tileIndex = At(x, y, layer);
+    for (int i = 0; i < mapWidth; ++i) {
+        for (int j = 0; j < mapHeight; ++j) {
+            auto tileIndex = At(i, j, layer);
             if (tileIndex != -1) {
-                tileSet->RenderTile(At(x, y, layer), x - cameraX, y - cameraY);
+                tileSet->RenderTile(tileIndex, i * tileSet->GetTileWidth() - cameraX, j * tileSet->GetTileHeight() - cameraY);
             }
         }
     }

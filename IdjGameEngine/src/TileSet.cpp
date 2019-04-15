@@ -21,7 +21,7 @@ void TileSet::RenderTile(unsigned index, float x, float y) {
     auto tileY = (index / columns) * tileHeight;
     tileSet.SetClip(tileX, tileY, tileWidth, tileHeight);
 
-    tileSet.Render(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+    tileSet.Render(x, y, tileWidth, tileHeight);
 }
 
 
