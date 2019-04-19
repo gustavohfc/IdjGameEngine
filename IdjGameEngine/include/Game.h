@@ -20,6 +20,6 @@ private:
     SDL_Renderer* renderer;
     State* state;
 
-    int frameStart;
+    unsigned frameStart;
     float dt;
 };
