@@ -4,6 +4,7 @@
 
 class Component;
 class Sound;
+class Minion;
 
 class GameObject {
 public:
@@ -23,6 +24,7 @@ public:
 
     std::shared_ptr<Component> GetComponent(const std::string& type) const;
     std::shared_ptr<Sound> GetSound() const;
+    std::shared_ptr<Minion> GetMinion() const;
 
 private:
     std::vector<std::shared_ptr<Component>> components;

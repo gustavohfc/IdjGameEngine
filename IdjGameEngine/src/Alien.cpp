@@ -55,7 +55,7 @@ void Alien::Update(float dt) {
             }
 
         } else if (task.type == Action::SHOOT) {
-            //TODO
+            minionArray[0]->GetMinion()->Shoot(task.pos);
             taskQueue.pop();
         }
     }

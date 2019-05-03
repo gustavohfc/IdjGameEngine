@@ -90,12 +90,6 @@ void State::Update(float dt) {
 
     Camera::Update(dt);
 
-    // Add face when the space bar is pressed
-    if (inputManager.KeyPress(SDLK_SPACE)) {
-        Vec2 objPos = Vec2(200, 0).GetRotated(-M_PI + M_PI * (rand() % 1001) / 500.0) + inputManager.GetMouseMapPos();
-        AddObject(int(objPos.x), int(objPos.y));
-    }
-
     for (auto& obj : objectArray) {
         obj->Update(dt);
     }
@@ -113,18 +107,4 @@ void State::Render() {
     for (auto& obj : objectArray) {
         obj->Render();
     }
-}
-
-
-void State::AddObject(int mouseX, int mouseY) {
-    // TODO: Remove?
-    auto gameObject = std::make_shared<GameObject>();
-
-    gameObject->AddComponent(std::make_shared<Sprite>(*gameObject, "assets/img/penguinface.png"));
-    gameObject->AddComponent(std::make_shared<Sound>(*gameObject, "assets/audio/boom.wav"));
-    //gameObject->AddComponent(std::make_shared<Face>(*gameObject));
-
-    gameObject->box.SetCenter(mouseX, mouseY);
-
-    objectArray.push_back(gameObject);
 }

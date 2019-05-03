@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bullet.cpp" />
     <ClCompile Include="src\Minion.cpp" />
     <ClCompile Include="src\Alien.cpp" />
     <ClCompile Include="src\CameraFollower.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="src\Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Alien.h" />
     <ClInclude Include="include\CameraFollower.h" />
     <ClInclude Include="include\Camera.h" />
