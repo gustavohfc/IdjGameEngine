@@ -1,7 +1,5 @@
 ﻿#include "pch.h"
 #include "State.h"
-#include "Vec2.h"
-#include "Sound.h"
 #include "TileMap.h"
 #include "InputManager.h"
 #include "Camera.h"
@@ -32,7 +30,7 @@ State::State():
 
     auto alien = std::make_shared<GameObject>();
     alien->AddComponent(std::make_shared<Alien>(*alien, 5));
-    alien->box.SetCenter(0, 0);
+    alien->box.SetCenter(512, 300);
     objectArray.push_back(alien);
 
     music.Play();

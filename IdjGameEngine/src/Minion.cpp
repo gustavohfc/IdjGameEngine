@@ -23,8 +23,14 @@ void Minion::Start() {}
 
 void Minion::Update(float dt) {
     arc = arc + ANGULAR_VELOCITY * dt;
-    auto center = alienCenter.lock(); // TODO
-    auto position = Vec2(150, 0).GetRotated(arc) + center->box.GetCenter();
+
+    auto alien = alienCenter.lock();
+    if (!alien) {
+        associated.RequestDelete();
+        return;
+    }
+
+    auto position = Vec2(150, 0).GetRotated(arc) + alien->box.GetCenter();
     associated.box.SetCenter(position.x, position.y);
 }
 

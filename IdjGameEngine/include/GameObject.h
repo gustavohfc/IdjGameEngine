@@ -9,6 +9,7 @@ class Minion;
 class GameObject {
 public:
     Rect box;
+    double angleDeg;
 
     GameObject();
     ~GameObject();

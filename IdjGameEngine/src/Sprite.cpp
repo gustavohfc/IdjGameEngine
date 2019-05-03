@@ -6,7 +6,8 @@
 
 
 Sprite::Sprite(GameObject& associated):
-    Component(associated) {}
+    Component(associated),
+    scale({1, 1}) {}
 
 
 Sprite::Sprite(GameObject& associated, const std::string& file):
@@ -33,12 +34,12 @@ void Sprite::SetClip(int x, int y, int w, int h) {
 
 
 int Sprite::GetWidth() const {
-    return width;
+    return width * scale.x;
 }
 
 
 int Sprite::GetHeight() const {
-    return height;
+    return height * scale.y;
 }
 
 
@@ -52,7 +53,20 @@ void Sprite::Render(int x, int y, int w, int h) {
 
     SDL_Rect dst = {x, y, w, h};
 
-    SDL_RenderCopy(renderer, texture, &clipRect, &dst);
+    SDL_RenderCopyEx(renderer, texture, &clipRect, &dst, associated.angleDeg, nullptr, SDL_FLIP_NONE);
+}
+
+
+void Sprite::SetScale(float scaleX, float scaleY) {
+    scale = {scaleX, scaleY};
+
+    associated.box.w = GetWidth();
+    associated.box.h = GetHeight();
+}
+
+
+Vec2 Sprite::GetScale() const {
+    return scale;
 }
 
 

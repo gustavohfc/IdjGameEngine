@@ -8,7 +8,8 @@
 
 Alien::Alien(GameObject& associated, int nMinions):
     Component(associated),
-    nMinions(nMinions) {
+    nMinions(nMinions),
+    hp(50) {
 
     auto alienSprite = std::make_shared<Sprite>(associated, "assets/img/alien.png");
     associated.AddComponent(alienSprite);
@@ -34,6 +35,11 @@ void Alien::Start() {
 
 
 void Alien::Update(float dt) {
+    if (hp <= 0) {
+        associated.RequestDelete();
+        return;
+    }
+
     auto& inputManager = InputManager::GetInstance();
 
     if (inputManager.MousePress(LEFT_MOUSE_BUTTON)) {
@@ -59,6 +65,9 @@ void Alien::Update(float dt) {
             taskQueue.pop();
         }
     }
+
+    // Rotate
+    associated.angleDeg += 10 * dt;
 }
 
 

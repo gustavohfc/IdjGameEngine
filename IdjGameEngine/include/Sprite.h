@@ -12,6 +12,8 @@ public:
     int GetHeight() const;
     bool IsOpen() const;
     void Render(int x, int y, int w, int h);
+    void SetScale(float scaleX, float scaleY);
+    Vec2 GetScale() const;
 
     void Start() override;
     void Render() override;
@@ -23,4 +25,6 @@ private:
     int width;
     int height;
     SDL_Rect clipRect;
+
+    Vec2 scale;
 };
