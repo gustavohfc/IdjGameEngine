@@ -7,7 +7,7 @@
 #define ANGULAR_VELOCITY 0.15707963267 // PI/20
 
 
-Minion::Minion(GameObject& associated, std::weak_ptr<GameObject> alienCenter, float arcOffset):
+Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCenter, double arcOffset):
     Component(associated),
     alienCenter(alienCenter),
     arc(arcOffset) {

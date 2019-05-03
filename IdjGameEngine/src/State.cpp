@@ -47,8 +47,8 @@ State::~State() {
 void State::Start() {
     LoadAssets();
 
-    for (auto& obj : objectArray) {
-        obj->Start();
+    for (int i = 0; i < objectArray.size(); i++) {
+        objectArray[i]->Start();
     }
 
     started = true;
@@ -65,7 +65,7 @@ void State::AddObject(const std::shared_ptr<GameObject>& go) {
 
 
 std::weak_ptr<GameObject> State::GetObjectPtr(GameObject* go) {
-    for (auto && gameObject : objectArray) {
+    for (auto&& gameObject : objectArray) {
         if (go == gameObject.get()) {
             return gameObject;
         }
@@ -90,8 +90,8 @@ void State::Update(float dt) {
 
     Camera::Update(dt);
 
-    for (auto& obj : objectArray) {
-        obj->Update(dt);
+    for (int i = 0; i < objectArray.size(); i++) {
+        objectArray[i]->Update(dt);
     }
 
     // Remove dead objects
@@ -104,7 +104,7 @@ void State::Update(float dt) {
 
 
 void State::Render() {
-    for (auto& obj : objectArray) {
-        obj->Render();
+    for (int i = 0; i < objectArray.size(); i++) {
+        objectArray[i]->Render();
     }
 }

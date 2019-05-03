@@ -2,8 +2,8 @@
 #include "Alien.h"
 #include "InputManager.h"
 #include "Sprite.h"
-#include "Minion.h"
 #include "Game.h"
+#include "Minion.h"
 
 
 Alien::Alien(GameObject& associated, int nMinions):
@@ -70,5 +70,6 @@ bool Alien::Is(const std::string& type) {
 }
 
 
-Alien::Action::Action(ActionType type, Vec2 pos): type(type),
-                                                  pos(pos) {}
+Alien::Action::Action(ActionType type, Vec2 pos):
+    type(type),
+    pos(pos) {}
