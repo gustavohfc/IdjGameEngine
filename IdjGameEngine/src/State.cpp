@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "Camera.h"
 #include "CameraFollower.h"
+#include "Alien.h"
 
 
 State::State():
@@ -28,6 +29,11 @@ State::State():
 
     map->AddComponent(tileMap);
     objectArray.push_back(map);
+
+    auto alien = std::make_shared<GameObject>();
+    alien->AddComponent(std::make_shared<Alien>(*alien, 5));
+    alien->box.SetCenter(0, 0);
+    objectArray.push_back(alien);
 
     music.Play();
 }

@@ -47,6 +47,16 @@ float Vec2::Dist(const Vec2& other) const {
 }
 
 
+Vec2 Vec2::GetVectorBetweenTwoPoints(Vec2 A, Vec2 B) {
+    return B - A;
+}
+
+
+Vec2 Vec2::GetUnitVectorBetweenTwoPoints(Vec2 A, Vec2 B) {
+    return GetVectorBetweenTwoPoints(A, B).Norm();
+}
+
+
 Vec2 Vec2::operator+(const Vec2& other) const {
     return {
         x + other.x,

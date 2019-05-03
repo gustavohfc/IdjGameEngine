@@ -1,20 +1,25 @@
 #include "pch.h"
 #include "Alien.h"
 #include "InputManager.h"
+#include "Sprite.h"
 
 
 Alien::Alien(GameObject& associated, int nMinions):
     Component(associated) {
-    // TODO
+
+    auto alienSprite = std::make_shared<Sprite>(associated, "assets/img/alien.png");
+    associated.AddComponent(alienSprite);
 }
 
 
 Alien::~Alien() {
-    minionArray.clear(); // TODO: minionArray should be shared_ptr
+    minionArray.clear();
 }
 
 
-void Alien::Start() {}
+void Alien::Start() {
+    // TODO: Add minions
+}
 
 
 void Alien::Update(float dt) {
@@ -32,9 +37,15 @@ void Alien::Update(float dt) {
         auto task = taskQueue.front();
 
         if (task.type == Action::MOVE) {
-            auto speed = 
-        } else {
+            bool arrived = associated.box.Move(dt, 200, task.pos);
+
+            if (arrived) {
+                taskQueue.pop();
+            }
+
+        } else if (task.type == Action::SHOOT) {
             //TODO
+            taskQueue.pop();
         }
     }
 }
@@ -42,7 +53,9 @@ void Alien::Update(float dt) {
 
 void Alien::Render() {}
 
-bool Alien::Is(const std::string& type) {}
+bool Alien::Is(const std::string& type) {
+    return type == "Alien";
+}
 
 
 Alien::Action::Action(ActionType type, Vec2 pos): type(type),

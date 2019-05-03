@@ -8,7 +8,7 @@ public:
     Component(GameObject& associated);
     virtual ~Component();
 
-    virtual void Start();
+    virtual void Start() = 0;
     virtual void Update(float dt) = 0;
     virtual void Render() = 0;
     virtual bool Is(const std::string& type) = 0;

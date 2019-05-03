@@ -12,5 +12,12 @@ public:
     Vec2 GetCenter() const;
     void SetCenter(float centerX, float centerY);
     float Dist(const Rect& other) const;
+    float Dist(const Vec2& vec) const;
     bool Contains(const Vec2& v) const;
+
+    /**
+     * \brief Moves the Rect in the direction of dest in a constant speed.
+     * \return Returns true if the rect arrived in the destination.
+     */
+    bool Move(float dt, int speed, const Vec2& dest);
 };

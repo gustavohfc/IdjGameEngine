@@ -23,9 +23,10 @@ private:
         Vec2 pos;
     };
 
+    // TODO: remove speed?
     Vec2 speed;
     int hp;
 
     std::queue<Action> taskQueue;
-    std::vector<std::weak_ptr<GameObject>> minionArray;
+    std::vector<std::shared_ptr<GameObject>> minionArray;
 };

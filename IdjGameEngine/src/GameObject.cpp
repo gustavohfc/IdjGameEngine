@@ -17,8 +17,6 @@ void GameObject::Start() {
     }
 
     started = true;
-
-    // TODO: Start new components from AddComponent??
 }
 
 
@@ -48,6 +46,10 @@ void GameObject::RequestDelete() {
 
 void GameObject::AddComponent(const std::shared_ptr<Component>& cpt) {
     components.push_back(cpt);
+
+    if (started) {
+        cpt->Start();
+    }
 }
 
 
@@ -58,6 +60,11 @@ void GameObject::RemoveComponent(const std::shared_ptr<Component>& cpt) {
     if (it != components.end()) {
         components.erase(it);
     }
+}
+
+
+Vec2 GameObject::GetPosition() const {
+    return box.GetCenter();
 }
 
 
