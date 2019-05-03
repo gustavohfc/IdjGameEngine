@@ -9,6 +9,7 @@ public:
 
     void Start();
     void AddObject(const std::shared_ptr<GameObject>& go);
+    std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
     bool QuitRequested() const;
     void LoadAssets();
     void Update(float dt);

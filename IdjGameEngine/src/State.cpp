@@ -64,6 +64,17 @@ void State::AddObject(const std::shared_ptr<GameObject>& go) {
 }
 
 
+std::weak_ptr<GameObject> State::GetObjectPtr(GameObject* go) {
+    for (auto && gameObject : objectArray) {
+        if (go == gameObject.get()) {
+            return gameObject;
+        }
+    }
+
+    return std::weak_ptr<GameObject>();
+}
+
+
 bool State::QuitRequested() const {
     return quitRequested;
 }

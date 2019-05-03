@@ -2,10 +2,13 @@
 #include "Alien.h"
 #include "InputManager.h"
 #include "Sprite.h"
+#include "Minion.h"
+#include "Game.h"
 
 
 Alien::Alien(GameObject& associated, int nMinions):
-    Component(associated) {
+    Component(associated),
+    nMinions(nMinions) {
 
     auto alienSprite = std::make_shared<Sprite>(associated, "assets/img/alien.png");
     associated.AddComponent(alienSprite);
@@ -18,7 +21,15 @@ Alien::~Alien() {
 
 
 void Alien::Start() {
-    // TODO: Add minions
+    auto state = Game::GetInstance().GetState();
+    double arc = (2 * M_PI) / nMinions;
+
+    for (int i = 0; i < nMinions; i++) {
+        auto minionGO = std::make_shared<GameObject>();
+        minionGO->AddComponent(std::make_shared<Minion>(*minionGO, state->GetObjectPtr(&associated), arc * i));
+        this->minionArray.push_back(minionGO);
+        state->AddObject(minionGO);
+    }
 }
 
 
@@ -52,6 +63,7 @@ void Alien::Update(float dt) {
 
 
 void Alien::Render() {}
+
 
 bool Alien::Is(const std::string& type) {
     return type == "Alien";

@@ -7,7 +7,7 @@ public:
 
     void Run();
     SDL_Renderer* GetRenderer() const;
-    State& GetState() const;
+    State* GetState() const;
     static Game& GetInstance();
     float GetDeltaTime() const;
 

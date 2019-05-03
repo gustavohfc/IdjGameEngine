@@ -100,8 +100,8 @@ SDL_Renderer* Game::GetRenderer() const {
 }
 
 
-State& Game::GetState() const {
-    return *state;
+State* Game::GetState() const {
+    return state;
 }
 
 
