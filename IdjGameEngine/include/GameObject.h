@@ -10,6 +10,7 @@ class Collider;
 class Alien;
 class PenguinBody;
 class PenguinCannon;
+class Bullet;
 
 class GameObject {
 public:
@@ -37,6 +38,7 @@ public:
     std::shared_ptr<Alien> GetAlien() const;
     std::shared_ptr<PenguinBody> GetPenguinBody() const;
     std::shared_ptr<PenguinCannon> GetPenguinCannon() const;
+    std::shared_ptr<Bullet> GetBullet() const;
 
 private:
     std::vector<std::shared_ptr<Component>> components;

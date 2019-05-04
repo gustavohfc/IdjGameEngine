@@ -14,10 +14,10 @@ public:
 
     int GetDamage() const;
 
+    bool targetsPlayer;
+
 private:
     Vec2 speed;
     float distanceLeft;
     int damage;
-
-    bool targetsPlayer;
 };

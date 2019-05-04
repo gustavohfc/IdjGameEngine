@@ -4,6 +4,10 @@
 #include "InputManager.h"
 #include "Util.h"
 #include "Collider.h"
+#include "Game.h"
+#include "PenguinCannon.h"
+#include "Bullet.h"
+#include "Camera.h"
 
 
 PenguinBody* PenguinBody::player = nullptr;
@@ -28,12 +32,21 @@ PenguinBody::~PenguinBody() {
 }
 
 
-void PenguinBody::Start() {}
+void PenguinBody::Start() {
+    auto state = Game::GetInstance().GetState();
+
+    auto penguinCannonGO = std::make_shared<GameObject>();
+    penguinCannonGO->AddComponent(std::make_shared<PenguinCannon>(*penguinCannonGO, state->GetObjectPtr(&associated)));
+    state->AddObject(penguinCannonGO);
+
+    pcannon = penguinCannonGO;
+}
 
 
 void PenguinBody::Update(float dt) {
     if (hp <= 0) {
         associated.RequestDelete();
+        Camera::Unfollow();
         return;
     }
 
@@ -74,4 +87,13 @@ void PenguinBody::Render() {}
 
 bool PenguinBody::Is(const std::string& type) {
     return type == "PenguinBody";
+}
+
+
+void PenguinBody::NotifyCollision(GameObject& other) {
+    auto bullet = other.GetBullet();
+
+    if (bullet && bullet->targetsPlayer) {
+        hp -= bullet->GetDamage();
+    }
 }

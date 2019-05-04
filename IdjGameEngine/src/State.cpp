@@ -43,10 +43,6 @@ State::State():
     penguinBodyGO->box.SetCenter(704, 640);
     objectArray.push_back(penguinBodyGO);
 
-    auto penguinCannonGO = std::make_shared<GameObject>();
-    penguinCannonGO->AddComponent(std::make_shared<PenguinCannon>(*penguinCannonGO, penguinBodyGO));
-    objectArray.push_back(penguinCannonGO);
-
     Camera::Follow(penguinBodyGO.get());
 
     music.Play();
@@ -79,9 +75,9 @@ void State::AddObject(const std::shared_ptr<GameObject>& go) {
 
 
 std::weak_ptr<GameObject> State::GetObjectPtr(GameObject* go) {
-    for (auto&& gameObject : objectArray) {
-        if (go == gameObject.get()) {
-            return gameObject;
+    for (int i = 0; i < objectArray.size(); ++i) {
+        if (go == objectArray[i].get()) {
+            return objectArray[i];
         }
     }
 

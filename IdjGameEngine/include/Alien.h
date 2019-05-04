@@ -12,6 +12,7 @@ public:
     void Render() override;
     bool Is(const std::string& type) override;
 
+    void NotifyCollision(GameObject& other) override;
 
 private:
 

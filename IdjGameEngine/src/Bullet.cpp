@@ -44,7 +44,7 @@ bool Bullet::Is(const std::string& type) {
 
 
 void Bullet::NotifyCollision(GameObject& other) {
-    if (targetsPlayer && (other.GetPenguinBody() || other.GetPenguinCannon())) {
+    if (targetsPlayer && other.GetPenguinBody()) {
         associated.RequestDelete();
     }
 

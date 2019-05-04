@@ -10,11 +10,12 @@ public:
     void Update(float dt) override;
     void Render() override;
     bool Is(const std::string& type) override;
+    void NotifyCollision(GameObject& other) override;
 
     static PenguinBody* player;
 
 private:
-    std::weak_ptr<GameObject> pcannon; // TODO
+    std::weak_ptr<GameObject> pcannon;
     Vec2 speed;
     float linearSpeed;
     float angle;

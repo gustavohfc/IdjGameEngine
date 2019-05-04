@@ -7,6 +7,7 @@
 #include "Alien.h"
 #include "PenguinBody.h"
 #include "PenguinCannon.h"
+#include "Bullet.h"
 
 
 GameObject::GameObject():
@@ -120,4 +121,8 @@ std::shared_ptr<PenguinBody> GameObject::GetPenguinBody() const {
 
 std::shared_ptr<PenguinCannon> GameObject::GetPenguinCannon() const {
     return std::static_pointer_cast<PenguinCannon>(GetComponent("PenguinCannon"));
+}
+
+std::shared_ptr<Bullet> GameObject::GetBullet() const {
+    return std::static_pointer_cast<Bullet>(GetComponent("Bullet"));
 }

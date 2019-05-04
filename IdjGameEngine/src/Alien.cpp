@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "Minion.h"
 #include "Collider.h"
+#include "Bullet.h"
 
 
 Alien::Alien(GameObject& associated, int nMinions):
@@ -89,6 +90,15 @@ void Alien::Render() {}
 
 bool Alien::Is(const std::string& type) {
     return type == "Alien";
+}
+
+
+void Alien::NotifyCollision(GameObject& other) {
+    auto bullet = other.GetBullet();
+
+    if (bullet) {
+        hp -= bullet->GetDamage();
+    }
 }
 
 
