@@ -6,6 +6,7 @@
 #include "CameraFollower.h"
 #include "Alien.h"
 #include "PenguinBody.h"
+#include "PenguinCannon.h"
 
 
 State::State():
@@ -29,16 +30,19 @@ State::State():
     map->AddComponent(tileMap);
     objectArray.push_back(map);
 
-    auto alien = std::make_shared<GameObject>();
-    alien->AddComponent(std::make_shared<Alien>(*alien, 5));
-    alien->box.SetCenter(512, 300);
-    objectArray.push_back(alien);
+    auto alienGO = std::make_shared<GameObject>();
+    alienGO->AddComponent(std::make_shared<Alien>(*alienGO, 5));
+    alienGO->box.SetCenter(512, 300);
+    objectArray.push_back(alienGO);
 
+    auto penguinBodyGO = std::make_shared<GameObject>();
+    penguinBodyGO->AddComponent(std::make_shared<PenguinBody>(*penguinBodyGO));
+    penguinBodyGO->box.SetCenter(704, 640);
+    objectArray.push_back(penguinBodyGO);
 
-    auto penguinBody = std::make_shared<GameObject>();
-    penguinBody->AddComponent(std::make_shared<PenguinBody>(*penguinBody));
-    penguinBody->box.SetCenter(704, 640);
-    objectArray.push_back(penguinBody);
+    auto penguinCannonGO = std::make_shared<GameObject>();
+    penguinCannonGO->AddComponent(std::make_shared<PenguinCannon>(*penguinCannonGO, penguinBodyGO));
+    objectArray.push_back(penguinCannonGO);
 
     music.Play();
 }

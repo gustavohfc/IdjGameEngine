@@ -3,6 +3,8 @@
 #include "Sprite.h"
 #include "Util.h"
 #include "InputManager.h"
+#include "Game.h"
+#include "Bullet.h"
 
 
 PenguinCannon::PenguinCannon(GameObject& associated, std::weak_ptr<GameObject> penguinBody):
@@ -26,11 +28,14 @@ void PenguinCannon::Update(float dt) {
 
     auto& inputManager = InputManager::GetInstance();
 
-    associated.box.SetCenter(pbody->box.GetCenter());
-    associated.angleDeg = Util::
-        RadToDeg(Vec2::GetVectorBetweenTwoPoints(associated.box.GetCenter(), inputManager.GetMouseMapPos()).Angle());
+    angle = Vec2::GetVectorBetweenTwoPoints(associated.box.GetCenter(), inputManager.GetMouseMapPos()).Angle();
 
-    // TODO: Shoot
+    associated.box.SetCenter(pbody->box.GetCenter());
+    associated.angleDeg = Util::RadToDeg(angle);
+
+    if (inputManager.MousePress(LEFT_MOUSE_BUTTON)) {
+        Shoot();
+    }
 }
 
 
@@ -42,4 +47,15 @@ bool PenguinCannon::Is(const std::string& type) {
 }
 
 
-void PenguinCannon::Shoot() {}
+void PenguinCannon::Shoot() {
+    auto state = Game::GetInstance().GetState();
+
+    auto cannonCenter = associated.box.GetCenter();
+    auto cannonTip = cannonCenter + Vec2(54, 0).GetRotated(-angle);
+
+    auto bulletGO = std::make_shared<GameObject>();
+    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, 100, 10, 1000, "assets/img/minionbullet2.png", 3, 1));
+    bulletGO->box.SetCenter(cannonTip.x, cannonTip.y);
+    bulletGO->angleDeg = Util::RadToDeg(angle);
+    state->AddObject(bulletGO);
+}

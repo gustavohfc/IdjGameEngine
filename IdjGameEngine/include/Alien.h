@@ -23,7 +23,6 @@ private:
         Vec2 pos;
     };
 
-    // TODO: remove speed?
     Vec2 speed = {0, 0};
     int hp;
 
