@@ -37,7 +37,7 @@ Vec2 Vec2::GetRotated(float angle) const {
 
     return {
         x * cos - y * sin,
-        y * cos - x * sin
+        y * cos + x * sin
     };
 }
 

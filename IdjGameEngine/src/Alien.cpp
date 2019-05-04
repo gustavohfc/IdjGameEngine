@@ -80,7 +80,7 @@ void Alien::Update(float dt) {
     }
 
     // Rotate
-    associated.angleDeg += 10 * dt;
+    associated.angleDeg -= 10 * dt;
 }
 
 

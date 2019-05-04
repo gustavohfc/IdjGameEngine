@@ -64,7 +64,7 @@ void PenguinBody::Update(float dt) {
         linearSpeed = 100;
     }
 
-    auto nextPos = associated.box.GetCenter() + Vec2(linearSpeed * dt, 0).GetRotated(-angle);
+    auto nextPos = associated.box.GetCenter() + Vec2(linearSpeed * dt, 0).GetRotated(angle);
     associated.box.SetCenter(nextPos);
 }
 
