@@ -35,8 +35,11 @@ void PenguinCannon::Update(float dt) {
     associated.box.SetCenter(pbody->box.GetCenter());
     associated.angleDeg = Util::RadToDeg(angle);
 
-    if (inputManager.MousePress(LEFT_MOUSE_BUTTON)) {
+    shootCoolDown.Update(dt);
+
+    if (inputManager.MousePress(LEFT_MOUSE_BUTTON) && shootCoolDown.Get() >= 1) {
         Shoot();
+        shootCoolDown.Restart();
     }
 }
 

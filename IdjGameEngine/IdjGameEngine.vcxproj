@@ -173,6 +173,7 @@
     <ClCompile Include="src\TileSet.cpp" />
     <ClCompile Include="src\Vec2.cpp" />
     <ClCompile Include="src\Util.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Collider.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="include\Util.h" />
     <ClInclude Include="include\PenguinBody.h" />
     <ClInclude Include="include\PenguinCannon.h" />
+    <ClInclude Include="include\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

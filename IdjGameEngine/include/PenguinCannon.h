@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "Timer.h"
 
 
 class PenguinCannon : public Component {
@@ -16,4 +17,6 @@ public:
 private:
     std::weak_ptr<GameObject> pbody;
     float angle;
+
+    Timer shootCoolDown;
 };
