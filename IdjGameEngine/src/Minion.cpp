@@ -12,8 +12,11 @@ Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCen
     Component(associated),
     alienCenter(alienCenter),
     arc(arcOffset) {
+
+    auto scale = 1 + ((rand() % 5) + 1) / 10.0;
     
     auto sprite = std::make_shared<Sprite>(associated, "assets/img/minion.png");
+    sprite->SetScale(scale, scale);
     associated.AddComponent(sprite);
 
     Update(0);
@@ -31,7 +34,7 @@ void Minion::Update(float dt) {
         return;
     }
 
-    auto position = Vec2(150, 0).GetRotated(arc) + alien->box.GetCenter();
+    auto position = Vec2(200, 0).GetRotated(arc) + alien->box.GetCenter();
     associated.box.SetCenter(position.x, position.y);
     associated.angleDeg = 360 - Util::RadToDeg(arc);
 }
