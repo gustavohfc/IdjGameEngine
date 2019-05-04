@@ -3,6 +3,7 @@
 #include "Sprite.h"
 #include "InputManager.h"
 #include "Util.h"
+#include "Collider.h"
 
 
 PenguinBody* PenguinBody::player = nullptr;
@@ -16,6 +17,7 @@ PenguinBody::PenguinBody(GameObject& associated) :
     hp(40) {
 
     associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/penguin.png"));
+    associated.AddComponent(std::make_shared<Collider>(associated));
 
     player = this;
 }

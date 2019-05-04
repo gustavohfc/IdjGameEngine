@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Bullet.h"
 #include "Sprite.h"
+#include "Collider.h"
 
 
 Bullet::Bullet(GameObject& associated, float angle, float speed, int damage, float maxDistance,
@@ -11,8 +12,8 @@ Bullet::Bullet(GameObject& associated, float angle, float speed, int damage, flo
 
     this->speed = Vec2(speed * cos(angle), speed * sin(angle));
 
-    auto spriteCmp = std::make_shared<Sprite>(associated, sprite, frameCount, frameTime);
-    associated.AddComponent(spriteCmp);
+    associated.AddComponent(std::make_shared<Sprite>(associated, sprite, frameCount, frameTime));
+    associated.AddComponent(std::make_shared<Collider>(associated));
 }
 
 

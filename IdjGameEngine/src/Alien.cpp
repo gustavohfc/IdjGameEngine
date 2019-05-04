@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "Game.h"
 #include "Minion.h"
+#include "Collider.h"
 
 
 Alien::Alien(GameObject& associated, int nMinions):
@@ -11,8 +12,8 @@ Alien::Alien(GameObject& associated, int nMinions):
     hp(50),
     nMinions(nMinions) {
 
-    auto alienSprite = std::make_shared<Sprite>(associated, "assets/img/alien.png");
-    associated.AddComponent(alienSprite);
+    associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/alien.png"));
+    associated.AddComponent(std::make_shared<Collider>(associated));
 }
 
 

@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Bullet.h"
 #include "Util.h"
+#include "Collider.h"
 
 #define ANGULAR_VELOCITY 0.15707963267 // PI/20
 
@@ -18,6 +19,7 @@ Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCen
     auto sprite = std::make_shared<Sprite>(associated, "assets/img/minion.png");
     sprite->SetScale(scale, scale);
     associated.AddComponent(sprite);
+    associated.AddComponent(std::make_shared<Collider>(associated));
 
     Update(0);
 }

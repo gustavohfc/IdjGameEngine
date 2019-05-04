@@ -5,6 +5,7 @@
 #include "InputManager.h"
 #include "Game.h"
 #include "Bullet.h"
+#include "Collider.h"
 
 
 PenguinCannon::PenguinCannon(GameObject& associated, std::weak_ptr<GameObject> penguinBody):
@@ -13,6 +14,7 @@ PenguinCannon::PenguinCannon(GameObject& associated, std::weak_ptr<GameObject> p
     angle(0) {
 
     associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/cubngun.png"));
+    associated.AddComponent(std::make_shared<Collider>(associated));
 }
 
 

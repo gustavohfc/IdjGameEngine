@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\PenguinCannon.cpp" />
     <ClCompile Include="src\PenguinBody.cpp" />
     <ClCompile Include="src\Bullet.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="src\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Collider.h" />
     <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Alien.h" />
     <ClInclude Include="include\CameraFollower.h" />
