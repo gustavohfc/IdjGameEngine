@@ -19,7 +19,10 @@ void Camera::Unfollow() {
 void Camera::Update(float dt) {
     if (focus != nullptr) {
 
-        pos = focus->box.GetCenter();
+        auto focusCenter = focus->box.GetCenter();
+
+        pos.x = focusCenter.x - 1024 / 2;
+        pos.y = focusCenter.y - 600 / 2;
 
     } else {
 

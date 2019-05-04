@@ -44,6 +44,8 @@ State::State():
     penguinCannonGO->AddComponent(std::make_shared<PenguinCannon>(*penguinCannonGO, penguinBodyGO));
     objectArray.push_back(penguinCannonGO);
 
+    Camera::Follow(penguinBodyGO.get());
+
     music.Play();
 }
 
