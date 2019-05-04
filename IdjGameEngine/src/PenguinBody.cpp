@@ -8,6 +8,7 @@
 #include "PenguinCannon.h"
 #include "Bullet.h"
 #include "Camera.h"
+#include "Sound.h"
 
 
 PenguinBody* PenguinBody::player = nullptr;
@@ -45,8 +46,7 @@ void PenguinBody::Start() {
 
 void PenguinBody::Update(float dt) {
     if (hp <= 0) {
-        associated.RequestDelete();
-        Camera::Unfollow();
+        Die();
         return;
     }
 
@@ -75,6 +75,8 @@ void PenguinBody::Update(float dt) {
 
     if (linearSpeed > 100) {
         linearSpeed = 100;
+    } else if (linearSpeed < -100) {
+        linearSpeed = -100;
     }
 
     auto nextPos = associated.box.GetCenter() + Vec2(linearSpeed * dt, 0).GetRotated(angle);
@@ -96,4 +98,20 @@ void PenguinBody::NotifyCollision(GameObject& other) {
     if (bullet && bullet->targetsPlayer) {
         hp -= bullet->GetDamage();
     }
+}
+
+
+void PenguinBody::Die() {
+    associated.RequestDelete();
+    Camera::Unfollow();
+
+    auto state = Game::GetInstance().GetState();
+
+    auto penguinDeath = std::make_shared<GameObject>();
+    penguinDeath->AddComponent(std::make_shared<Sprite>(*penguinDeath, "assets/img/penguindeath.png", 5, 0.1, 0.5));
+    auto boomSound = std::make_shared<Sound>(*penguinDeath, "assets/audio/boom.wav");
+    boomSound->Play();
+    penguinDeath->AddComponent(boomSound);
+    penguinDeath->box.SetCenter(associated.box.GetCenter());
+    state->AddObject(penguinDeath);
 }

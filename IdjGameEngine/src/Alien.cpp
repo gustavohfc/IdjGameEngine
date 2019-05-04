@@ -6,6 +6,7 @@
 #include "Minion.h"
 #include "Collider.h"
 #include "Bullet.h"
+#include "Sound.h"
 
 
 Alien::Alien(GameObject& associated, int nMinions):
@@ -38,7 +39,7 @@ void Alien::Start() {
 
 void Alien::Update(float dt) {
     if (hp <= 0) {
-        associated.RequestDelete();
+        Die();
         return;
     }
 
@@ -99,6 +100,21 @@ void Alien::NotifyCollision(GameObject& other) {
     if (bullet) {
         hp -= bullet->GetDamage();
     }
+}
+
+
+void Alien::Die() {
+    associated.RequestDelete();
+
+    auto state = Game::GetInstance().GetState();
+
+    auto alienDeath = std::make_shared<GameObject>();
+    alienDeath->AddComponent(std::make_shared<Sprite>(*alienDeath, "assets/img/aliendeath.png", 4, 0.1, 0.4));
+    auto boomSound = std::make_shared<Sound>(*alienDeath, "assets/audio/boom.wav");
+    boomSound->Play();
+    alienDeath->AddComponent(boomSound);
+    alienDeath->box.SetCenter(associated.box.GetCenter());
+    state->AddObject(alienDeath);
 }
 
 

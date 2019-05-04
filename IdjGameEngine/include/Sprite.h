@@ -1,9 +1,10 @@
 ﻿#pragma once
 #include "Component.h"
+#include "Timer.h"
 
 class Sprite : public Component {
 public:
-    Sprite(GameObject& associated, const std::string& file, int frameCount = 1, float frameTime = 1);
+    Sprite(GameObject& associated, const std::string& file, int frameCount = 1, float frameTime = 1, float secondsToSelfDestruct = 0);
 
     void Open(const std::string& file);
     void SetClip(int x, int y, int w, int h);
@@ -38,4 +39,7 @@ private:
     float frameTime;
 
     Vec2 scale;
+
+    Timer selfDestructCount;
+    float secondsToSelfDestruct;
 };

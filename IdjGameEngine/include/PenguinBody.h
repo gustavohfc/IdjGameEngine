@@ -15,6 +15,8 @@ public:
     static PenguinBody* player;
 
 private:
+    void Die();
+
     std::weak_ptr<GameObject> pcannon;
     Vec2 speed;
     float linearSpeed;

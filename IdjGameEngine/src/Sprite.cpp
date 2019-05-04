@@ -3,15 +3,17 @@
 #include "Game.h"
 #include "Resources.h"
 #include "Camera.h"
+#include <iterator>
 
 
-Sprite::Sprite(GameObject& associated, const std::string& file, int frameCount, float frameTime) :
+Sprite::Sprite(GameObject& associated, const std::string& file, int frameCount, float frameTime, float secondsToSelfDestruct) :
     Component(associated),
     frameCount(frameCount),
     currentFrame(0),
     timeElapsed(0),
-    frameTime(0),
-    scale({1, 1}) {
+    frameTime(frameTime),
+    scale({1, 1}),
+    secondsToSelfDestruct(secondsToSelfDestruct) {
 
     Open(file);
 }
@@ -112,6 +114,13 @@ void Sprite::Update(float dt) {
         timeElapsed = 0;
         currentFrame = ++currentFrame % frameCount;
         UpdateFrameClipRect();
+    }
+
+    if (secondsToSelfDestruct != 0) {
+        selfDestructCount.Update(dt);
+        if (selfDestructCount.Get() > secondsToSelfDestruct) {
+            associated.RequestDelete();
+        }
     }
 }
 

@@ -16,6 +16,8 @@ public:
 
 private:
 
+    void Die();
+
     class Action {
     public:
         enum ActionType { MOVE, SHOOT };
