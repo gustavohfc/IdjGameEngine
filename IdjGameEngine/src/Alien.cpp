@@ -54,9 +54,14 @@ void Alien::Update(float dt) {
         auto task = taskQueue.front();
 
         if (task.type == Action::MOVE) {
-            bool arrived = associated.box.Move(dt, 200, task.pos);
+            if (speed.x == 0 && speed.y == 0) {
+                speed = Vec2::GetUnitVectorBetweenTwoPoints(associated.box.GetCenter(), task.pos) * 200;
+            }
+
+            bool arrived = associated.box.Move(speed * dt, task.pos);
 
             if (arrived) {
+                speed = {0, 0};
                 taskQueue.pop();
             }
 

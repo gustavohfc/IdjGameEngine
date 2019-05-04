@@ -24,7 +24,7 @@ private:
     };
 
     // TODO: remove speed?
-    Vec2 speed;
+    Vec2 speed = {0, 0};
     int hp;
 
     int nMinions;

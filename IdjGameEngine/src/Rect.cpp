@@ -57,9 +57,7 @@ bool Rect::Contains(const Vec2& v) const {
 }
 
 
-bool Rect::Move(float dt, int speedAbs, const Vec2& dest) {
-    Vec2 speed = Vec2::GetUnitVectorBetweenTwoPoints(this->GetCenter(), dest) * dt * speedAbs;
-
+bool Rect::Move(const Vec2& speed, const Vec2& dest) {
     auto distance = this->Dist(dest);
     auto displacement = speed.Abs();
 

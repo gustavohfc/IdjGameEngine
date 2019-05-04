@@ -19,5 +19,5 @@ public:
      * \brief Moves the Rect in the direction of dest in a constant speed.
      * \return Returns true if the rect arrived in the destination.
      */
-    bool Move(float dt, int speed, const Vec2& dest);
+    bool Move(const Vec2& speed, const Vec2& dest);
 };
