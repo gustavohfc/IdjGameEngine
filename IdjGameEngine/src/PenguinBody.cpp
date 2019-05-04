@@ -101,6 +101,11 @@ void PenguinBody::NotifyCollision(GameObject& other) {
 }
 
 
+Vec2 PenguinBody::GetCenter() {
+    return associated.box.GetCenter();
+}
+
+
 void PenguinBody::Die() {
     associated.RequestDelete();
     Camera::Unfollow();

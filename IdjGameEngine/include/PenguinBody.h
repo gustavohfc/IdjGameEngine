@@ -11,6 +11,7 @@ public:
     void Render() override;
     bool Is(const std::string& type) override;
     void NotifyCollision(GameObject& other) override;
+    Vec2 GetCenter();
 
     static PenguinBody* player;
 

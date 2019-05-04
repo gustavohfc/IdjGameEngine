@@ -7,20 +7,27 @@
 #include "Collider.h"
 #include "Bullet.h"
 #include "Sound.h"
+#include "PenguinBody.h"
+
+int Alien::alienCount = 0;
 
 
 Alien::Alien(GameObject& associated, int nMinions):
     Component(associated),
+    state(AlienState::RESTING),
     hp(50),
     nMinions(nMinions) {
 
     associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/alien.png"));
     associated.AddComponent(std::make_shared<Collider>(associated));
+
+    alienCount++;
 }
 
 
 Alien::~Alien() {
     minionArray.clear();
+    alienCount--;
 }
 
 
@@ -43,46 +50,46 @@ void Alien::Update(float dt) {
         return;
     }
 
-    auto& inputManager = InputManager::GetInstance();
-
-    if (inputManager.MousePress(LEFT_MOUSE_BUTTON)) {
-        taskQueue.emplace(Action::SHOOT, inputManager.GetMouseMapPos());
-    }
-
-    if (inputManager.MousePress(RIGHT_MOUSE_BUTTON)) {
-        taskQueue.emplace(Action::MOVE, inputManager.GetMouseMapPos());
-    }
-
-    if (!taskQueue.empty()) {
-        auto task = taskQueue.front();
-
-        if (task.type == Action::MOVE) {
-            if (speed.x == 0 && speed.y == 0) {
-                speed = Vec2::GetUnitVectorBetweenTwoPoints(associated.box.GetCenter(), task.pos) * 200;
-            }
-
-            bool arrived = associated.box.Move(speed * dt, task.pos);
-
-            if (arrived) {
-                speed = {0, 0};
-                taskQueue.pop();
-            }
-
-        } else if (task.type == Action::SHOOT) {
-            auto minionCompare = [&task](std::shared_ptr<GameObject> a, std::shared_ptr<GameObject> b) {
-                return a->box.Dist(task.pos) < b->box.Dist(task.pos);
-            };
-
-            auto closestMinion = *std::min_element(minionArray.begin(), minionArray.end(), minionCompare);
-
-            closestMinion->GetMinion()->Shoot(task.pos);
-
-            taskQueue.pop();
-        }
-    }
-
     // Rotate
     associated.angleDeg -= 10 * dt;
+
+    if (state == AlienState::MOVING) {
+        if (speed.x == 0 && speed.y == 0) {
+            speed = Vec2::GetUnitVectorBetweenTwoPoints(associated.box.GetCenter(), destination) * 200;
+        }
+
+        bool arrived = associated.box.Move(speed * dt, destination);
+
+        if (arrived) {
+            speed = { 0, 0 };
+
+            if (auto player = PenguinBody::player) {
+                auto playerCenter = player->GetCenter();
+
+                auto minionCompare = [&playerCenter](std::shared_ptr<GameObject> a, std::shared_ptr<GameObject> b) {
+                    return a->box.Dist(playerCenter) < b->box.Dist(playerCenter);
+                };
+
+                auto closestMinion = *std::min_element(minionArray.begin(), minionArray.end(), minionCompare);
+
+                closestMinion->GetMinion()->Shoot(playerCenter);
+
+                state = AlienState::RESTING;
+                restTimer.Restart();
+            }
+        }
+
+    }else if (state == AlienState::RESTING) {
+        
+        restTimer.Update(dt);
+
+        if (restTimer.Get() > 3) {
+            if (auto player = PenguinBody::player) {
+                destination = player->GetCenter();
+                state = AlienState::MOVING;
+            }
+        }
+    }
 }
 
 
@@ -116,8 +123,3 @@ void Alien::Die() {
     alienDeath->box.SetCenter(associated.box.GetCenter());
     state->AddObject(alienDeath);
 }
-
-
-Alien::Action::Action(ActionType type, Vec2 pos):
-    type(type),
-    pos(pos) {}

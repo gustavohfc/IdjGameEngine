@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Timer.h"
 
 
 class Alien : public Component {
@@ -14,22 +15,19 @@ public:
 
     void NotifyCollision(GameObject& other) override;
 
-private:
+    static int alienCount;
 
+private:
     void Die();
 
-    class Action {
-    public:
-        enum ActionType { MOVE, SHOOT };
-        Action(ActionType type, Vec2 pos);
-        ActionType type;
-        Vec2 pos;
-    };
+    enum class AlienState { MOVING, RESTING };
+    AlienState state;
+    Timer restTimer;
+    Vec2 destination;
 
     Vec2 speed = {0, 0};
     int hp;
 
     int nMinions;
-    std::queue<Action> taskQueue;
     std::vector<std::shared_ptr<GameObject>> minionArray;
 };
