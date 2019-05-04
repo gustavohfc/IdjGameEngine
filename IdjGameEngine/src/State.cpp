@@ -7,6 +7,9 @@
 #include "Alien.h"
 #include "PenguinBody.h"
 #include "PenguinCannon.h"
+#include "Collision.h"
+#include "Util.h"
+#include "Collider.h"
 
 
 State::State():
@@ -103,6 +106,28 @@ void State::Update(float dt) {
 
     for (int i = 0; i < objectArray.size(); i++) {
         objectArray[i]->Update(dt);
+    }
+
+    for (int i = 0; i < objectArray.size(); i++) {
+        auto aCollider = objectArray[i]->GetCollider();
+        if (aCollider == nullptr) {
+            continue;
+        }
+
+        for (int j = i + 1; j < objectArray.size(); j++) {
+            auto bCollider = objectArray[j]->GetCollider();
+            if (bCollider == nullptr) {
+                continue;
+            }
+
+            auto isColliding = Collision::IsColliding(aCollider->box, bCollider->box, Util::DegToRad(objectArray[i]->angleDeg),
+                                                      Util::DegToRad(objectArray[j]->angleDeg));
+
+            if (isColliding) {
+                objectArray[i]->NotifyCollision(*objectArray[j]);
+                objectArray[j]->NotifyCollision(*objectArray[i]);
+            }
+        }
     }
 
     // Remove dead objects

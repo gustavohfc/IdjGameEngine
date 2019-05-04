@@ -3,6 +3,8 @@
 #include "Sound.h"
 #include "Minion.h"
 #include "Sprite.h"
+#include "Collider.h"
+
 
 GameObject::GameObject():
     angleDeg(0) {}
@@ -70,6 +72,13 @@ Vec2 GameObject::GetPosition() const {
 }
 
 
+void GameObject::NotifyCollision(GameObject& other) {
+    for (int i = 0; i < components.size(); i++) {
+        components[i]->NotifyCollision(other);
+    }
+}
+
+
 std::shared_ptr<Component> GameObject::GetComponent(const std::string& type) const {
     for (auto& component : components) {
         if (component->Is(type)) {
@@ -89,6 +98,11 @@ std::shared_ptr<Minion> GameObject::GetMinion() const {
     return std::static_pointer_cast<Minion>(GetComponent("Minion"));
 }
 
+
 std::shared_ptr<Sprite> GameObject::GetSprite() const {
     return std::static_pointer_cast<Sprite>(GetComponent("Sprite"));
+}
+
+std::shared_ptr<Collider> GameObject::GetCollider() const {
+    return std::static_pointer_cast<Collider>(GetComponent("Collider"));
 }
