@@ -25,8 +25,8 @@ float Vec2::Angle() const {
 Vec2 Vec2::Norm() const {
     auto abs = Abs();
     return {
-        x / abs,
-        y / abs
+        abs != 0 ? x / abs : 0,
+        abs != 0 ? y / abs : 0
     };
 }
 
