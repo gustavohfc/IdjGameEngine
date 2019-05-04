@@ -14,7 +14,7 @@ public:
     static PenguinBody* player;
 
 private:
-    std::weak_ptr<GameObject> pcannon;
+    std::weak_ptr<GameObject> pcannon; // TODO
     Vec2 speed;
     float linearSpeed;
     float angle;

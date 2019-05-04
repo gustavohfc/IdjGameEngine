@@ -7,6 +7,9 @@ class Sound;
 class Minion;
 class Sprite;
 class Collider;
+class Alien;
+class PenguinBody;
+class PenguinCannon;
 
 class GameObject {
 public:
@@ -31,6 +34,9 @@ public:
     std::shared_ptr<Minion> GetMinion() const;
     std::shared_ptr<Sprite> GetSprite() const;
     std::shared_ptr<Collider> GetCollider() const;
+    std::shared_ptr<Alien> GetAlien() const;
+    std::shared_ptr<PenguinBody> GetPenguinBody() const;
+    std::shared_ptr<PenguinCannon> GetPenguinCannon() const;
 
 private:
     std::vector<std::shared_ptr<Component>> components;

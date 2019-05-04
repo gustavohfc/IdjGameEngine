@@ -56,7 +56,7 @@ void PenguinCannon::Shoot() {
     auto cannonTip = cannonCenter + Vec2(54, 0).GetRotated(angle);
 
     auto bulletGO = std::make_shared<GameObject>();
-    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, 100, 10, 1000, "assets/img/minionbullet2.png", 3, 1));
+    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, 100, 10, 1000, "assets/img/minionbullet2.png", 3, 1, false));
     bulletGO->box.SetCenter(cannonTip.x, cannonTip.y);
     bulletGO->angleDeg = Util::RadToDeg(angle);
     state->AddObject(bulletGO);

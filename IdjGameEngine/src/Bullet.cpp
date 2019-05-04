@@ -5,10 +5,11 @@
 
 
 Bullet::Bullet(GameObject& associated, float angle, float speed, int damage, float maxDistance,
-               const std::string& sprite, int frameCount, float frameTime):
+               const std::string& sprite, int frameCount, float frameTime, bool targetsPlayer):
     Component(associated),
     distanceLeft(maxDistance),
-    damage(damage) {
+    damage(damage),
+    targetsPlayer(targetsPlayer) {
 
     this->speed = Vec2(speed * cos(angle), speed * sin(angle));
 
@@ -39,6 +40,17 @@ void Bullet::Render() {}
 
 bool Bullet::Is(const std::string& type) {
     return type == "Bullet";
+}
+
+
+void Bullet::NotifyCollision(GameObject& other) {
+    if (targetsPlayer && (other.GetPenguinBody() || other.GetPenguinCannon())) {
+        associated.RequestDelete();
+    }
+
+    if (other.GetAlien()) {
+        associated.RequestDelete();
+    }
 }
 
 

@@ -4,6 +4,9 @@
 #include "Minion.h"
 #include "Sprite.h"
 #include "Collider.h"
+#include "Alien.h"
+#include "PenguinBody.h"
+#include "PenguinCannon.h"
 
 
 GameObject::GameObject():
@@ -105,4 +108,16 @@ std::shared_ptr<Sprite> GameObject::GetSprite() const {
 
 std::shared_ptr<Collider> GameObject::GetCollider() const {
     return std::static_pointer_cast<Collider>(GetComponent("Collider"));
+}
+
+std::shared_ptr<Alien> GameObject::GetAlien() const {
+    return std::static_pointer_cast<Alien>(GetComponent("Alien"));
+}
+
+std::shared_ptr<PenguinBody> GameObject::GetPenguinBody() const {
+    return std::static_pointer_cast<PenguinBody>(GetComponent("PenguinBody"));
+}
+
+std::shared_ptr<PenguinCannon> GameObject::GetPenguinCannon() const {
+    return std::static_pointer_cast<PenguinCannon>(GetComponent("PenguinCannon"));
 }
