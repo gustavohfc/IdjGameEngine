@@ -53,7 +53,7 @@ void Minion::Shoot(Vec2 target) const {
     auto angle = Vec2::GetVectorBetweenTwoPoints(position, target).Angle();
 
     auto bulletGO = std::make_shared<GameObject>();
-    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, 100, 10, 1000, "assets/img/minionbullet1.png"));
+    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, 100, 10, 1000, "assets/img/minionbullet2.png", 3, 1));
     bulletGO->box.SetCenter(position.x, position.y);
     bulletGO->angleDeg = Util::RadToDeg(angle);
     state->AddObject(bulletGO);

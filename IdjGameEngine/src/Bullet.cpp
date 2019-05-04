@@ -4,14 +4,14 @@
 
 
 Bullet::Bullet(GameObject& associated, float angle, float speed, int damage, float maxDistance,
-               const std::string& sprite):
+               const std::string& sprite, int frameCount, float frameTime):
     Component(associated),
     distanceLeft(maxDistance),
     damage(damage) {
 
     this->speed = Vec2(speed * cos(angle), speed * sin(angle));
 
-    auto spriteCmp = std::make_shared<Sprite>(associated, sprite);
+    auto spriteCmp = std::make_shared<Sprite>(associated, sprite, frameCount, frameTime);
     associated.AddComponent(spriteCmp);
 }
 

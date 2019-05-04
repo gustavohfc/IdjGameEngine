@@ -8,8 +8,8 @@
 
 Alien::Alien(GameObject& associated, int nMinions):
     Component(associated),
-    nMinions(nMinions),
-    hp(50) {
+    hp(50),
+    nMinions(nMinions) {
 
     auto alienSprite = std::make_shared<Sprite>(associated, "assets/img/alien.png");
     associated.AddComponent(alienSprite);

@@ -5,13 +5,13 @@
 #include "Camera.h"
 
 
-Sprite::Sprite(GameObject& associated):
+Sprite::Sprite(GameObject& associated, const std::string& file, int frameCount, float frameTime) :
     Component(associated),
-    scale({1, 1}) {}
-
-
-Sprite::Sprite(GameObject& associated, const std::string& file):
-    Sprite(associated) {
+    frameCount(frameCount),
+    currentFrame(0),
+    timeElapsed(0),
+    frameTime(0),
+    scale({1, 1}) {
 
     Open(file);
 }
@@ -23,7 +23,10 @@ void Sprite::Open(const std::string& file) {
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 
     SetClip(0, 0, width, height);
-    associated.box.w = width;
+
+    UpdateFrameClipRect();
+
+    associated.box.w = GetWidth();
     associated.box.h = height;
 }
 
@@ -34,7 +37,7 @@ void Sprite::SetClip(int x, int y, int w, int h) {
 
 
 int Sprite::GetWidth() const {
-    return width * scale.x;
+    return (float(width) / frameCount) * scale.x;
 }
 
 
@@ -70,6 +73,27 @@ Vec2 Sprite::GetScale() const {
 }
 
 
+void Sprite::SetFrame(int frame) {
+    currentFrame = frame;
+
+    UpdateFrameClipRect();
+}
+
+
+void Sprite::SetFrameCount(int frameCount) {
+    this->frameCount = frameCount;
+
+    currentFrame = 0;
+
+    UpdateFrameClipRect();
+}
+
+
+void Sprite::SetFrameTime(float frameTime) {
+    this->frameTime = frameTime;
+}
+
+
 void Sprite::Start() {}
 
 
@@ -81,9 +105,27 @@ void Sprite::Render() {
 }
 
 
-void Sprite::Update(float dt) {}
+void Sprite::Update(float dt) {
+    timeElapsed += dt;
+
+    if (timeElapsed >= frameTime) {
+        timeElapsed = 0;
+        currentFrame = ++currentFrame % frameCount;
+        UpdateFrameClipRect();
+    }
+}
 
 
 bool Sprite::Is(const std::string& type) {
     return type == "Sprite";
+}
+
+
+void Sprite::UpdateFrameClipRect() {
+    auto frameWidth = width / frameCount;
+    auto x = currentFrame * frameWidth;
+
+    SetClip(x, clipRect.y, width / frameCount, clipRect.h);
+
+    associated.box.w = GetWidth();
 }

@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Sound.h"
 #include "Minion.h"
-
+#include "Sprite.h"
 
 GameObject::GameObject():
     angleDeg(0) {}
@@ -87,4 +87,8 @@ std::shared_ptr<Sound> GameObject::GetSound() const {
 
 std::shared_ptr<Minion> GameObject::GetMinion() const {
     return std::static_pointer_cast<Minion>(GetComponent("Minion"));
+}
+
+std::shared_ptr<Sprite> GameObject::GetSprite() const {
+    return std::static_pointer_cast<Sprite>(GetComponent("Sprite"));
 }
