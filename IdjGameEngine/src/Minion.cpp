@@ -3,6 +3,7 @@
 #include "Sprite.h"
 #include "Game.h"
 #include "Bullet.h"
+#include "Util.h"
 
 #define ANGULAR_VELOCITY 0.15707963267 // PI/20
 
@@ -22,7 +23,7 @@ Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCen
 void Minion::Start() {}
 
 void Minion::Update(float dt) {
-    arc = arc + ANGULAR_VELOCITY * dt;
+    arc += ANGULAR_VELOCITY * dt;
 
     auto alien = alienCenter.lock();
     if (!alien) {
@@ -32,6 +33,7 @@ void Minion::Update(float dt) {
 
     auto position = Vec2(150, 0).GetRotated(arc) + alien->box.GetCenter();
     associated.box.SetCenter(position.x, position.y);
+    associated.angleDeg = 360 - Util::RadToDeg(arc);
 }
 
 void Minion::Render() {}

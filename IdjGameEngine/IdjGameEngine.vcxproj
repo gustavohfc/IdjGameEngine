@@ -169,6 +169,7 @@
     <ClCompile Include="src\TileMap.cpp" />
     <ClCompile Include="src\TileSet.cpp" />
     <ClCompile Include="src\Vec2.cpp" />
+    <ClCompile Include="src\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Bullet.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="include\Resources.h" />
     <ClInclude Include="include\InputManager.h" />
     <ClInclude Include="include\Minion.h" />
+    <ClInclude Include="include\Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
