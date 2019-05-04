@@ -61,7 +61,14 @@ void Alien::Update(float dt) {
             }
 
         } else if (task.type == Action::SHOOT) {
-            minionArray[0]->GetMinion()->Shoot(task.pos);
+            auto minionCompare = [&task](std::shared_ptr<GameObject> a, std::shared_ptr<GameObject> b) {
+                return a->box.Dist(task.pos) < b->box.Dist(task.pos);
+            };
+
+            auto closestMinion = *std::min_element(minionArray.begin(), minionArray.end(), minionCompare);
+
+            closestMinion->GetMinion()->Shoot(task.pos);
+
             taskQueue.pop();
         }
     }
