@@ -11,6 +11,7 @@ public:
     void Reset();
     Vec2 GetCenter() const;
     void SetCenter(float centerX, float centerY);
+    void SetCenter(Vec2 center);
     float Dist(const Rect& other) const;
     float Dist(const Vec2& vec) const;
     bool Contains(const Vec2& v) const;

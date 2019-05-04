@@ -38,6 +38,11 @@ void Rect::SetCenter(float centerX, float centerY) {
 }
 
 
+void Rect::SetCenter(Vec2 center) {
+    SetCenter(center.x, center.y);
+}
+
+
 float Rect::Dist(const Rect& other) const {
     return this->GetCenter().Dist(other.GetCenter());
 }

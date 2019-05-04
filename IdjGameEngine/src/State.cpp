@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "CameraFollower.h"
 #include "Alien.h"
+#include "PenguinBody.h"
 
 
 State::State():
@@ -32,6 +33,12 @@ State::State():
     alien->AddComponent(std::make_shared<Alien>(*alien, 5));
     alien->box.SetCenter(512, 300);
     objectArray.push_back(alien);
+
+
+    auto penguinBody = std::make_shared<GameObject>();
+    penguinBody->AddComponent(std::make_shared<PenguinBody>(*penguinBody));
+    penguinBody->box.SetCenter(704, 640);
+    objectArray.push_back(penguinBody);
 
     music.Play();
 }

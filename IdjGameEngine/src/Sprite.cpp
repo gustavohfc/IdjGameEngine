@@ -125,7 +125,7 @@ void Sprite::UpdateFrameClipRect() {
     auto frameWidth = width / frameCount;
     auto x = currentFrame * frameWidth;
 
-    SetClip(x, clipRect.y, width / frameCount, clipRect.h);
+    SetClip(x, clipRect.y, frameWidth, clipRect.h);
 
     associated.box.w = GetWidth();
 }

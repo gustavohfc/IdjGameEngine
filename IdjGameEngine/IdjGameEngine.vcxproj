@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\PenguinCannon.cpp" />
+    <ClCompile Include="src\PenguinBody.cpp" />
     <ClCompile Include="src\Bullet.cpp" />
     <ClCompile Include="src\Minion.cpp" />
     <ClCompile Include="src\Alien.cpp" />
@@ -192,6 +194,8 @@
     <ClInclude Include="include\InputManager.h" />
     <ClInclude Include="include\Minion.h" />
     <ClInclude Include="include\Util.h" />
+    <ClInclude Include="include\PenguinBody.h" />
+    <ClInclude Include="include\PenguinCannon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
