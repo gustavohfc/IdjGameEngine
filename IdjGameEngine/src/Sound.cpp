@@ -63,6 +63,6 @@ void Sound::Update(float dt) {}
 void Sound::Render() {}
 
 
-bool Sound::Is(const std::string& type) {
-    return type == "Sound";
+ComponentType Sound::GetType() const {
+    return Type;
 }

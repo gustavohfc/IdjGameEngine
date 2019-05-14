@@ -61,7 +61,7 @@ void Alien::Update(float dt) {
         bool arrived = associated.box.Move(speed * dt, destination);
 
         if (arrived) {
-            speed = { 0, 0 };
+            speed = {0, 0};
 
             if (auto player = PenguinBody::player) {
                 auto playerCenter = player->GetCenter();
@@ -72,15 +72,15 @@ void Alien::Update(float dt) {
 
                 auto closestMinion = *std::min_element(minionArray.begin(), minionArray.end(), minionCompare);
 
-                closestMinion->GetMinion()->Shoot(playerCenter);
+                closestMinion->GetComponent<Minion>()->Shoot(playerCenter);
 
                 state = AlienState::RESTING;
                 restTimer.Restart();
             }
         }
 
-    }else if (state == AlienState::RESTING) {
-        
+    } else if (state == AlienState::RESTING) {
+
         restTimer.Update(dt);
 
         if (restTimer.Get() > 3) {
@@ -96,17 +96,17 @@ void Alien::Update(float dt) {
 void Alien::Render() {}
 
 
-bool Alien::Is(const std::string& type) {
-    return type == "Alien";
-}
-
-
 void Alien::NotifyCollision(GameObject& other) {
-    auto bullet = other.GetBullet();
+    auto bullet = other.GetComponent<Bullet>();
 
     if (bullet) {
         hp -= bullet->GetDamage();
     }
+}
+
+
+ComponentType Alien::GetType() const {
+    return Type;
 }
 
 

@@ -125,8 +125,8 @@ void Sprite::Update(float dt) {
 }
 
 
-bool Sprite::Is(const std::string& type) {
-    return type == "Sprite";
+ComponentType Sprite::GetType() const {
+    return Type;
 }
 
 

@@ -6,7 +6,7 @@
 #include "Util.h"
 #include "Collider.h"
 #include "Constants.h"
-
+#include "GameObject.h"
 
 Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCenter, double arcOffset):
     Component(associated),
@@ -45,11 +45,6 @@ void Minion::Update(float dt) {
 void Minion::Render() {}
 
 
-bool Minion::Is(const std::string& type) {
-    return type == "Minion";
-}
-
-
 void Minion::Shoot(Vec2 target) const {
     auto state = Game::GetInstance().GetState();
 
@@ -64,4 +59,9 @@ void Minion::Shoot(Vec2 target) const {
     bulletGO->box.SetCenter(position.x, position.y);
     bulletGO->angleDeg = Util::RadToDeg(angle);
     state->AddObject(bulletGO);
+}
+
+
+ComponentType Minion::GetType() const {
+    return Type;
 }

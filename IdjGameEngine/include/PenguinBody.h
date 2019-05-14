@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "Vec2.h"
 
 class PenguinBody : public Component {
 public:
@@ -9,9 +10,11 @@ public:
     void Start() override;
     void Update(float dt) override;
     void Render() override;
-    bool Is(const std::string& type) override;
     void NotifyCollision(GameObject& other) override;
     Vec2 GetCenter();
+
+    ComponentType GetType() const override;
+    static const ComponentType Type = ComponentType::PenguinBody;
 
     static PenguinBody* player;
 

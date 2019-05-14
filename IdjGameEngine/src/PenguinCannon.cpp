@@ -7,7 +7,7 @@
 #include "Bullet.h"
 #include "Collider.h"
 #include "Constants.h"
-
+#include "GameObject.h"
 
 PenguinCannon::PenguinCannon(GameObject& associated, std::weak_ptr<GameObject> penguinBody):
     Component(associated),
@@ -48,11 +48,6 @@ void PenguinCannon::Update(float dt) {
 void PenguinCannon::Render() {}
 
 
-bool PenguinCannon::Is(const std::string& type) {
-    return type == "PenguinCannon";
-}
-
-
 void PenguinCannon::Shoot() {
     auto state = Game::GetInstance().GetState();
 
@@ -69,4 +64,9 @@ void PenguinCannon::Shoot() {
     bulletGO->box.SetCenter(cannonTip.x, cannonTip.y);
     bulletGO->angleDeg = Util::RadToDeg(angle);
     state->AddObject(bulletGO);
+}
+
+
+ComponentType PenguinCannon::GetType() const {
+    return Type;
 }

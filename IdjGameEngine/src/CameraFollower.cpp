@@ -19,6 +19,6 @@ void CameraFollower::Update(float dt) {
 void CameraFollower::Render() {}
 
 
-bool CameraFollower::Is(const std::string& type) {
-    return type == "CameraFollower";
+ComponentType CameraFollower::GetType() const {
+    return Type;
 }

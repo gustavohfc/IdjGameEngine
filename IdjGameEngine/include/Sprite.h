@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Component.h"
 #include "Timer.h"
+#include "Rect.h"
 
 class Sprite : public Component {
 public:
@@ -22,7 +23,9 @@ public:
     void Start() override;
     void Render() override;
     void Update(float dt) override;
-    bool Is(const std::string& type) override;
+
+    ComponentType GetType() const override;
+    static const ComponentType Type = ComponentType::Sprite;
 
 private:
 

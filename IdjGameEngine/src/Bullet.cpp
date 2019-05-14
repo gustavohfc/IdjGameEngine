@@ -1,7 +1,9 @@
 #include "pch.h"
+#include "Alien.h"
 #include "Bullet.h"
 #include "Sprite.h"
 #include "Collider.h"
+#include "PenguinBody.h"
 
 
 Bullet::Bullet(GameObject& associated, float angle, float speed, int damage, float maxDistance,
@@ -38,17 +40,12 @@ void Bullet::Update(float dt) {
 void Bullet::Render() {}
 
 
-bool Bullet::Is(const std::string& type) {
-    return type == "Bullet";
-}
-
-
 void Bullet::NotifyCollision(GameObject& other) {
-    if (targetsPlayer && other.GetPenguinBody()) {
+    if (targetsPlayer && other.GetComponent<PenguinBody>()) {
         associated.RequestDelete();
     }
 
-    if (other.GetAlien() && !other.GetPenguinBody()) {
+    if (other.GetComponent<Alien>() && !other.GetComponent<PenguinBody>()) {
         associated.RequestDelete();
     }
 }
@@ -56,4 +53,9 @@ void Bullet::NotifyCollision(GameObject& other) {
 
 int Bullet::GetDamage() const {
     return damage;
+}
+
+
+ComponentType Bullet::GetType() const {
+    return Type;
 }

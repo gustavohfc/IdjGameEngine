@@ -9,10 +9,12 @@ public:
     void Start() override;
     void Update(float dt) override;
     void Render() override;
-    bool Is(const std::string& type) override;
     void NotifyCollision(GameObject& other) override;
 
     int GetDamage() const;
+
+    ComponentType GetType() const override;
+    static const ComponentType Type = ComponentType::Bullet;
 
     bool targetsPlayer;
 

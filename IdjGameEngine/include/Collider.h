@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "Rect.h"
 
 class Collider : public Component {
 public:
@@ -10,10 +11,12 @@ public:
     void Start() override;
     void Update(float dt) override;
     void Render() override;
-    bool Is(const std::string& type) override;
 
     void SetScale(Vec2 scale);
     void SetOffset(Vec2 offset);
+
+    ComponentType GetType() const override;
+    static const ComponentType Type = ComponentType::Collider;
 
 private:
     Vec2 scale;

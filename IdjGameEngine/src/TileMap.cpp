@@ -91,6 +91,6 @@ void TileMap::Render() {
 void TileMap::Update(float dt) {}
 
 
-bool TileMap::Is(const std::string& type) {
-    return type == "TileMap";
+ComponentType TileMap::GetType() const {
+    return Type;
 }

@@ -88,13 +88,8 @@ void PenguinBody::Update(float dt) {
 void PenguinBody::Render() {}
 
 
-bool PenguinBody::Is(const std::string& type) {
-    return type == "PenguinBody";
-}
-
-
 void PenguinBody::NotifyCollision(GameObject& other) {
-    auto bullet = other.GetBullet();
+    auto bullet = other.GetComponent<Bullet>();
 
     if (bullet && bullet->targetsPlayer) {
         hp -= bullet->GetDamage();
@@ -104,6 +99,11 @@ void PenguinBody::NotifyCollision(GameObject& other) {
 
 Vec2 PenguinBody::GetCenter() {
     return associated.box.GetCenter();
+}
+
+
+ComponentType PenguinBody::GetType() const {
+    return Type;
 }
 
 

@@ -10,9 +10,11 @@ public:
     void Start() override;
     void Update(float dt) override;
     void Render() override;
-    bool Is(const std::string& type) override;
 
     void Shoot();
+
+    ComponentType GetType() const override;
+    static const ComponentType Type = ComponentType::PenguinCannon;
 
 private:
     std::weak_ptr<GameObject> pbody;

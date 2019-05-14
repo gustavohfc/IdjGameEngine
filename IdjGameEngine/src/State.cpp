@@ -105,13 +105,13 @@ void State::Update(float dt) {
     }
 
     for (int i = 0; i < objectArray.size(); i++) {
-        auto aCollider = objectArray[i]->GetCollider();
+        auto aCollider = objectArray[i]->GetComponent<Collider>();
         if (aCollider == nullptr) {
             continue;
         }
 
         for (int j = i + 1; j < objectArray.size(); j++) {
-            auto bCollider = objectArray[j]->GetCollider();
+            auto bCollider = objectArray[j]->GetComponent<Collider>();
             if (bCollider == nullptr) {
                 continue;
             }

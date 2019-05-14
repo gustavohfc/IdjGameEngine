@@ -17,7 +17,9 @@ public:
     void Start() override;
     void Render() override;
     void Update(float dt) override;
-    bool Is(const std::string& type) override;
+
+    ComponentType GetType() const override;
+    static const ComponentType Type = ComponentType::TileMap;
 
 private:
     std::vector<int> tileMatrix;

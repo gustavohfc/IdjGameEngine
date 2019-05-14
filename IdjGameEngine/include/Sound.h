@@ -15,7 +15,9 @@ public:
     void Start() override;
     void Update(float dt) override;
     void Render() override;
-    bool Is(const std::string& type) override;
+
+    ComponentType GetType() const override;
+    static const ComponentType Type = ComponentType::Sound;
 
 private:
     Mix_Chunk* chunk = nullptr;

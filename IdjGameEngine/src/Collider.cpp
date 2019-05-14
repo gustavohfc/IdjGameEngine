@@ -59,11 +59,6 @@ void Collider::Render() {
 }
 
 
-bool Collider::Is(const std::string& type) {
-    return type == "Collider";
-}
-
-
 void Collider::SetScale(Vec2 scale) {
     this->scale = scale;
 }
@@ -71,4 +66,9 @@ void Collider::SetScale(Vec2 scale) {
 
 void Collider::SetOffset(Vec2 offset) {
     this->offset = offset;
+}
+
+
+ComponentType Collider::GetType() const {
+    return Type;
 }
