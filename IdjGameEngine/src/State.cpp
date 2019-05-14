@@ -6,10 +6,10 @@
 #include "CameraFollower.h"
 #include "Alien.h"
 #include "PenguinBody.h"
-#include "PenguinCannon.h"
 #include "Collision.h"
 #include "Util.h"
 #include "Collider.h"
+#include "Constants.h"
 
 
 State::State():
@@ -21,7 +21,7 @@ State::State():
     objectArray.push_back(background);
 
     auto map = std::make_shared<GameObject>();
-    auto tileSet = std::make_shared<TileSet>(*map, 64, 64, "assets/img/tileset.png");
+    auto tileSet = std::make_shared<TileSet>(*map, Constants::TileSet::TILE_WIDTH, Constants::TileSet::TILE_HEIGHT, "assets/img/tileset.png");
     auto tileMap = std::make_shared<TileMap>(*map, "assets/map/tileMap.txt", tileSet);
 
     // TODO: why set to (0, 0)?
@@ -34,13 +34,13 @@ State::State():
     objectArray.push_back(map);
 
     auto alienGO = std::make_shared<GameObject>();
-    alienGO->AddComponent(std::make_shared<Alien>(*alienGO, 5));
-    alienGO->box.SetCenter(512, 300);
+    alienGO->AddComponent(std::make_shared<Alien>(*alienGO, Constants::Alien::NUMBER_OF_MINIONS));
+    alienGO->box.SetCenter(Constants::Alien::INITIAL_POSITION_X, Constants::Alien::INITIAL_POSITION_Y);
     objectArray.push_back(alienGO);
 
     auto penguinBodyGO = std::make_shared<GameObject>();
     penguinBodyGO->AddComponent(std::make_shared<PenguinBody>(*penguinBodyGO));
-    penguinBodyGO->box.SetCenter(704, 640);
+    penguinBodyGO->box.SetCenter(Constants::PenguinBody::INITIAL_POSITION_X, Constants::PenguinBody::INITIAL_POSITION_Y);
     objectArray.push_back(penguinBodyGO);
 
     Camera::Follow(penguinBodyGO.get());

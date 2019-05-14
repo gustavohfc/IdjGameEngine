@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "TileMap.h"
 #include "Camera.h"
+#include "Constants.h"
 
 
 TileMap::TileMap(GameObject& associated, const std::string& file, std::shared_ptr<TileSet>& tileSet):
@@ -47,7 +48,7 @@ int& TileMap::At(int x, int y, int z) {
 
 
 void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
-    auto parallaxOffset = layer * 0.5;
+    auto parallaxOffset = layer * Constants::TileMap::PARALLAX_LAYER_OFFSET;
 
     for (int i = 0; i < mapWidth; ++i) {
         for (int j = 0; j < mapHeight; ++j) {

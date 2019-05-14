@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Resources.h"
 #include "InputManager.h"
+#include "Constants.h"
 
 Game* Game::instance = nullptr;
 
@@ -86,7 +87,7 @@ void Game::Run() {
         state->Update(dt);
         state->Render();
         SDL_RenderPresent(renderer);
-        SDL_Delay(33);
+        SDL_Delay(Constants::Game::SDL_DELAY);
     }
 
     Resources::ClearImages();
@@ -107,7 +108,7 @@ State* Game::GetState() const {
 
 Game& Game::GetInstance() {
     if (instance == nullptr) {
-        instance = new Game("Gustavo Henrique Fernandes Carvalho 14/0021671", 1024, 600);
+        instance = new Game(Constants::Game::WINDOW_TITLE, Constants::Game::WINDOW_WIDTH, Constants::Game::WINDOW_HEIGHT);
     }
     return *instance;
 }

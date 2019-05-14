@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "Camera.h"
 #include "InputManager.h"
+#include "Constants.h"
 
 Vec2 Camera::pos(0, 0), Camera::speed(0, 0);
 GameObject* Camera::focus = nullptr;
@@ -21,8 +22,8 @@ void Camera::Update(float dt) {
 
         auto focusCenter = focus->box.GetCenter();
 
-        pos.x = focusCenter.x - 1024 / 2;
-        pos.y = focusCenter.y - 600 / 2;
+        pos.x = focusCenter.x - Constants::Game::WINDOW_WIDTH / 2;
+        pos.y = focusCenter.y - Constants::Game::WINDOW_HEIGHT / 2;
 
     } else {
 
@@ -30,19 +31,19 @@ void Camera::Update(float dt) {
         speed = {0, 0};
 
         if (inputManager.IsKeyDown(UP_ARROW_KEY)) {
-            speed.y = -100;
+            speed.y -= Constants::Camera::SPEED;
         }
 
         if (inputManager.IsKeyDown(DOWN_ARROW_KEY)) {
-            speed.y = 100;
+            speed.y += Constants::Camera::SPEED;
         }
 
         if (inputManager.IsKeyDown(LEFT_ARROW_KEY)) {
-            speed.x = -100;
+            speed.x -= Constants::Camera::SPEED;
         }
 
         if (inputManager.IsKeyDown(RIGHT_ARROW_KEY)) {
-            speed.x = 100;
+            speed.x += Constants::Camera::SPEED;
         }
 
         pos += speed * dt;

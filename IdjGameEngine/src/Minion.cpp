@@ -5,8 +5,7 @@
 #include "Bullet.h"
 #include "Util.h"
 #include "Collider.h"
-
-#define ANGULAR_VELOCITY 0.15707963267 // PI/20
+#include "Constants.h"
 
 
 Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCenter, double arcOffset):
@@ -15,7 +14,7 @@ Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCen
     arc(arcOffset) {
 
     auto scale = 1 + ((rand() % 5) + 1) / 10.0;
-    
+
     auto sprite = std::make_shared<Sprite>(associated, "assets/img/minion.png");
     sprite->SetScale(scale, scale);
     associated.AddComponent(sprite);
@@ -27,8 +26,9 @@ Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCen
 
 void Minion::Start() {}
 
+
 void Minion::Update(float dt) {
-    arc += ANGULAR_VELOCITY * dt;
+    arc += Constants::Minion::ANGULAR_VELOCITY * dt;
 
     auto alien = alienCenter.lock();
     if (!alien) {
@@ -41,7 +41,9 @@ void Minion::Update(float dt) {
     associated.angleDeg = 360 - Util::RadToDeg(arc);
 }
 
+
 void Minion::Render() {}
+
 
 bool Minion::Is(const std::string& type) {
     return type == "Minion";
@@ -55,7 +57,10 @@ void Minion::Shoot(Vec2 target) const {
     auto angle = Vec2::GetVectorBetweenTwoPoints(position, target).Angle();
 
     auto bulletGO = std::make_shared<GameObject>();
-    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, 100, 10, 1000, "assets/img/minionbullet2.png", 3, 1, true));
+
+    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, Constants::Minion::BULLET_SPEED, Constants::Minion::BULLET_DAMAGE,
+                                                    Constants::Minion::BULLET_MAX_DISTANCE, "assets/img/minionbullet2.png", 3, 1, true));
+
     bulletGO->box.SetCenter(position.x, position.y);
     bulletGO->angleDeg = Util::RadToDeg(angle);
     state->AddObject(bulletGO);

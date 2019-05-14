@@ -182,6 +182,7 @@
     <ClInclude Include="include\CameraFollower.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Collision.h" />
+    <ClInclude Include="include\Constants.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\Component.h" />
     <ClInclude Include="include\Game.h" />

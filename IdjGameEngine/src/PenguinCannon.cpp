@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "Bullet.h"
 #include "Collider.h"
+#include "Constants.h"
 
 
 PenguinCannon::PenguinCannon(GameObject& associated, std::weak_ptr<GameObject> penguinBody):
@@ -37,7 +38,7 @@ void PenguinCannon::Update(float dt) {
 
     shootCoolDown.Update(dt);
 
-    if (inputManager.MousePress(LEFT_MOUSE_BUTTON) && shootCoolDown.Get() >= 1) {
+    if (inputManager.MousePress(LEFT_MOUSE_BUTTON) && shootCoolDown.Get() >= Constants::PenguinCannon::COOLDOWN_TIME) {
         Shoot();
         shootCoolDown.Restart();
     }
@@ -56,10 +57,15 @@ void PenguinCannon::Shoot() {
     auto state = Game::GetInstance().GetState();
 
     auto cannonCenter = associated.box.GetCenter();
-    auto cannonTip = cannonCenter + Vec2(54, 0).GetRotated(angle);
+    auto cannonTip = cannonCenter + Vec2(54, 0).GetRotated(angle); // TODO
 
     auto bulletGO = std::make_shared<GameObject>();
-    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, 100, 10, 1000, "assets/img/minionbullet2.png", 3, 1, false));
+
+    bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, Constants::PenguinCannon::BULLET_SPEED,
+                                                    Constants::PenguinCannon::BULLET_DAMAGE, Constants::PenguinCannon::BULLET_MAX_DISTANCE,
+                                                    "assets/img/minionbullet2.png", Constants::Bullet::FRAME_COUNT,
+                                                    Constants::Bullet::FRAME_TIME, false));
+
     bulletGO->box.SetCenter(cannonTip.x, cannonTip.y);
     bulletGO->angleDeg = Util::RadToDeg(angle);
     state->AddObject(bulletGO);

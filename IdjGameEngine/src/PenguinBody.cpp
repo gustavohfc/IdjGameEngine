@@ -9,6 +9,7 @@
 #include "Bullet.h"
 #include "Camera.h"
 #include "Sound.h"
+#include "Constants.h"
 
 
 PenguinBody* PenguinBody::player = nullptr;
@@ -19,7 +20,7 @@ PenguinBody::PenguinBody(GameObject& associated) :
     speed({0, 0}),
     linearSpeed(0),
     angle(0),
-    hp(40) {
+    hp(Constants::PenguinBody::INITIAL_HP) {
 
     associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/penguin.png"));
     associated.AddComponent(std::make_shared<Collider>(associated));
@@ -55,28 +56,28 @@ void PenguinBody::Update(float dt) {
     float angularSpeed = 0;
 
     if (inputManager.IsKeyDown(SDLK_w)) {
-        linearSpeed += 5;
+        linearSpeed += Constants::PenguinBody::LINEAR_SPEED_INCREMENT;
     }
 
     if (inputManager.IsKeyDown(SDLK_s)) {
-        linearSpeed -= 5;
+        linearSpeed -= Constants::PenguinBody::LINEAR_SPEED_INCREMENT;
     }
 
     if (inputManager.IsKeyDown(SDLK_a)) {
-        angularSpeed -= 1;
+        angularSpeed -= Constants::PenguinBody::ANGULAR_SPEED;
     }
 
     if (inputManager.IsKeyDown(SDLK_d)) {
-        angularSpeed += 1;
+        angularSpeed += Constants::PenguinBody::ANGULAR_SPEED;
     }
 
     angle += angularSpeed * dt;
     associated.angleDeg = Util::RadToDeg(angle);
 
-    if (linearSpeed > 100) {
-        linearSpeed = 100;
-    } else if (linearSpeed < -100) {
-        linearSpeed = -100;
+    if (linearSpeed > Constants::PenguinBody::MAX_LINEAR_SPEED) {
+        linearSpeed = Constants::PenguinBody::MAX_LINEAR_SPEED;
+    } else if (linearSpeed < - Constants::PenguinBody::MAX_LINEAR_SPEED) {
+        linearSpeed = - Constants::PenguinBody::MAX_LINEAR_SPEED;
     }
 
     auto nextPos = associated.box.GetCenter() + Vec2(linearSpeed * dt, 0).GetRotated(angle);
