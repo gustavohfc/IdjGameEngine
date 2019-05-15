@@ -51,7 +51,7 @@ namespace Constants {
 
     namespace Bullet {
         const int FRAME_COUNT = 3;
-        const float FRAME_TIME = 1;
+        const float FRAME_TIME = 0.5;
     }
 
     namespace Minion {
