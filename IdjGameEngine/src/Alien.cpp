@@ -99,7 +99,7 @@ void Alien::Render() {}
 void Alien::NotifyCollision(GameObject& other) {
     auto bullet = other.GetComponent<Bullet>();
 
-    if (bullet) {
+    if (bullet && !bullet->targetsPlayer) {
         hp -= bullet->GetDamage();
     }
 }

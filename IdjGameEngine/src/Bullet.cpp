@@ -45,7 +45,7 @@ void Bullet::NotifyCollision(GameObject& other) {
         associated.RequestDelete();
     }
 
-    if (other.GetComponent<Alien>() && !other.GetComponent<PenguinBody>()) {
+    if (!targetsPlayer && other.GetComponent<Alien>()) {
         associated.RequestDelete();
     }
 }
