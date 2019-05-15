@@ -52,7 +52,7 @@ void PenguinCannon::Shoot() {
     auto state = Game::GetInstance().GetState();
 
     auto cannonCenter = associated.box.GetCenter();
-    auto cannonTip = cannonCenter + Vec2(54, 0).GetRotated(angle); // TODO
+    auto cannonTip = cannonCenter + Vec2(associated.box.w / 2, 0).GetRotated(angle);
 
     auto bulletGO = std::make_shared<GameObject>();
 

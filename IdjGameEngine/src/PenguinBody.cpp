@@ -114,7 +114,16 @@ void PenguinBody::Die() {
     auto state = Game::GetInstance().GetState();
 
     auto penguinDeath = std::make_shared<GameObject>();
-    penguinDeath->AddComponent(std::make_shared<Sprite>(*penguinDeath, "assets/img/penguindeath.png", 5, 0.1f, 0.5f));
+    penguinDeath->AddComponent(
+        std::make_shared<Sprite>(
+            *penguinDeath,
+            "assets/img/penguindeath.png",
+            Constants::PenguinBody::DEATH_FRAME_COUNT,
+            Constants::PenguinBody::DEATH_FRAME_TIME,
+            Constants::PenguinBody::DEATH_SECONDS_TO_SELF_DESTRUCT
+        )
+    );
+
     auto boomSound = std::make_shared<Sound>(*penguinDeath, "assets/audio/boom.wav");
     boomSound->Play();
     penguinDeath->AddComponent(boomSound);

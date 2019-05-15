@@ -8,6 +8,7 @@
 #include "Bullet.h"
 #include "Sound.h"
 #include "PenguinBody.h"
+#include "Constants.h"
 
 int Alien::alienCount = 0;
 
@@ -15,7 +16,7 @@ int Alien::alienCount = 0;
 Alien::Alien(GameObject& associated, int nMinions):
     Component(associated),
     state(AlienState::RESTING),
-    hp(50),
+    hp(Constants::Alien::INITIAL_HP),
     nMinions(nMinions) {
 
     associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/alien.png"));
@@ -50,12 +51,11 @@ void Alien::Update(float dt) {
         return;
     }
 
-    // Rotate
-    associated.angleDeg -= 10 * dt;
+    associated.angleDeg -= Constants::Alien::ROTATION_SPEED * dt;
 
     if (state == AlienState::MOVING) {
         if (speed.x == 0 && speed.y == 0) {
-            speed = Vec2::GetUnitVectorBetweenTwoPoints(associated.box.GetCenter(), destination) * 200;
+            speed = Vec2::GetUnitVectorBetweenTwoPoints(associated.box.GetCenter(), destination) * Constants::Alien::LINEAR_SPEED;
         }
 
         bool arrived = associated.box.Move(speed * dt, destination);
@@ -116,7 +116,16 @@ void Alien::Die() {
     auto state = Game::GetInstance().GetState();
 
     auto alienDeath = std::make_shared<GameObject>();
-    alienDeath->AddComponent(std::make_shared<Sprite>(*alienDeath, "assets/img/aliendeath.png", 4, 0.1f, 0.4f));
+    alienDeath->AddComponent(
+        std::make_shared<Sprite>(
+            *alienDeath,
+            "assets/img/aliendeath.png",
+            Constants::Alien::DEATH_FRAME_COUNT,
+            Constants::Alien::DEATH_FRAME_TIME,
+            Constants::Alien::DEATH_SECONDS_TO_SELF_DESTRUCT
+        )
+    );
+
     auto boomSound = std::make_shared<Sound>(*alienDeath, "assets/audio/boom.wav");
     boomSound->Play();
     alienDeath->AddComponent(boomSound);
