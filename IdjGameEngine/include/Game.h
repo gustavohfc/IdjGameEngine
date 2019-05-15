@@ -5,10 +5,14 @@ class Game {
 public:
     ~Game();
 
-    void Run();
-    SDL_Renderer* GetRenderer() const;
-    State* GetState() const;
     static Game& GetInstance();
+    SDL_Renderer* GetRenderer() const;
+    State* GetCurrentState() const;
+
+    void Push(State* state);
+
+    void Run();
+
     float GetDeltaTime() const;
 
 private:
@@ -16,9 +20,10 @@ private:
     void CalculateDeltaTime();
 
     static Game* instance;
+    State* storedState;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    State* state;
+    std::stack<std::unique_ptr<State>> stateStack;
 
     unsigned frameStart;
     float dt;

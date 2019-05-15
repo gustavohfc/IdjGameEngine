@@ -36,5 +36,6 @@
 #include <unordered_map>
 #include <queue>
 #include <math.h>
+#include <stack>
 
 #endif //PCH_H

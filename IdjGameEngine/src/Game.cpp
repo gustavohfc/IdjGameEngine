@@ -58,13 +58,16 @@ Game::Game(const std::string& title, int width, int height):
         throw std::runtime_error(SDL_GetError());
     }
 
-    // Init the game state
-    state = new State();
+    storedState = nullptr;
 }
 
 
 Game::~Game() {
-    delete state;
+    delete storedState;
+
+    while (!stateStack.empty()) {
+        stateStack.pop();
+    }
 
     Mix_CloseAudio();
     Mix_Quit();
@@ -77,15 +80,41 @@ Game::~Game() {
 
 
 void Game::Run() {
+    if (storedState == nullptr) {
+        return;
+    }
+
     auto& inputManager = InputManager::GetInstance();
 
-    state->Start();
+    stateStack.push(std::unique_ptr<State>(storedState));
+    storedState = nullptr;
 
-    while (!state->QuitRequested()) {
+    stateStack.top()->Start();
+
+    while (!stateStack.empty() && !stateStack.top()->QuitRequested()) {
+
+        if (stateStack.top()->PopRequested()) {
+            stateStack.pop();
+
+            stateStack.top()->Resume();
+        }
+
+        if (storedState != nullptr) {
+            stateStack.top()->Pause();
+            stateStack.push(std::unique_ptr<State>(storedState));
+            stateStack.top()->Start();
+        }
+
+        if (stateStack.empty()) {
+            break;
+        }
+
         CalculateDeltaTime();
         inputManager.Update();
-        state->Update(dt);
-        state->Render();
+
+        stateStack.top()->Update(dt);
+        stateStack.top()->Render();
+
         SDL_RenderPresent(renderer);
         SDL_Delay(Constants::Game::SDL_DELAY);
     }
@@ -101,8 +130,13 @@ SDL_Renderer* Game::GetRenderer() const {
 }
 
 
-State* Game::GetState() const {
-    return state;
+State* Game::GetCurrentState() const {
+    return stateStack.top().get();
+}
+
+
+void Game::Push(State* state) {
+    storedState = state;
 }
 
 

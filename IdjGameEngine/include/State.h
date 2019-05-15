@@ -1,24 +1,33 @@
-﻿#pragma once
-#include "Sprite.h"
-#include "Music.h"
+#pragma once
+#include "GameObject.h"
 
 class State {
 public:
     State();
-    ~State();
+    virtual ~State();
 
-    void Start();
-    void AddObject(const std::shared_ptr<GameObject>& go);
-    std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
+    virtual void LoadAssets() = 0;
+    virtual void Update(float dt) = 0;
+    virtual void Render() = 0;
+
+    virtual void Start() = 0;
+    virtual void Pause() = 0;
+    virtual void Resume() = 0;
+
+    virtual void AddObject(const std::shared_ptr<GameObject>& go);
+    virtual std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
+
+    bool PopRequested() const;
     bool QuitRequested() const;
-    void LoadAssets();
-    void Update(float dt);
-    void Render();
 
-private:
-    // Sprite bg;
-    Music music;
-    bool quitRequested = false;
-    bool started = false;
+protected:
+    virtual void StartArray();
+    virtual void UpdateArray(float dt);
+    virtual void RenderArray();
+
+    bool popRequested;
+    bool quitRequested;
+    bool started;
+
     std::vector<std::shared_ptr<GameObject>> objectArray;
 };

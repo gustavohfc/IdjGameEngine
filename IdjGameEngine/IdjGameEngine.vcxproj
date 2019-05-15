@@ -168,12 +168,13 @@
     </ClCompile>
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
-    <ClCompile Include="src\State.cpp" />
+    <ClCompile Include="src\StateStage.cpp" />
     <ClCompile Include="src\TileMap.cpp" />
     <ClCompile Include="src\TileSet.cpp" />
     <ClCompile Include="src\Vec2.cpp" />
     <ClCompile Include="src\Util.cpp" />
     <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Collider.h" />
@@ -187,7 +188,7 @@
     <ClInclude Include="include\Component.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\pch.h" />
-    <ClInclude Include="include\State.h" />
+    <ClInclude Include="include\StateStage.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\Music.h" />
     <ClInclude Include="include\Rect.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="include\PenguinBody.h" />
     <ClInclude Include="include\PenguinCannon.h" />
     <ClInclude Include="include\Timer.h" />
+    <ClInclude Include="include\State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
