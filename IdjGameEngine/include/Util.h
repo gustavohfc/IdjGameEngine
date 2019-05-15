@@ -3,7 +3,7 @@
 
 class Util{
 public:
-    static double RadToDeg(double rad);
-    static double DegToRad(double deg);
+    static float RadToDeg(float rad);
+    static float DegToRad(float deg);
 };
 

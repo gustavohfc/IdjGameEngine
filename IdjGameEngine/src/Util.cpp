@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "Util.h"
 
-double Util::RadToDeg(double rad) {
-    return rad * 180 / M_PI;
+float Util::RadToDeg(float rad) {
+    return float(rad * 180 / M_PI);
 }
 
-double Util::DegToRad(double deg) {
-    return deg * M_PI / 180;
+float Util::DegToRad(float deg) {
+    return float(deg * M_PI / 180);
 }

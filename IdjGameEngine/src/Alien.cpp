@@ -37,7 +37,7 @@ void Alien::Start() {
 
     for (int i = 0; i < nMinions; i++) {
         auto minionGO = std::make_shared<GameObject>();
-        minionGO->AddComponent(std::make_shared<Minion>(*minionGO, state->GetObjectPtr(&associated), arc * i));
+        minionGO->AddComponent(std::make_shared<Minion>(*minionGO, state->GetObjectPtr(&associated), float(arc * i)));
         this->minionArray.push_back(minionGO);
         state->AddObject(minionGO);
     }
@@ -116,7 +116,7 @@ void Alien::Die() {
     auto state = Game::GetInstance().GetState();
 
     auto alienDeath = std::make_shared<GameObject>();
-    alienDeath->AddComponent(std::make_shared<Sprite>(*alienDeath, "assets/img/aliendeath.png", 4, 0.1, 0.4));
+    alienDeath->AddComponent(std::make_shared<Sprite>(*alienDeath, "assets/img/aliendeath.png", 4, 0.1f, 0.4f));
     auto boomSound = std::make_shared<Sound>(*alienDeath, "assets/audio/boom.wav");
     boomSound->Play();
     alienDeath->AddComponent(boomSound);

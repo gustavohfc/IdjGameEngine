@@ -57,7 +57,7 @@ State::~State() {
 void State::Start() {
     LoadAssets();
 
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         objectArray[i]->Start();
     }
 
@@ -75,7 +75,7 @@ void State::AddObject(const std::shared_ptr<GameObject>& go) {
 
 
 std::weak_ptr<GameObject> State::GetObjectPtr(GameObject* go) {
-    for (int i = 0; i < objectArray.size(); ++i) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         if (go == objectArray[i].get()) {
             return objectArray[i];
         }
@@ -100,17 +100,17 @@ void State::Update(float dt) {
 
     Camera::Update(dt);
 
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         objectArray[i]->Update(dt);
     }
 
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         auto aCollider = objectArray[i]->GetComponent<Collider>();
         if (aCollider == nullptr) {
             continue;
         }
 
-        for (int j = i + 1; j < objectArray.size(); j++) {
+        for (unsigned j = i + 1; j < objectArray.size(); j++) {
             auto bCollider = objectArray[j]->GetComponent<Collider>();
             if (bCollider == nullptr) {
                 continue;
@@ -136,7 +136,7 @@ void State::Update(float dt) {
 
 
 void State::Render() {
-    for (int i = 0; i < objectArray.size(); i++) {
+    for (unsigned i = 0; i < objectArray.size(); i++) {
         objectArray[i]->Render();
     }
 }

@@ -77,7 +77,7 @@ Vec2 GameObject::GetPosition() const {
 
 
 void GameObject::NotifyCollision(GameObject& other) {
-    for (int i = 0; i < components.size(); i++) {
+    for (unsigned i = 0; i < components.size(); i++) {
         components[i]->NotifyCollision(other);
     }
 }

@@ -9,9 +9,9 @@
 Bullet::Bullet(GameObject& associated, float angle, float speed, int damage, float maxDistance,
                const std::string& sprite, int frameCount, float frameTime, bool targetsPlayer):
     Component(associated),
+    targetsPlayer(targetsPlayer),
     distanceLeft(maxDistance),
-    damage(damage),
-    targetsPlayer(targetsPlayer) {
+    damage(damage) {
 
     this->speed = Vec2(speed * cos(angle), speed * sin(angle));
 

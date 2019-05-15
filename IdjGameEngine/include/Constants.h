@@ -34,22 +34,22 @@ namespace Constants {
     }
 
     namespace PenguinCannon {
-        const int BULLET_SPEED = 100;
+        const float BULLET_SPEED = 100;
         const int BULLET_DAMAGE = 10;
-        const int BULLET_MAX_DISTANCE = 1000;
+        const float BULLET_MAX_DISTANCE = 1000;
         const float COOLDOWN_TIME = 0.5;
     }
 
     namespace Bullet {
         const int FRAME_COUNT = 3;
-        const int FRAME_TIME = 1;
+        const float FRAME_TIME = 1;
     }
 
     namespace Minion {
-        const int BULLET_SPEED = 100;
+        const float BULLET_SPEED = 100;
         const int BULLET_DAMAGE = 10;
-        const int BULLET_MAX_DISTANCE = 1000;
-        const float ANGULAR_VELOCITY = 0.15707963267;
+        const float BULLET_MAX_DISTANCE = 1000;
+        const float ANGULAR_VELOCITY = 0.15707963267f;
     }
 
     namespace Camera {

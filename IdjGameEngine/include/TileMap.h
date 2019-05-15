@@ -24,5 +24,5 @@ public:
 private:
     std::vector<int> tileMatrix;
     std::shared_ptr<TileSet> tileSet;
-    int mapWidth, mapHeight, mapDepth;
+    unsigned mapWidth, mapHeight, mapDepth;
 };

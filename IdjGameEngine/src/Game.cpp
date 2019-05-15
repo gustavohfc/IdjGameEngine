@@ -17,7 +17,7 @@ Game::Game(const std::string& title, int width, int height):
 
     instance = this;
 
-    srand(time(nullptr));
+    srand(int(time(nullptr)));
 
     // Init the SDL
     auto initReturn = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
@@ -121,6 +121,6 @@ float Game::GetDeltaTime() const {
 
 void Game::CalculateDeltaTime() {
     auto currentTime = SDL_GetTicks();
-    dt = (currentTime - frameStart) / 1000.0;
+    dt = float((currentTime - frameStart) / 1000.0);
     frameStart = currentTime;
 }

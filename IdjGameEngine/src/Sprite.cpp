@@ -28,8 +28,8 @@ void Sprite::Open(const std::string& file) {
 
     UpdateFrameClipRect();
 
-    associated.box.w = GetWidth();
-    associated.box.h = height;
+    associated.box.w = float(GetWidth());
+    associated.box.h = float(height);
 }
 
 
@@ -39,12 +39,12 @@ void Sprite::SetClip(int x, int y, int w, int h) {
 
 
 int Sprite::GetWidth() const {
-    return (float(width) / frameCount) * scale.x;
+    return int((float(width) / frameCount) * scale.x);
 }
 
 
 int Sprite::GetHeight() const {
-    return height * scale.y;
+    return int(height * scale.y);
 }
 
 
@@ -65,8 +65,8 @@ void Sprite::Render(int x, int y, int w, int h) {
 void Sprite::SetScale(float scaleX, float scaleY) {
     scale = {scaleX, scaleY};
 
-    associated.box.w = GetWidth();
-    associated.box.h = GetHeight();
+    associated.box.w = float(GetWidth());
+    associated.box.h = float(GetHeight());
 }
 
 
@@ -100,10 +100,10 @@ void Sprite::Start() {}
 
 
 void Sprite::Render() {
-    Render(associated.box.x - Camera::pos.x,
-           associated.box.y - Camera::pos.y,
-           associated.box.w,
-           associated.box.h);
+    Render(int(associated.box.x - Camera::pos.x),
+           int(associated.box.y - Camera::pos.y),
+           int(associated.box.w),
+           int(associated.box.h));
 }
 
 
@@ -112,7 +112,7 @@ void Sprite::Update(float dt) {
 
     if (timeElapsed >= frameTime) {
         timeElapsed = 0;
-        currentFrame = ++currentFrame % frameCount;
+        currentFrame = (currentFrame + 1) % frameCount;
         UpdateFrameClipRect();
     }
 
@@ -136,5 +136,5 @@ void Sprite::UpdateFrameClipRect() {
 
     SetClip(x, clipRect.y, frameWidth, clipRect.h);
 
-    associated.box.w = GetWidth();
+    associated.box.w = float(GetWidth());
 }

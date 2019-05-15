@@ -6,7 +6,7 @@
 class GameObject {
 public:
     Rect box;
-    double angleDeg;
+    float angleDeg;
 
     GameObject();
     ~GameObject();

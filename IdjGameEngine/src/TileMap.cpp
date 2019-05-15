@@ -48,14 +48,14 @@ int& TileMap::At(int x, int y, int z) {
 
 
 void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
-    auto parallaxOffset = layer * Constants::TileMap::PARALLAX_LAYER_OFFSET;
+    auto layerOffset = 1 + layer * Constants::TileMap::PARALLAX_LAYER_OFFSET;
 
-    for (int i = 0; i < mapWidth; ++i) {
-        for (int j = 0; j < mapHeight; ++j) {
+    for (unsigned i = 0; i < mapWidth; ++i) {
+        for (unsigned j = 0; j < mapHeight; ++j) {
             auto tileIndex = At(i, j, layer);
             if (tileIndex != -1) {
-                auto x = (i * tileSet->GetTileWidth() - cameraX) - (cameraX * parallaxOffset);
-                auto y = (j * tileSet->GetTileHeight() - cameraY) - (cameraY * parallaxOffset);
+                auto x = (i * tileSet->GetTileWidth()) - (cameraX * layerOffset);
+                auto y = (j * tileSet->GetTileHeight()) - (cameraY * layerOffset);
                 tileSet->RenderTile(tileIndex, x, y);
             }
         }
@@ -83,7 +83,7 @@ void TileMap::Start() {}
 
 void TileMap::Render() {
     for (unsigned i = 0; i < mapDepth; ++i) {
-        RenderLayer(i, Camera::pos.x, Camera::pos.y);
+        RenderLayer(i, int(Camera::pos.x), int(Camera::pos.y));
     }
 }
 
