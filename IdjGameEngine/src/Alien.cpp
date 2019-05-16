@@ -105,11 +105,6 @@ void Alien::NotifyCollision(GameObject& other) {
 }
 
 
-ComponentType Alien::GetType() const {
-	return Type;
-}
-
-
 void Alien::Die() {
 	associated.RequestDelete();
 

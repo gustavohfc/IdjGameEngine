@@ -102,11 +102,6 @@ Vec2 PenguinBody::GetCenter() {
 }
 
 
-ComponentType PenguinBody::GetType() const {
-	return Type;
-}
-
-
 void PenguinBody::Die() {
 	associated.RequestDelete();
 	Camera::Unfollow();

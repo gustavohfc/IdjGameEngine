@@ -125,11 +125,6 @@ void Sprite::Update(float dt) {
 }
 
 
-ComponentType Sprite::GetType() const {
-	return Type;
-}
-
-
 void Sprite::UpdateFrameClipRect() {
 	auto frameWidth = width / frameCount;
 	auto x = currentFrame * frameWidth;

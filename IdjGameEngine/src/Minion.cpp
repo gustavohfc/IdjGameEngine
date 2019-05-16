@@ -61,8 +61,3 @@ void Minion::Shoot(Vec2 target) const {
 	bulletGO->angleDeg = Util::RadToDeg(angle);
 	state->AddObject(bulletGO);
 }
-
-
-ComponentType Minion::GetType() const {
-	return Type;
-}

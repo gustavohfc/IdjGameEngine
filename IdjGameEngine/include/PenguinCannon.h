@@ -13,7 +13,7 @@ public:
 
 	void Shoot();
 
-	ComponentType GetType() const override;
+	ComponentType GetType() const override { return Type; };
 	static const ComponentType Type = ComponentType::PenguinCannon;
 
 private:

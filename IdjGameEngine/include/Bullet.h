@@ -13,7 +13,7 @@ public:
 
 	int GetDamage() const;
 
-	ComponentType GetType() const override;
+	ComponentType GetType() const override { return Type; };
 	static const ComponentType Type = ComponentType::Bullet;
 
 	bool targetsPlayer;

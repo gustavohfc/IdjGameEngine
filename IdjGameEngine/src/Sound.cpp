@@ -61,8 +61,3 @@ void Sound::Start() {}
 void Sound::Update(float dt) {}
 
 void Sound::Render() {}
-
-
-ComponentType Sound::GetType() const {
-	return Type;
-}

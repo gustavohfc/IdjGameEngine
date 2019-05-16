@@ -17,8 +17,3 @@ void CameraFollower::Update(float dt) {
 
 
 void CameraFollower::Render() {}
-
-
-ComponentType CameraFollower::GetType() const {
-	return Type;
-}

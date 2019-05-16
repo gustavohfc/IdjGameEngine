@@ -66,8 +66,3 @@ void PenguinCannon::Shoot() {
 	bulletGO->angleDeg = Util::RadToDeg(angle);
 	state->AddObject(bulletGO);
 }
-
-
-ComponentType PenguinCannon::GetType() const {
-	return Type;
-}

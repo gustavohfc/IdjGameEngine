@@ -18,7 +18,7 @@ public:
 	void Render() override;
 	void Update(float dt) override;
 
-	ComponentType GetType() const override;
+	ComponentType GetType() const override { return Type; };
 	static const ComponentType Type = ComponentType::TileMap;
 
 private:

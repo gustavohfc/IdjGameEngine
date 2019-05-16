@@ -54,8 +54,3 @@ void Bullet::NotifyCollision(GameObject& other) {
 int Bullet::GetDamage() const {
 	return damage;
 }
-
-
-ComponentType Bullet::GetType() const {
-	return Type;
-}

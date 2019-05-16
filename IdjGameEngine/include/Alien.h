@@ -14,7 +14,7 @@ public:
 
 	void NotifyCollision(GameObject& other) override;
 
-	ComponentType GetType() const override;
+	ComponentType GetType() const override { return Type; };
 	static const ComponentType Type = ComponentType::Alien;
 
 	static int alienCount;

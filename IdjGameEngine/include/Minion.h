@@ -13,7 +13,7 @@ public:
 	void Shoot(Vec2 target) const;
 
 
-	ComponentType GetType() const override;
+	ComponentType GetType() const override { return Type; };
 	static const ComponentType Type = ComponentType::Minion;
 
 private:

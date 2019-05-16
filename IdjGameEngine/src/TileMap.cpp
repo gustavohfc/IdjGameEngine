@@ -89,8 +89,3 @@ void TileMap::Render() {
 
 
 void TileMap::Update(float dt) {}
-
-
-ComponentType TileMap::GetType() const {
-	return Type;
-}
