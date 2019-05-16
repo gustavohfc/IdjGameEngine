@@ -105,6 +105,7 @@ void Game::Run() {
 			stateStack.top()->Pause();
 			stateStack.emplace(storedState);
 			stateStack.top()->Start();
+			storedState = nullptr;
 		}
 
 		if (stateStack.empty()) {

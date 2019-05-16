@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Game.h"
-#include "StageState.h"
+#include "TitleState.h"
 
 
 int main(int argc, char** argv) {
@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
 #endif
 
 	auto& game = Game::GetInstance();
-	game.Push(new StageState());
+	game.Push(new TitleState());
 	game.Run();
 
 	return 0;

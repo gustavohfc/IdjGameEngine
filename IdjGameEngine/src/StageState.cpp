@@ -10,6 +10,8 @@
 #include "Util.h"
 #include "Collider.h"
 #include "Constants.h"
+#include "Game.h"
+#include "TitleState.h"
 
 
 StageState::StageState():
@@ -62,6 +64,9 @@ void StageState::Update(float dt) {
 	auto& inputManager = InputManager::GetInstance();
 
 	quitRequested = inputManager.QuitRequested();
+	if (inputManager.IsKeyDown(SDLK_ESCAPE)) {
+		Game::GetInstance().Push(new TitleState());
+	}
 
 	Camera::Update(dt);
 
