@@ -13,7 +13,7 @@
 
 
 StateStage::StateStage():
-    music("assets/audio/stageState.ogg") {
+    backgroundMusic("assets/audio/stageState.ogg") {
 
     auto background = std::make_shared<GameObject>();
     background->AddComponent(std::make_shared<Sprite>(*background, "assets/img/ocean.jpg"));
@@ -21,7 +21,8 @@ StateStage::StateStage():
     objectArray.push_back(background);
 
     auto map = std::make_shared<GameObject>();
-    auto tileSet = std::make_shared<TileSet>(*map, Constants::TileSet::TILE_WIDTH, Constants::TileSet::TILE_HEIGHT, "assets/img/tileset.png");
+    auto tileSet = std::make_shared<TileSet>(*map, Constants::TileSet::TILE_WIDTH, Constants::TileSet::TILE_HEIGHT,
+                                             "assets/img/tileset.png");
     auto tileMap = std::make_shared<TileMap>(*map, "assets/map/tileMap.txt", tileSet);
 
     // TODO: why set to (0, 0)?
@@ -45,48 +46,12 @@ StateStage::StateStage():
 
     Camera::Follow(penguinBodyGO.get());
 
-    music.Play();
+    backgroundMusic.Play();
 }
 
 
 StateStage::~StateStage() {
     objectArray.clear();
-}
-
-
-void StateStage::Start() {
-    LoadAssets();
-
-    for (unsigned i = 0; i < objectArray.size(); i++) {
-        objectArray[i]->Start();
-    }
-
-    started = true;
-}
-
-
-void StateStage::AddObject(const std::shared_ptr<GameObject>& go) {
-    objectArray.push_back(go);
-
-    if (started) {
-        go->Start();
-    }
-}
-
-
-std::weak_ptr<GameObject> StateStage::GetObjectPtr(GameObject* go) {
-    for (unsigned i = 0; i < objectArray.size(); i++) {
-        if (go == objectArray[i].get()) {
-            return objectArray[i];
-        }
-    }
-
-    return std::weak_ptr<GameObject>();
-}
-
-
-bool StateStage::QuitRequested() const {
-    return quitRequested;
 }
 
 
@@ -100,9 +65,7 @@ void StateStage::Update(float dt) {
 
     Camera::Update(dt);
 
-    for (unsigned i = 0; i < objectArray.size(); i++) {
-        objectArray[i]->Update(dt);
-    }
+    UpdateArray(dt);
 
     for (unsigned i = 0; i < objectArray.size(); i++) {
         auto aCollider = objectArray[i]->GetComponent<Collider>();
@@ -136,7 +99,19 @@ void StateStage::Update(float dt) {
 
 
 void StateStage::Render() {
-    for (unsigned i = 0; i < objectArray.size(); i++) {
-        objectArray[i]->Render();
-    }
+    RenderArray();
 }
+
+
+void StateStage::Start() {
+    LoadAssets();
+
+    StartArray();
+
+    started = true;
+}
+
+
+void StateStage::Pause() {}
+
+void StateStage::Resume() {}

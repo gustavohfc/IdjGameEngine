@@ -49,7 +49,7 @@ void PenguinCannon::Render() {}
 
 
 void PenguinCannon::Shoot() {
-    auto state = Game::GetInstance().GetState();
+    auto state = Game::GetInstance().GetCurrentState();
 
     auto cannonCenter = associated.box.GetCenter();
     auto cannonTip = cannonCenter + Vec2(associated.box.w / 2, 0).GetRotated(angle);

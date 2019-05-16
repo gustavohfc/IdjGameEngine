@@ -35,7 +35,7 @@ PenguinBody::~PenguinBody() {
 
 
 void PenguinBody::Start() {
-    auto state = Game::GetInstance().GetState();
+    auto state = Game::GetInstance().GetCurrentState();
 
     auto penguinCannonGO = std::make_shared<GameObject>();
     penguinCannonGO->AddComponent(std::make_shared<PenguinCannon>(*penguinCannonGO, state->GetObjectPtr(&associated)));
@@ -111,7 +111,7 @@ void PenguinBody::Die() {
     associated.RequestDelete();
     Camera::Unfollow();
 
-    auto state = Game::GetInstance().GetState();
+    auto state = Game::GetInstance().GetCurrentState();
 
     auto penguinDeath = std::make_shared<GameObject>();
     penguinDeath->AddComponent(

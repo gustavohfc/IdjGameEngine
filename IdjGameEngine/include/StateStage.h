@@ -1,24 +1,22 @@
 ﻿#pragma once
-#include "Sprite.h"
 #include "Music.h"
+#include "State.h"
+#include "TileSet.h"
 
-class StateStage {
+class StateStage : public State {
 public:
     StateStage();
     ~StateStage();
 
-    void Start();
-    void AddObject(const std::shared_ptr<GameObject>& go);
-    std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
-    bool QuitRequested() const;
-    void LoadAssets();
-    void Update(float dt);
-    void Render();
+    void LoadAssets() override;
+    void Update(float dt) override;
+    void Render() override;
+
+    void Start() override;
+    void Pause() override;
+    void Resume() override;
 
 private:
-    // Sprite bg;
-    Music music;
-    bool quitRequested = false;
-    bool started = false;
-    std::vector<std::shared_ptr<GameObject>> objectArray;
+    Music backgroundMusic;
+    TileSet* tileSet; // TODO: Why?
 };

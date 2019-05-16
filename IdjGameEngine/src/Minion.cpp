@@ -46,7 +46,7 @@ void Minion::Render() {}
 
 
 void Minion::Shoot(Vec2 target) const {
-    auto state = Game::GetInstance().GetState();
+    auto state = Game::GetInstance().GetCurrentState();
 
     auto position = associated.box.GetCenter();
     auto angle = Vec2::GetVectorBetweenTwoPoints(position, target).Angle();

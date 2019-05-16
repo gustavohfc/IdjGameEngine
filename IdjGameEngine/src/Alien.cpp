@@ -33,7 +33,7 @@ Alien::~Alien() {
 
 
 void Alien::Start() {
-    auto state = Game::GetInstance().GetState();
+    auto state = Game::GetInstance().GetCurrentState();
     double arc = (2 * M_PI) / nMinions;
 
     for (int i = 0; i < nMinions; i++) {
@@ -113,7 +113,7 @@ ComponentType Alien::GetType() const {
 void Alien::Die() {
     associated.RequestDelete();
 
-    auto state = Game::GetInstance().GetState();
+    auto state = Game::GetInstance().GetCurrentState();
 
     auto alienDeath = std::make_shared<GameObject>();
     alienDeath->AddComponent(

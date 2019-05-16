@@ -86,7 +86,7 @@ void Game::Run() {
 
     auto& inputManager = InputManager::GetInstance();
 
-    stateStack.push(std::unique_ptr<State>(storedState));
+    stateStack.emplace(storedState);
     storedState = nullptr;
 
     stateStack.top()->Start();
@@ -96,12 +96,14 @@ void Game::Run() {
         if (stateStack.top()->PopRequested()) {
             stateStack.pop();
 
-            stateStack.top()->Resume();
+            if (!stateStack.empty() && storedState == nullptr) {
+                stateStack.top()->Resume();
+            }
         }
 
         if (storedState != nullptr) {
             stateStack.top()->Pause();
-            stateStack.push(std::unique_ptr<State>(storedState));
+            stateStack.emplace(storedState);
             stateStack.top()->Start();
         }
 
