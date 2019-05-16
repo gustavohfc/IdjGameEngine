@@ -11,73 +11,73 @@
 
 
 GameObject::GameObject():
-    angleDeg(0) {}
+	angleDeg(0) {}
 
 
 GameObject::~GameObject() {
-    components.clear();
+	components.clear();
 }
 
 
 void GameObject::Start() {
-    for (auto& component : components) {
-        component->Start();
-    }
+	for (auto& component : components) {
+		component->Start();
+	}
 
-    started = true;
+	started = true;
 }
 
 
 void GameObject::Update(float dt) {
-    for (int i = components.size() - 1; i >= 0; i--) {
-        components[i]->Update(dt);
-    }
+	for (int i = components.size() - 1; i >= 0; i--) {
+		components[i]->Update(dt);
+	}
 }
 
 
 void GameObject::Render() {
-    for (auto& component : components) {
-        component->Render();
-    }
+	for (auto& component : components) {
+		component->Render();
+	}
 }
 
 
 bool GameObject::IsDead() const {
-    return isDead;
+	return isDead;
 }
 
 
 void GameObject::RequestDelete() {
-    isDead = true;
+	isDead = true;
 }
 
 
 void GameObject::AddComponent(const std::shared_ptr<Component>& cpt) {
-    components.push_back(cpt);
+	components.push_back(cpt);
 
-    if (started) {
-        cpt->Start();
-    }
+	if (started) {
+		cpt->Start();
+	}
 }
 
 
 void GameObject::RemoveComponent(const std::shared_ptr<Component>& cpt) {
-    auto it = std::find_if(components.begin(), components.end(),
-                           [&cpt](const std::shared_ptr<Component>& c) { return c == cpt; });
+	auto it = std::find_if(components.begin(), components.end(),
+	                       [&cpt](const std::shared_ptr<Component>& c) { return c == cpt; });
 
-    if (it != components.end()) {
-        components.erase(it);
-    }
+	if (it != components.end()) {
+		components.erase(it);
+	}
 }
 
 
 Vec2 GameObject::GetPosition() const {
-    return box.GetCenter();
+	return box.GetCenter();
 }
 
 
 void GameObject::NotifyCollision(GameObject& other) {
-    for (unsigned i = 0; i < components.size(); i++) {
-        components[i]->NotifyCollision(other);
-    }
+	for (unsigned i = 0; i < components.size(); i++) {
+		components[i]->NotifyCollision(other);
+	}
 }

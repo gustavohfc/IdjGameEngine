@@ -5,31 +5,32 @@
 
 class Alien : public Component {
 public:
-    Alien(GameObject& associated, int nMinions);
-    ~Alien();
+	Alien(GameObject& associated, int nMinions);
+	~Alien();
 
-    void Start() override;
-    void Update(float dt) override;
-    void Render() override;
+	void Start() override;
+	void Update(float dt) override;
+	void Render() override;
 
-    void NotifyCollision(GameObject& other) override;
+	void NotifyCollision(GameObject& other) override;
 
-    ComponentType GetType() const override;
-    static const ComponentType Type = ComponentType::Alien;
+	ComponentType GetType() const override;
+	static const ComponentType Type = ComponentType::Alien;
 
-    static int alienCount;
+	static int alienCount;
 
 private:
-    void Die();
+	void Die();
 
-    enum class AlienState { MOVING, RESTING };
-    AlienState state;
-    Timer restTimer;
-    Vec2 destination;
+	enum class AlienState { MOVING, RESTING };
 
-    Vec2 speed = {0, 0};
-    int hp;
+	AlienState state;
+	Timer restTimer;
+	Vec2 destination;
 
-    int nMinions;
-    std::vector<std::shared_ptr<GameObject>> minionArray;
+	Vec2 speed = {0, 0};
+	int hp;
+
+	int nMinions;
+	std::vector<std::shared_ptr<GameObject>> minionArray;
 };

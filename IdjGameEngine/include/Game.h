@@ -3,28 +3,28 @@
 
 class Game {
 public:
-    ~Game();
+	~Game();
 
-    static Game& GetInstance();
-    SDL_Renderer* GetRenderer() const;
-    State* GetCurrentState() const;
+	static Game& GetInstance();
+	SDL_Renderer* GetRenderer() const;
+	State* GetCurrentState() const;
 
-    void Push(State* state);
+	void Push(State* state);
 
-    void Run();
+	void Run();
 
-    float GetDeltaTime() const;
+	float GetDeltaTime() const;
 
 private:
-    Game(const std::string& title, int width, int height);
-    void CalculateDeltaTime();
+	Game(const std::string& title, int width, int height);
+	void CalculateDeltaTime();
 
-    static Game* instance;
-    State* storedState;
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    std::stack<std::unique_ptr<State>> stateStack;
+	static Game* instance;
+	State* storedState;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+	std::stack<std::unique_ptr<State>> stateStack;
 
-    unsigned frameStart;
-    float dt;
+	unsigned frameStart;
+	float dt;
 };

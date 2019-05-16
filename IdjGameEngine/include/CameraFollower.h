@@ -3,12 +3,12 @@
 
 class CameraFollower : public Component {
 public:
-    CameraFollower(GameObject& associated);
+	CameraFollower(GameObject& associated);
 
-    void Start() override;
-    void Update(float dt) override;
-    void Render() override;
+	void Start() override;
+	void Update(float dt) override;
+	void Render() override;
 
-    ComponentType GetType() const override;
-    static const ComponentType Type = ComponentType::CameraFollower;
+	ComponentType GetType() const override;
+	static const ComponentType Type = ComponentType::CameraFollower;
 };

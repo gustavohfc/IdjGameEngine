@@ -11,33 +11,33 @@
 
 class InputManager {
 public:
-    void Update();
+	void Update();
 
-    bool KeyPress(int key);
-    bool KeyRelease(int key);
-    bool IsKeyDown(int key);
+	bool KeyPress(int key);
+	bool KeyRelease(int key);
+	bool IsKeyDown(int key);
 
-    bool MousePress(int button);
-    bool MouseRelease(int button);
-    bool IsMouseDown(int button);
+	bool MousePress(int button);
+	bool MouseRelease(int button);
+	bool IsMouseDown(int button);
 
-    int GetMouseX() const;
-    int GetMouseY() const;
-    Vec2 GetMouseMapPos() const;
+	int GetMouseX() const;
+	int GetMouseY() const;
+	Vec2 GetMouseMapPos() const;
 
-    bool QuitRequested() const;
+	bool QuitRequested() const;
 
-    static InputManager& GetInstance();
+	static InputManager& GetInstance();
 
 private:
-    InputManager();
-    ~InputManager();
+	InputManager();
+	~InputManager();
 
-    bool mouseState[6];
-    int mouseUpdate[6];
-    std::unordered_map<int, bool> keyState;
-    std::unordered_map<int, int> keyUpdate;
-    bool quitRequested;
-    int updateCounter;
-    int mouseX, mouseY;
+	bool mouseState[6];
+	int mouseUpdate[6];
+	std::unordered_map<int, bool> keyState;
+	std::unordered_map<int, int> keyUpdate;
+	bool quitRequested;
+	int updateCounter;
+	int mouseX, mouseY;
 };

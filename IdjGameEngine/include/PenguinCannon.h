@@ -5,20 +5,20 @@
 
 class PenguinCannon : public Component {
 public:
-    PenguinCannon(GameObject& associated, std::weak_ptr<GameObject> penguinBody);
+	PenguinCannon(GameObject& associated, std::weak_ptr<GameObject> penguinBody);
 
-    void Start() override;
-    void Update(float dt) override;
-    void Render() override;
+	void Start() override;
+	void Update(float dt) override;
+	void Render() override;
 
-    void Shoot();
+	void Shoot();
 
-    ComponentType GetType() const override;
-    static const ComponentType Type = ComponentType::PenguinCannon;
+	ComponentType GetType() const override;
+	static const ComponentType Type = ComponentType::PenguinCannon;
 
 private:
-    std::weak_ptr<GameObject> pbody;
-    float angle;
+	std::weak_ptr<GameObject> pbody;
+	float angle;
 
-    Timer shootCoolDown;
+	Timer shootCoolDown;
 };

@@ -3,7 +3,7 @@
 
 
 Component::Component(GameObject& associated):
-    associated(associated) {}
+	associated(associated) {}
 
 
 Component::~Component() {}

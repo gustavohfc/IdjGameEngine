@@ -5,18 +5,18 @@
 
 class StageState : public State {
 public:
-    StageState();
-    ~StageState();
+	StageState();
+	~StageState();
 
-    void LoadAssets() override;
-    void Update(float dt) override;
-    void Render() override;
+	void LoadAssets() override;
+	void Update(float dt) override;
+	void Render() override;
 
-    void Start() override;
-    void Pause() override;
-    void Resume() override;
+	void Start() override;
+	void Pause() override;
+	void Resume() override;
 
 private:
-    Music backgroundMusic;
-    TileSet* tileSet; // TODO: Why?
+	Music backgroundMusic;
+	TileSet* tileSet; // TODO: Why?
 };

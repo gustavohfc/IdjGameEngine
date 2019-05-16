@@ -3,17 +3,19 @@
 
 
 Timer::Timer():
-    time(0) {}
+	time(0) {}
 
 
 void Timer::Update(float dt) {
-    time += dt;
+	time += dt;
 }
+
 
 void Timer::Restart() {
-    time = 0;
+	time = 0;
 }
 
+
 float Timer::Get() const {
-    return time;
+	return time;
 }

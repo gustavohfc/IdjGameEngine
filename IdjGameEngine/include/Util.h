@@ -1,9 +1,8 @@
 #pragma once
 
 
-class Util{
+class Util {
 public:
-    static float RadToDeg(float rad);
-    static float DegToRad(float deg);
+	static float RadToDeg(float rad);
+	static float DegToRad(float deg);
 };
-

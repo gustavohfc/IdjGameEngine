@@ -7,92 +7,92 @@
 
 
 Sprite::Sprite(GameObject& associated, const std::string& file, int frameCount, float frameTime, float secondsToSelfDestruct) :
-    Component(associated),
-    frameCount(frameCount),
-    currentFrame(0),
-    timeElapsed(0),
-    frameTime(frameTime),
-    scale({1, 1}),
-    secondsToSelfDestruct(secondsToSelfDestruct) {
+	Component(associated),
+	frameCount(frameCount),
+	currentFrame(0),
+	timeElapsed(0),
+	frameTime(frameTime),
+	scale({1, 1}),
+	secondsToSelfDestruct(secondsToSelfDestruct) {
 
-    Open(file);
+	Open(file);
 }
 
 
 void Sprite::Open(const std::string& file) {
-    texture = Resources::GetImage(file);
+	texture = Resources::GetImage(file);
 
-    SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
+	SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 
-    SetClip(0, 0, width, height);
+	SetClip(0, 0, width, height);
 
-    UpdateFrameClipRect();
+	UpdateFrameClipRect();
 
-    associated.box.w = float(GetWidth());
-    associated.box.h = float(height);
+	associated.box.w = float(GetWidth());
+	associated.box.h = float(height);
 }
 
 
 void Sprite::SetClip(int x, int y, int w, int h) {
-    clipRect = {x, y, w, h};
+	clipRect = {x, y, w, h};
 }
 
 
 int Sprite::GetWidth() const {
-    return int((float(width) / frameCount) * scale.x);
+	return int((float(width) / frameCount) * scale.x);
 }
 
 
 int Sprite::GetHeight() const {
-    return int(height * scale.y);
+	return int(height * scale.y);
 }
 
 
 bool Sprite::IsOpen() const {
-    return texture != nullptr;
+	return texture != nullptr;
 }
 
 
 void Sprite::Render(int x, int y, int w, int h) {
-    auto renderer = Game::GetInstance().GetRenderer();
+	auto renderer = Game::GetInstance().GetRenderer();
 
-    SDL_Rect dst = {x, y, w, h};
+	SDL_Rect dst = {x, y, w, h};
 
-    SDL_RenderCopyEx(renderer, texture, &clipRect, &dst, associated.angleDeg, nullptr, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, texture, &clipRect, &dst, associated.angleDeg, nullptr, SDL_FLIP_NONE);
 }
 
 
 void Sprite::SetScale(float scaleX, float scaleY) {
-    scale = {scaleX, scaleY};
+	scale = {scaleX, scaleY};
 
-    associated.box.w = float(GetWidth());
-    associated.box.h = float(GetHeight());
+	associated.box.w = float(GetWidth());
+	associated.box.h = float(GetHeight());
 }
 
 
 Vec2 Sprite::GetScale() const {
-    return scale;
+	return scale;
 }
 
 
 void Sprite::SetFrame(int frame) {
-    currentFrame = frame;
+	currentFrame = frame;
 
-    UpdateFrameClipRect();
+	UpdateFrameClipRect();
 }
 
 
 void Sprite::SetFrameCount(int frameCount) {
-    this->frameCount = frameCount;
+	this->frameCount = frameCount;
 
-    currentFrame = 0;
+	currentFrame = 0;
 
-    UpdateFrameClipRect();
+	UpdateFrameClipRect();
 }
 
 
 void Sprite::SetFrameTime(float frameTime) {
-    this->frameTime = frameTime;
+	this->frameTime = frameTime;
 }
 
 
@@ -100,41 +100,41 @@ void Sprite::Start() {}
 
 
 void Sprite::Render() {
-    Render(int(associated.box.x - Camera::pos.x),
-           int(associated.box.y - Camera::pos.y),
-           int(associated.box.w),
-           int(associated.box.h));
+	Render(int(associated.box.x - Camera::pos.x),
+	       int(associated.box.y - Camera::pos.y),
+	       int(associated.box.w),
+	       int(associated.box.h));
 }
 
 
 void Sprite::Update(float dt) {
-    timeElapsed += dt;
+	timeElapsed += dt;
 
-    if (timeElapsed >= frameTime) {
-        timeElapsed = 0;
-        currentFrame = (currentFrame + 1) % frameCount;
-        UpdateFrameClipRect();
-    }
+	if (timeElapsed >= frameTime) {
+		timeElapsed = 0;
+		currentFrame = (currentFrame + 1) % frameCount;
+		UpdateFrameClipRect();
+	}
 
-    if (secondsToSelfDestruct != 0) {
-        selfDestructCount.Update(dt);
-        if (selfDestructCount.Get() > secondsToSelfDestruct) {
-            associated.RequestDelete();
-        }
-    }
+	if (secondsToSelfDestruct != 0) {
+		selfDestructCount.Update(dt);
+		if (selfDestructCount.Get() > secondsToSelfDestruct) {
+			associated.RequestDelete();
+		}
+	}
 }
 
 
 ComponentType Sprite::GetType() const {
-    return Type;
+	return Type;
 }
 
 
 void Sprite::UpdateFrameClipRect() {
-    auto frameWidth = width / frameCount;
-    auto x = currentFrame * frameWidth;
+	auto frameWidth = width / frameCount;
+	auto x = currentFrame * frameWidth;
 
-    SetClip(x, clipRect.y, frameWidth, clipRect.h);
+	SetClip(x, clipRect.y, frameWidth, clipRect.h);
 
-    associated.box.w = float(GetWidth());
+	associated.box.w = float(GetWidth());
 }

@@ -2,12 +2,12 @@
 
 class Timer {
 public:
-    Timer();
+	Timer();
 
-    void Update(float dt);
-    void Restart();
-    float Get() const;
+	void Update(float dt);
+	void Restart();
+	float Get() const;
 
 private:
-    float time;
+	float time;
 };

@@ -4,55 +4,55 @@
 
 
 Sound::Sound(GameObject& associated):
-    Component(associated) {}
+	Component(associated) {}
 
 
 Sound::Sound(GameObject& associated, const std::string& file):
-    Sound(associated) {
+	Sound(associated) {
 
-    Open(file);
+	Open(file);
 }
 
 
 void Sound::Play(int times) {
-    if (!IsOpen()) {
-        throw std::logic_error("Trying to play a nullptr chunk");
-    }
+	if (!IsOpen()) {
+		throw std::logic_error("Trying to play a nullptr chunk");
+	}
 
-    channel = Mix_PlayChannel(-1, chunk, times - 1);
-    if (channel == -1) {
-        throw std::runtime_error("Mix_PlayChannel fail");
-    }
+	channel = Mix_PlayChannel(-1, chunk, times - 1);
+	if (channel == -1) {
+		throw std::runtime_error("Mix_PlayChannel fail");
+	}
 }
 
 
 void Sound::Stop() {
-    if (!IsOpen()) {
-        throw std::logic_error("Trying to stop a nullptr chunk");
-    }
+	if (!IsOpen()) {
+		throw std::logic_error("Trying to stop a nullptr chunk");
+	}
 
-    Mix_HaltChannel(channel);
+	Mix_HaltChannel(channel);
 
-    channel = -1;
+	channel = -1;
 }
 
 
 void Sound::Open(const std::string& file) {
-    chunk = Resources::GetSound(file);
+	chunk = Resources::GetSound(file);
 }
 
 
 bool Sound::IsOpen() {
-    return chunk != nullptr;
+	return chunk != nullptr;
 }
 
 
 bool Sound::IsPlaying() const {
-    if (channel == -1) {
-        return false;
-    }
+	if (channel == -1) {
+		return false;
+	}
 
-    return Mix_Playing(channel);
+	return Mix_Playing(channel);
 }
 
 
@@ -64,5 +64,5 @@ void Sound::Render() {}
 
 
 ComponentType Sound::GetType() const {
-    return Type;
+	return Type;
 }

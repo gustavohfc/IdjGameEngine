@@ -8,44 +8,44 @@ GameObject* Camera::focus = nullptr;
 
 
 void Camera::Follow(GameObject* newFocus) {
-    focus = newFocus;
+	focus = newFocus;
 }
 
 
 void Camera::Unfollow() {
-    focus = nullptr;
+	focus = nullptr;
 }
 
 
 void Camera::Update(float dt) {
-    if (focus != nullptr) {
+	if (focus != nullptr) {
 
-        auto focusCenter = focus->box.GetCenter();
+		auto focusCenter = focus->box.GetCenter();
 
-        pos.x = focusCenter.x - Constants::Game::WINDOW_WIDTH / 2;
-        pos.y = focusCenter.y - Constants::Game::WINDOW_HEIGHT / 2;
+		pos.x = focusCenter.x - Constants::Game::WINDOW_WIDTH / 2;
+		pos.y = focusCenter.y - Constants::Game::WINDOW_HEIGHT / 2;
 
-    } else {
+	} else {
 
-        auto& inputManager = InputManager::GetInstance();
-        speed = {0, 0};
+		auto& inputManager = InputManager::GetInstance();
+		speed = {0, 0};
 
-        if (inputManager.IsKeyDown(UP_ARROW_KEY)) {
-            speed.y -= Constants::Camera::SPEED;
-        }
+		if (inputManager.IsKeyDown(UP_ARROW_KEY)) {
+			speed.y -= Constants::Camera::SPEED;
+		}
 
-        if (inputManager.IsKeyDown(DOWN_ARROW_KEY)) {
-            speed.y += Constants::Camera::SPEED;
-        }
+		if (inputManager.IsKeyDown(DOWN_ARROW_KEY)) {
+			speed.y += Constants::Camera::SPEED;
+		}
 
-        if (inputManager.IsKeyDown(LEFT_ARROW_KEY)) {
-            speed.x -= Constants::Camera::SPEED;
-        }
+		if (inputManager.IsKeyDown(LEFT_ARROW_KEY)) {
+			speed.x -= Constants::Camera::SPEED;
+		}
 
-        if (inputManager.IsKeyDown(RIGHT_ARROW_KEY)) {
-            speed.x += Constants::Camera::SPEED;
-        }
+		if (inputManager.IsKeyDown(RIGHT_ARROW_KEY)) {
+			speed.x += Constants::Camera::SPEED;
+		}
 
-        pos += speed * dt;
-    }
+		pos += speed * dt;
+	}
 }

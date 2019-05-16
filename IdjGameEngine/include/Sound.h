@@ -3,23 +3,23 @@
 
 class Sound : public Component {
 public:
-    Sound(GameObject& associated);
-    Sound(GameObject& associated, const std::string& file);
+	Sound(GameObject& associated);
+	Sound(GameObject& associated, const std::string& file);
 
-    void Play(int times = 1);
-    void Stop();
-    void Open(const std::string& file);
-    bool IsOpen();
-    bool IsPlaying() const;
+	void Play(int times = 1);
+	void Stop();
+	void Open(const std::string& file);
+	bool IsOpen();
+	bool IsPlaying() const;
 
-    void Start() override;
-    void Update(float dt) override;
-    void Render() override;
+	void Start() override;
+	void Update(float dt) override;
+	void Render() override;
 
-    ComponentType GetType() const override;
-    static const ComponentType Type = ComponentType::Sound;
+	ComponentType GetType() const override;
+	static const ComponentType Type = ComponentType::Sound;
 
 private:
-    Mix_Chunk* chunk = nullptr;
-    int channel = -1;
+	Mix_Chunk* chunk = nullptr;
+	int channel = -1;
 };
