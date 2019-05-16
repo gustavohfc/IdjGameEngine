@@ -1,5 +1,5 @@
 ﻿#include "pch.h"
-#include "StateStage.h"
+#include "StageState.h"
 #include "TileMap.h"
 #include "InputManager.h"
 #include "Camera.h"
@@ -12,7 +12,7 @@
 #include "Constants.h"
 
 
-StateStage::StateStage():
+StageState::StageState():
     backgroundMusic("assets/audio/stageState.ogg") {
 
     auto background = std::make_shared<GameObject>();
@@ -50,15 +50,15 @@ StateStage::StateStage():
 }
 
 
-StateStage::~StateStage() {
+StageState::~StageState() {
     objectArray.clear();
 }
 
 
-void StateStage::LoadAssets() {}
+void StageState::LoadAssets() {}
 
 
-void StateStage::Update(float dt) {
+void StageState::Update(float dt) {
     auto& inputManager = InputManager::GetInstance();
 
     quitRequested = inputManager.QuitRequested();
@@ -98,12 +98,12 @@ void StateStage::Update(float dt) {
 }
 
 
-void StateStage::Render() {
+void StageState::Render() {
     RenderArray();
 }
 
 
-void StateStage::Start() {
+void StageState::Start() {
     LoadAssets();
 
     StartArray();
@@ -112,6 +112,6 @@ void StateStage::Start() {
 }
 
 
-void StateStage::Pause() {}
+void StageState::Pause() {}
 
-void StateStage::Resume() {}
+void StageState::Resume() {}

@@ -3,10 +3,10 @@
 #include "State.h"
 #include "TileSet.h"
 
-class StateStage : public State {
+class StageState : public State {
 public:
-    StateStage();
-    ~StateStage();
+    StageState();
+    ~StageState();
 
     void LoadAssets() override;
     void Update(float dt) override;

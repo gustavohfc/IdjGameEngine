@@ -168,7 +168,7 @@
     </ClCompile>
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
-    <ClCompile Include="src\StateStage.cpp" />
+    <ClCompile Include="src\StageState.cpp" />
     <ClCompile Include="src\TileMap.cpp" />
     <ClCompile Include="src\TileSet.cpp" />
     <ClCompile Include="src\Vec2.cpp" />
@@ -188,7 +188,7 @@
     <ClInclude Include="include\Component.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\pch.h" />
-    <ClInclude Include="include\StateStage.h" />
+    <ClInclude Include="include\StageState.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\Music.h" />
     <ClInclude Include="include\Rect.h" />
