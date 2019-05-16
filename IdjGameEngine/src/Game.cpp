@@ -1,6 +1,5 @@
 ﻿#include "pch.h"
 #include "Game.h"
-#include "Resources.h"
 #include "InputManager.h"
 #include "Constants.h"
 
@@ -121,10 +120,6 @@ void Game::Run() {
 		SDL_RenderPresent(renderer);
 		SDL_Delay(Constants::Game::SDL_DELAY);
 	}
-
-	Resources::ClearImages();
-	Resources::ClearMusics();
-	Resources::ClearSounds();
 }
 
 

@@ -31,7 +31,7 @@ private:
 
 	void UpdateFrameClipRect();
 
-	SDL_Texture* texture = nullptr;
+	std::shared_ptr<SDL_Texture> texture = nullptr;
 	int width;
 	int height;
 	SDL_Rect clipRect;

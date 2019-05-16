@@ -11,5 +11,5 @@ public:
 	bool IsOpen() const;
 
 private:
-	Mix_Music* music = nullptr;
+	std::shared_ptr<Mix_Music> music = nullptr;
 };

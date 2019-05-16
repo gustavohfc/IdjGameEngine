@@ -20,6 +20,6 @@ public:
 	static const ComponentType Type = ComponentType::Sound;
 
 private:
-	Mix_Chunk* chunk = nullptr;
+	std::shared_ptr<Mix_Chunk> chunk = nullptr;
 	int channel = -1;
 };

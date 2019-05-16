@@ -16,7 +16,7 @@ void Music::Play(int times) const {
 		throw std::logic_error("Trying to play a nullptr music");
 	}
 
-	auto mixPlayReturn = Mix_PlayMusic(music, times);
+	auto mixPlayReturn = Mix_PlayMusic(music.get(), times);
 	if (mixPlayReturn != 0) {
 		throw std::runtime_error(Mix_GetError());
 	}

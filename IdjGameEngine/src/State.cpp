@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "State.h"
+#include "Resources.h"
 
 
 State::State():
@@ -10,6 +11,10 @@ State::State():
 
 State::~State() {
 	objectArray.clear();
+
+	Resources::ClearImages();
+	Resources::ClearMusics();
+	Resources::ClearSounds();
 }
 
 

@@ -65,7 +65,7 @@ void StageState::Update(float dt) {
 
 	quitRequested = inputManager.QuitRequested();
 	if (inputManager.IsKeyDown(SDLK_ESCAPE)) {
-		Game::GetInstance().Push(new TitleState());
+		popRequested = true;
 	}
 
 	Camera::Update(dt);

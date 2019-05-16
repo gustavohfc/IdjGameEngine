@@ -19,7 +19,7 @@ void Sound::Play(int times) {
 		throw std::logic_error("Trying to play a nullptr chunk");
 	}
 
-	channel = Mix_PlayChannel(-1, chunk, times - 1);
+	channel = Mix_PlayChannel(-1, chunk.get(), times - 1);
 	if (channel == -1) {
 		throw std::runtime_error("Mix_PlayChannel fail");
 	}
