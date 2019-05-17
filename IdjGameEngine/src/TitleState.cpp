@@ -4,14 +4,22 @@
 #include "InputManager.h"
 #include "Game.h"
 #include "StageState.h"
-#include "CameraFollower.h"
+#include "Text.h"
+#include "Constants.h"
+#include "Camera.h"
 
 
 TitleState::TitleState() {
 	auto background = std::make_shared<GameObject>();
 	background->AddComponent(std::make_shared<Sprite>(*background, "assets/img/title.jpg"));
-	background->AddComponent(std::make_shared<CameraFollower>(*background));
 	objectArray.push_back(background);
+
+	auto text = std::make_shared<GameObject>();
+	text->AddComponent(std::make_shared<Text>(*text, "assets/font/Call me maybe.ttf", 48, Text::BLENDED, "Pressione espaco para iniciar o jogo", Constants::Color::ORANGERED));
+	text->box.SetCenter(512, 525);
+	objectArray.push_back(text);
+
+	// TODO: Show and hide the text
 }
 
 
@@ -45,4 +53,6 @@ void TitleState::Start() {
 
 void TitleState::Pause() {}
 
-void TitleState::Resume() {}
+void TitleState::Resume() {
+	Camera::Reset();
+}

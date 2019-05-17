@@ -49,3 +49,10 @@ void Camera::Update(float dt) {
 		pos += speed * dt;
 	}
 }
+
+
+void Camera::Reset() {
+	focus = nullptr;
+	pos = { 0, 0 };
+	speed = { 0, 0 };
+}
