@@ -12,7 +12,8 @@ enum class ComponentType {
 	PenguinCannon,
 	Sound,
 	Sprite,
-	TileMap
+	TileMap,
+	Text
 };
 
 class Component {

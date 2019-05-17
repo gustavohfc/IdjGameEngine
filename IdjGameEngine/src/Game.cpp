@@ -45,6 +45,12 @@ Game::Game(const std::string& title, int width, int height):
 
 	Mix_AllocateChannels(32);
 
+	// Init the SDL ttf
+	auto ttfInitResult = TTF_Init();
+	if (ttfInitResult != 0) {
+		throw std::runtime_error("TTF_Init() fail!");
+	}
+
 	// Create the window
 	window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 	if (window == nullptr) {
@@ -75,6 +81,7 @@ Game::~Game() {
 	SDL_DestroyWindow(window);
 	IMG_Quit();
 	SDL_Quit();
+	TTF_Quit(); // TODO: correct order?
 }
 
 

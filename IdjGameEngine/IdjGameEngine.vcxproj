@@ -176,6 +176,7 @@
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\State.cpp" />
     <ClCompile Include="src\TitleState.cpp" />
+    <ClCompile Include="src\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Collider.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="include\Timer.h" />
     <ClInclude Include="include\State.h" />
     <ClInclude Include="include\TitleState.h" />
+    <ClInclude Include="include\Text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

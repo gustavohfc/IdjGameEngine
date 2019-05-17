@@ -65,4 +65,8 @@ namespace Constants {
 		const int SPEED = 100;
 	}
 
+	namespace Color {
+		const SDL_Color BLACK = {0, 0, 0, 127};
+	}
+
 }
