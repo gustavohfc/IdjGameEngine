@@ -47,6 +47,7 @@ void TitleState::Render() {
 
 
 void TitleState::Start() {
+	Camera::Reset();
 	StartArray();
 }
 

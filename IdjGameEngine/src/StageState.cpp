@@ -10,7 +10,9 @@
 #include "Util.h"
 #include "Collider.h"
 #include "Constants.h"
+#include "GameData.h"
 #include "Game.h"
+#include "EndState.h"
 
 
 StageState::StageState():
@@ -25,13 +27,6 @@ StageState::StageState():
 	auto tileSet = std::make_shared<TileSet>(*map, Constants::TileSet::TILE_WIDTH, Constants::TileSet::TILE_HEIGHT,
 	                                         "assets/img/tileset.png");
 	auto tileMap = std::make_shared<TileMap>(*map, "assets/map/tileMap.txt", tileSet);
-
-	// TODO: why set to (0, 0)?
-	map->box.x = 0;
-	map->box.y = 0;
-	//map->box.w = tileMap->GetWidth() * 64;
-	//map->box.h = tileMap->GetHeight() * 64;
-
 	map->AddComponent(tileMap);
 	objectArray.push_back(map);
 
@@ -91,6 +86,16 @@ void StageState::Update(float dt) {
 				objectArray[j]->NotifyCollision(*objectArray[i]);
 			}
 		}
+	}
+
+	if (PenguinBody::player == nullptr) {
+		GameData::playerVictory = false;
+		popRequested = true;
+		Game::GetInstance().Push(new EndState());
+	} else if (Alien::alienCount == 0) {
+		GameData::playerVictory = true;
+		popRequested = true;
+		Game::GetInstance().Push(new EndState());
 	}
 
 	// Remove dead objects
