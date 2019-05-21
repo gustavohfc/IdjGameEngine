@@ -118,10 +118,8 @@ void Alien::Die() {
 		Constants::Alien::DEATH_SECONDS_TO_SELF_DESTRUCT
 	);
 
-	//auto boomSound = std::make_shared<Sound>(*alienDeath, "assets/audio/boom.wav");
-	//boomSound->Play();
 	alienDeath->AddComponent<Sound>("assets/audio/boom.wav");
-	//TODO: play
+	alienDeath->GetComponent<Sound>()->Play();
 
 	alienDeath->box.SetCenter(associated.box.GetCenter());
 	state->AddObject(alienDeath);

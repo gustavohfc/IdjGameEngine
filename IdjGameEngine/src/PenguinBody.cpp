@@ -115,11 +115,10 @@ void PenguinBody::Die() {
 		Constants::PenguinBody::DEATH_FRAME_TIME,
 		Constants::PenguinBody::DEATH_SECONDS_TO_SELF_DESTRUCT
 	);
-/*
-	auto boomSound = std::make_shared<Sound>(*penguinDeath, "assets/audio/boom.wav");
-	boomSound->Play();*/
+
 	penguinDeath->AddComponent<Sound>("assets/audio/boom.wav");
-	// TODO: play
+	penguinDeath->GetComponent<Sound>()->Play();
+
 	penguinDeath->box.SetCenter(associated.box.GetCenter());
 	state->AddObject(penguinDeath);
 }

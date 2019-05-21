@@ -16,10 +16,9 @@ Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCen
 
 	auto scale = float(1 + ((rand() % 5) + 1) / 10.0);
 
-	//auto sprite = std::make_shared<Sprite>(associated, "assets/img/minion.png");
-	//sprite->SetScale(scale, scale);
 	associated.AddComponent<Sprite>("assets/img/minion.png");
-	//TODO: set scale
+	associated.GetComponent<Sprite>()->SetScale(scale, scale);
+
 	associated.AddComponent<Collider>();
 
 	Update(0);
