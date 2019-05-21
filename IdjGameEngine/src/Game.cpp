@@ -74,14 +74,16 @@ Game::~Game() {
 		stateStack.pop();
 	}
 
+	std::cout << "~Game()" << std::endl;
+
 	Mix_CloseAudio();
 	Mix_Quit();
 	IMG_Quit();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
-	TTF_Quit(); // TODO: correct order?
 }
 
 
@@ -127,6 +129,9 @@ void Game::Run() {
 		SDL_RenderPresent(renderer);
 		SDL_Delay(Constants::Game::SDL_DELAY);
 	}
+
+	instance = nullptr;
+	delete this;
 }
 
 
