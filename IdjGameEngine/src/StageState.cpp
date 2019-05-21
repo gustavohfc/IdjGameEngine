@@ -46,7 +46,6 @@ StageState::StageState():
 
 
 StageState::~StageState() {
-	objectArray.clear();
 }
 
 

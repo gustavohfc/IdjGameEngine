@@ -29,5 +29,6 @@ template <typename T>
 unsigned GetComponentTypeId() {
 	static_assert(std::is_base_of<Component, T>::value, "");
 	static auto typeId = GetNextComponentId();
+	assert(typeId < Constants::NUMBER_OF_COMPONENTS_TYPES);
 	return typeId;
 }

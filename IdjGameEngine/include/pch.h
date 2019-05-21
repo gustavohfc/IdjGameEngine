@@ -37,7 +37,12 @@
 #include <queue>
 #include <math.h>
 #include <stack>
-#include <cassert>
 #include <array>
+
+// Disable asserts when not in debug
+#ifndef _DEBUG
+#define NDEBUG
+#endif
+#include <cassert>
 
 #endif //PCH_H
