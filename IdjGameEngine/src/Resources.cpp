@@ -121,4 +121,13 @@ void Resources::ClearSounds() {
 }
 
 
-void Resources::ClearFonts() {}
+void Resources::ClearFonts() {
+	for (auto&& it = fontTable.begin(); it != fontTable.end();) {
+		if (it->second.unique()) {
+			it = fontTable.erase(it);
+		}
+		else {
+			++it;
+		}
+	}
+}

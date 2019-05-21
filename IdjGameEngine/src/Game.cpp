@@ -74,8 +74,6 @@ Game::~Game() {
 		stateStack.pop();
 	}
 
-	std::cout << "~Game()" << std::endl;
-
 	Mix_CloseAudio();
 	Mix_Quit();
 	IMG_Quit();

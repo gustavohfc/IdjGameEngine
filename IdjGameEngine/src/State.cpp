@@ -15,6 +15,7 @@ State::~State() {
 	Resources::ClearImages();
 	Resources::ClearMusics();
 	Resources::ClearSounds();
+	Resources::ClearFonts();
 }
 
 
