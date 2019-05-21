@@ -116,8 +116,8 @@ void PenguinBody::Die() {
 		Constants::PenguinBody::DEATH_SECONDS_TO_SELF_DESTRUCT
 	);
 
-	penguinDeath->AddComponent<Sound>("assets/audio/boom.wav");
-	penguinDeath->GetComponent<Sound>()->Play();
+	auto sound = penguinDeath->AddComponent<Sound>("assets/audio/boom.wav");
+	sound->Play();
 
 	penguinDeath->box.SetCenter(associated.box.GetCenter());
 	state->AddObject(penguinDeath);

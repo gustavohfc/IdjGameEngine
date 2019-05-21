@@ -21,7 +21,7 @@ public:
 	void NotifyCollision(GameObject& other);
 
 	template <class T, class ... TArgs>
-	void AddComponent(TArgs&& ... args);
+	T* AddComponent(TArgs&& ... args);
 
 	template <class T>
 	T* GetComponent() const;
@@ -37,7 +37,7 @@ private:
 
 
 template <class T, class... TArgs>
-void GameObject::AddComponent(TArgs&&... args) {
+T* GameObject::AddComponent(TArgs&&... args) {
 
 	auto cpt = new T(*this, std::forward<TArgs>(args)...);
 
@@ -47,6 +47,8 @@ void GameObject::AddComponent(TArgs&&... args) {
 	if (started) {
 		cpt->Start();
 	}
+
+	return cpt;
 }
 
 

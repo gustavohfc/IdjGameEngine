@@ -118,8 +118,8 @@ void Alien::Die() {
 		Constants::Alien::DEATH_SECONDS_TO_SELF_DESTRUCT
 	);
 
-	alienDeath->AddComponent<Sound>("assets/audio/boom.wav");
-	alienDeath->GetComponent<Sound>()->Play();
+	auto sound = alienDeath->AddComponent<Sound>("assets/audio/boom.wav");
+	sound->Play();
 
 	alienDeath->box.SetCenter(associated.box.GetCenter());
 	state->AddObject(alienDeath);
