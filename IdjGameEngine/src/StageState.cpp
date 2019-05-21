@@ -29,10 +29,16 @@ StageState::StageState():
 	map->AddComponent<TileMap>("assets/map/tileMap.txt", tileSet);
 	objectArray.push_back(map);
 
-	auto alienGO = std::make_shared<GameObject>();
-	alienGO->AddComponent<Alien>(Constants::Alien::NUMBER_OF_MINIONS);
-	alienGO->box.SetCenter(Constants::Alien::INITIAL_POSITION_X, Constants::Alien::INITIAL_POSITION_Y);
-	objectArray.push_back(alienGO);
+	for (auto i = 0; i < Constants::Alien::NUMBER_OF_ALIENS; i++) {
+		auto x = rand() % 1408;
+		auto y = rand() % 1280;
+		auto offset = (rand() % 20) / 10.0;
+
+		auto alienGO = std::make_shared<GameObject>();
+		alienGO->AddComponent<Alien>(Constants::Alien::NUMBER_OF_MINIONS, offset);
+		alienGO->box.SetCenter(x, y);
+		objectArray.push_back(alienGO);
+	}
 
 	auto penguinBodyGO = std::make_shared<GameObject>();
 	penguinBodyGO->AddComponent<PenguinBody>();

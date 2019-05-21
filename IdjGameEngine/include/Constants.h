@@ -21,9 +21,8 @@ namespace Constants {
 	}
 
 	namespace Alien {
+		const int NUMBER_OF_ALIENS = 5;
 		const int NUMBER_OF_MINIONS = 5;
-		const int INITIAL_POSITION_X = 512;
-		const int INITIAL_POSITION_Y = 300;
 		const int INITIAL_HP = 50;
 		const int LINEAR_SPEED = 150;
 		const int ROTATION_SPEED = 10;
@@ -35,7 +34,7 @@ namespace Constants {
 	namespace PenguinBody {
 		const int INITIAL_POSITION_X = 704;
 		const int INITIAL_POSITION_Y = 640;
-		const int INITIAL_HP = 40;
+		const int INITIAL_HP = 60;
 		const int LINEAR_SPEED_INCREMENT = 10;
 		const int MAX_LINEAR_SPEED = 150;
 		const int ANGULAR_SPEED = 1;
