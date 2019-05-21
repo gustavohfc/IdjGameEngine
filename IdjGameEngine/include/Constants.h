@@ -2,6 +2,8 @@
 
 namespace Constants {
 
+	const unsigned NUMBER_OF_COMPONENTS_TYPES = 11;
+
 	namespace Game {
 		const int WINDOW_WIDTH = 1024;
 		const int WINDOW_HEIGHT = 600;

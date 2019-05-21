@@ -22,8 +22,8 @@ PenguinBody::PenguinBody(GameObject& associated) :
 	angle(0),
 	hp(Constants::PenguinBody::INITIAL_HP) {
 
-	associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/penguin.png"));
-	associated.AddComponent(std::make_shared<Collider>(associated));
+	associated.AddComponent<Sprite>("assets/img/penguin.png");
+	associated.AddComponent<Collider>();
 
 	player = this;
 }
@@ -38,7 +38,7 @@ void PenguinBody::Start() {
 	auto state = Game::GetInstance().GetCurrentState();
 
 	auto penguinCannonGO = std::make_shared<GameObject>();
-	penguinCannonGO->AddComponent(std::make_shared<PenguinCannon>(*penguinCannonGO, state->GetObjectPtr(&associated)));
+	penguinCannonGO->AddComponent<PenguinCannon>(state->GetObjectPtr(&associated));
 	state->AddObject(penguinCannonGO);
 
 	pcannon = penguinCannonGO;
@@ -109,19 +109,17 @@ void PenguinBody::Die() {
 	auto state = Game::GetInstance().GetCurrentState();
 
 	auto penguinDeath = std::make_shared<GameObject>();
-	penguinDeath->AddComponent(
-		std::make_shared<Sprite>(
-			*penguinDeath,
-			"assets/img/penguindeath.png",
-			Constants::PenguinBody::DEATH_FRAME_COUNT,
-			Constants::PenguinBody::DEATH_FRAME_TIME,
-			Constants::PenguinBody::DEATH_SECONDS_TO_SELF_DESTRUCT
-		)
+	penguinDeath->AddComponent<Sprite>(
+		"assets/img/penguindeath.png",
+		Constants::PenguinBody::DEATH_FRAME_COUNT,
+		Constants::PenguinBody::DEATH_FRAME_TIME,
+		Constants::PenguinBody::DEATH_SECONDS_TO_SELF_DESTRUCT
 	);
-
+/*
 	auto boomSound = std::make_shared<Sound>(*penguinDeath, "assets/audio/boom.wav");
-	boomSound->Play();
-	penguinDeath->AddComponent(boomSound);
+	boomSound->Play();*/
+	penguinDeath->AddComponent<Sound>("assets/audio/boom.wav");
+	// TODO: play
 	penguinDeath->box.SetCenter(associated.box.GetCenter());
 	state->AddObject(penguinDeath);
 }

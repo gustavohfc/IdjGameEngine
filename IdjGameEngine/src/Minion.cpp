@@ -16,10 +16,11 @@ Minion::Minion(GameObject& associated, const std::weak_ptr<GameObject>& alienCen
 
 	auto scale = float(1 + ((rand() % 5) + 1) / 10.0);
 
-	auto sprite = std::make_shared<Sprite>(associated, "assets/img/minion.png");
-	sprite->SetScale(scale, scale);
-	associated.AddComponent(sprite);
-	associated.AddComponent(std::make_shared<Collider>(associated));
+	//auto sprite = std::make_shared<Sprite>(associated, "assets/img/minion.png");
+	//sprite->SetScale(scale, scale);
+	associated.AddComponent<Sprite>("assets/img/minion.png");
+	//TODO: set scale
+	associated.AddComponent<Collider>();
 
 	Update(0);
 }
@@ -54,8 +55,8 @@ void Minion::Shoot(Vec2 target) const {
 
 	auto bulletGO = std::make_shared<GameObject>();
 
-	bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, Constants::Minion::BULLET_SPEED, Constants::Minion::BULLET_DAMAGE,
-	                                                Constants::Minion::BULLET_MAX_DISTANCE, "assets/img/minionbullet2.png", 3, 1.0f, true));
+	bulletGO->AddComponent<Bullet>(angle, Constants::Minion::BULLET_SPEED, Constants::Minion::BULLET_DAMAGE,
+	                               Constants::Minion::BULLET_MAX_DISTANCE, "assets/img/minionbullet2.png", 3, 1.0f, true);
 
 	bulletGO->box.SetCenter(position.x, position.y);
 	bulletGO->angleDeg = Util::RadToDeg(angle);

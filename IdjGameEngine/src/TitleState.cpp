@@ -11,11 +11,11 @@
 
 TitleState::TitleState() {
 	auto background = std::make_shared<GameObject>();
-	background->AddComponent(std::make_shared<Sprite>(*background, "assets/img/title.jpg"));
+	background->AddComponent<Sprite>("assets/img/title.jpg");
 	objectArray.push_back(background);
 
 	auto text = std::make_shared<GameObject>();
-	text->AddComponent(std::make_shared<Text>(*text, "assets/font/Call me maybe.ttf", 48, Text::BLENDED, "Pressione espaco para iniciar o jogo", Constants::Color::ORANGERED));
+	text->AddComponent<Text>("assets/font/Call me maybe.ttf", 48, Text::BLENDED, "Pressione espaco para iniciar o jogo", Constants::Color::ORANGERED);
 	text->box.SetCenter(512, 525);
 	objectArray.push_back(text);
 

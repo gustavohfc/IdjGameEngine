@@ -12,9 +12,6 @@ public:
 	void Update(float dt) override;
 	void Render() override;
 
-	ComponentType GetType() const override { return Type; };
-	static const ComponentType Type = ComponentType::Text;
-
 	void SetText(std::string text);
 	void SetColor(SDL_Color color);
 	void SetStyle(TextStyle style);

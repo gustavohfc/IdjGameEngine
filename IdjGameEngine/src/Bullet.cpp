@@ -15,8 +15,8 @@ Bullet::Bullet(GameObject& associated, float angle, float speed, int damage, flo
 
 	this->speed = Vec2(speed * cos(angle), speed * sin(angle));
 
-	associated.AddComponent(std::make_shared<Sprite>(associated, sprite, frameCount, frameTime));
-	associated.AddComponent(std::make_shared<Collider>(associated));
+	associated.AddComponent<Sprite>(sprite, frameCount, frameTime);
+	associated.AddComponent<Collider>();
 }
 
 

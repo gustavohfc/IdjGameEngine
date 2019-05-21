@@ -19,8 +19,8 @@ Alien::Alien(GameObject& associated, int nMinions):
 	hp(Constants::Alien::INITIAL_HP),
 	nMinions(nMinions) {
 
-	associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/alien.png"));
-	associated.AddComponent(std::make_shared<Collider>(associated));
+	associated.AddComponent<Sprite>("assets/img/alien.png");
+	associated.AddComponent<Collider>();
 
 	alienCount++;
 }
@@ -38,7 +38,7 @@ void Alien::Start() {
 
 	for (int i = 0; i < nMinions; i++) {
 		auto minionGO = std::make_shared<GameObject>();
-		minionGO->AddComponent(std::make_shared<Minion>(*minionGO, state->GetObjectPtr(&associated), float(arc * i)));
+		minionGO->AddComponent<Minion>(state->GetObjectPtr(&associated), float(arc * i));
 		this->minionArray.push_back(minionGO);
 		state->AddObject(minionGO);
 	}
@@ -111,19 +111,18 @@ void Alien::Die() {
 	auto state = Game::GetInstance().GetCurrentState();
 
 	auto alienDeath = std::make_shared<GameObject>();
-	alienDeath->AddComponent(
-		std::make_shared<Sprite>(
-			*alienDeath,
-			"assets/img/aliendeath.png",
-			Constants::Alien::DEATH_FRAME_COUNT,
-			Constants::Alien::DEATH_FRAME_TIME,
-			Constants::Alien::DEATH_SECONDS_TO_SELF_DESTRUCT
-		)
+	alienDeath->AddComponent<Sprite>(
+		"assets/img/aliendeath.png",
+		Constants::Alien::DEATH_FRAME_COUNT,
+		Constants::Alien::DEATH_FRAME_TIME,
+		Constants::Alien::DEATH_SECONDS_TO_SELF_DESTRUCT
 	);
 
-	auto boomSound = std::make_shared<Sound>(*alienDeath, "assets/audio/boom.wav");
-	boomSound->Play();
-	alienDeath->AddComponent(boomSound);
+	//auto boomSound = std::make_shared<Sound>(*alienDeath, "assets/audio/boom.wav");
+	//boomSound->Play();
+	alienDeath->AddComponent<Sound>("assets/audio/boom.wav");
+	//TODO: play
+
 	alienDeath->box.SetCenter(associated.box.GetCenter());
 	state->AddObject(alienDeath);
 }

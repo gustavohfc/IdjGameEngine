@@ -19,24 +19,23 @@ StageState::StageState():
 	backgroundMusic("assets/audio/stageState.ogg") {
 
 	auto background = std::make_shared<GameObject>();
-	background->AddComponent(std::make_shared<Sprite>(*background, "assets/img/ocean.jpg"));
-	background->AddComponent(std::make_shared<CameraFollower>(*background));
+	background->AddComponent<Sprite>("assets/img/ocean.jpg");
+	background->AddComponent<CameraFollower>();
 	objectArray.push_back(background);
 
 	auto map = std::make_shared<GameObject>();
 	auto tileSet = std::make_shared<TileSet>(*map, Constants::TileSet::TILE_WIDTH, Constants::TileSet::TILE_HEIGHT,
 	                                         "assets/img/tileset.png");
-	auto tileMap = std::make_shared<TileMap>(*map, "assets/map/tileMap.txt", tileSet);
-	map->AddComponent(tileMap);
+	map->AddComponent<TileMap>("assets/map/tileMap.txt", tileSet);
 	objectArray.push_back(map);
 
 	auto alienGO = std::make_shared<GameObject>();
-	alienGO->AddComponent(std::make_shared<Alien>(*alienGO, Constants::Alien::NUMBER_OF_MINIONS));
+	alienGO->AddComponent<Alien>(Constants::Alien::NUMBER_OF_MINIONS);
 	alienGO->box.SetCenter(Constants::Alien::INITIAL_POSITION_X, Constants::Alien::INITIAL_POSITION_Y);
 	objectArray.push_back(alienGO);
 
 	auto penguinBodyGO = std::make_shared<GameObject>();
-	penguinBodyGO->AddComponent(std::make_shared<PenguinBody>(*penguinBodyGO));
+	penguinBodyGO->AddComponent<PenguinBody>();
 	penguinBodyGO->box.SetCenter(Constants::PenguinBody::INITIAL_POSITION_X, Constants::PenguinBody::INITIAL_POSITION_Y);
 	objectArray.push_back(penguinBodyGO);
 

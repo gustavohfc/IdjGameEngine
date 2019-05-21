@@ -13,9 +13,6 @@ public:
 
 	void Shoot();
 
-	ComponentType GetType() const override { return Type; };
-	static const ComponentType Type = ComponentType::PenguinCannon;
-
 private:
 	std::weak_ptr<GameObject> pbody;
 	float angle;

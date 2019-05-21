@@ -37,5 +37,7 @@
 #include <queue>
 #include <math.h>
 #include <stack>
+#include <cassert>
+#include <array>
 
 #endif //PCH_H

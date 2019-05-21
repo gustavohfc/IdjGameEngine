@@ -2,12 +2,7 @@
 #include "GameObject.h"
 #include "Sound.h"
 #include "Minion.h"
-#include "Sprite.h"
-#include "Collider.h"
-#include "Alien.h"
 #include "PenguinBody.h"
-#include "PenguinCannon.h"
-#include "Bullet.h"
 
 
 GameObject::GameObject():
@@ -15,7 +10,8 @@ GameObject::GameObject():
 
 
 GameObject::~GameObject() {
-	components.clear();
+	// TODO: Is it needed?
+	//components.clear();
 }
 
 
@@ -52,21 +48,18 @@ void GameObject::RequestDelete() {
 }
 
 
-void GameObject::AddComponent(const std::shared_ptr<Component>& cpt) {
-	components.push_back(cpt);
-
-	if (started) {
-		cpt->Start();
-	}
-}
-
-
-void GameObject::RemoveComponent(const std::shared_ptr<Component>& cpt) {
+void GameObject::RemoveComponent(const Component* cpt) {
 	auto it = std::find_if(components.begin(), components.end(),
-	                       [&cpt](const std::shared_ptr<Component>& c) { return c == cpt; });
+	                       [&cpt](const std::unique_ptr<Component>& c) { return c.get() == cpt; });
 
 	if (it != components.end()) {
 		components.erase(it);
+	}
+
+	for (auto& component : componentsArray) {
+		if (component == cpt) {
+			component = nullptr;
+		}
 	}
 }
 

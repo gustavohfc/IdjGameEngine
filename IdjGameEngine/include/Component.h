@@ -1,20 +1,7 @@
 #pragma once
+#include "Constants.h"
 
 class GameObject;
-
-enum class ComponentType {
-	Alien,
-	Bullet,
-	CameraFollower,
-	Collider,
-	Minion,
-	PenguinBody,
-	PenguinCannon,
-	Sound,
-	Sprite,
-	TileMap,
-	Text
-};
 
 class Component {
 public:
@@ -27,8 +14,20 @@ public:
 
 	virtual void NotifyCollision(GameObject& other);
 
-	virtual ComponentType GetType() const = 0;
-
 protected:
 	GameObject& associated;
 };
+
+
+inline unsigned GetNextComponentId() {
+	static auto lastId = 0u;
+	return lastId++;
+}
+
+
+template <typename T>
+unsigned GetComponentTypeId() {
+	static_assert(std::is_base_of<Component, T>::value, "");
+	static auto typeId = GetNextComponentId();
+	return typeId;
+}

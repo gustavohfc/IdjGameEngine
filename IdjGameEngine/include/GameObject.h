@@ -16,29 +16,42 @@ public:
 	void Render();
 	bool IsDead() const;
 	void RequestDelete();
-	void AddComponent(const std::shared_ptr<Component>& cpt);
-	void RemoveComponent(const std::shared_ptr<Component>& cpt);
+	void RemoveComponent(const Component* cpt);
 	Vec2 GetPosition() const;
 	void NotifyCollision(GameObject& other);
 
+	template <class T, class ... TArgs>
+	void AddComponent(TArgs&& ... args);
+
 	template <class T>
-	std::shared_ptr<T> GetComponent() const;
+	T* GetComponent() const;
 
 
 private:
-	std::vector<std::shared_ptr<Component>> components;
+	std::vector<std::unique_ptr<Component>> components;
+	std::array<Component*, Constants::NUMBER_OF_COMPONENTS_TYPES> componentsArray{};
+
 	bool isDead = false;
 	bool started = false;
 };
 
 
-template <class T>
-std::shared_ptr<T> GameObject::GetComponent() const {
-	for (auto& component : components) {
-		if (T::Type == component->GetType()) {
-			return std::static_pointer_cast<T>(component);
-		}
-	}
+template <class T, class... TArgs>
+void GameObject::AddComponent(TArgs&&... args) {
 
-	return nullptr;
+	auto cpt = new T(*this, std::forward<TArgs>(args)...);
+
+	components.emplace_back(cpt);
+	componentsArray[GetComponentTypeId<T>()] = cpt;
+
+	if (started) {
+		cpt->Start();
+	}
+}
+
+
+template <class T>
+T* GameObject::GetComponent() const {
+	static_assert(std::is_base_of<Component, T>::value, "Invalid type");
+	return static_cast<T*>(componentsArray[GetComponentTypeId<T>()]);
 }

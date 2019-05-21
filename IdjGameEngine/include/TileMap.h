@@ -18,9 +18,6 @@ public:
 	void Render() override;
 	void Update(float dt) override;
 
-	ComponentType GetType() const override { return Type; };
-	static const ComponentType Type = ComponentType::TileMap;
-
 private:
 	std::vector<int> tileMatrix;
 	std::shared_ptr<TileSet> tileSet;

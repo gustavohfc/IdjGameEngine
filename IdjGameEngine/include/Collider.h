@@ -15,9 +15,6 @@ public:
 	void SetScale(Vec2 scale);
 	void SetOffset(Vec2 offset);
 
-	ComponentType GetType() const override { return Type; };
-	static const ComponentType Type = ComponentType::Collider;
-
 private:
 	Vec2 scale;
 	Vec2 offset;

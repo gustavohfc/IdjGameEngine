@@ -13,9 +13,6 @@ public:
 	void NotifyCollision(GameObject& other) override;
 	Vec2 GetCenter();
 
-	ComponentType GetType() const override { return Type; };
-	static const ComponentType Type = ComponentType::PenguinBody;
-
 	static PenguinBody* player;
 
 private:

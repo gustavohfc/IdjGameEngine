@@ -24,9 +24,6 @@ public:
 	void Render() override;
 	void Update(float dt) override;
 
-	ComponentType GetType() const override { return Type; };
-	static const ComponentType Type = ComponentType::Sprite;
-
 private:
 
 	void UpdateFrameClipRect();

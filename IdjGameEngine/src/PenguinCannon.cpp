@@ -15,8 +15,8 @@ PenguinCannon::PenguinCannon(GameObject& associated, std::weak_ptr<GameObject> p
 	pbody(penguinBody),
 	angle(0) {
 
-	associated.AddComponent(std::make_shared<Sprite>(associated, "assets/img/cubngun.png"));
-	associated.AddComponent(std::make_shared<Collider>(associated));
+	associated.AddComponent<Sprite>("assets/img/cubngun.png");
+	associated.AddComponent<Collider>();
 }
 
 
@@ -57,10 +57,10 @@ void PenguinCannon::Shoot() {
 
 	auto bulletGO = std::make_shared<GameObject>();
 
-	bulletGO->AddComponent(std::make_shared<Bullet>(*bulletGO, angle, Constants::PenguinCannon::BULLET_SPEED,
-	                                                Constants::PenguinCannon::BULLET_DAMAGE, Constants::PenguinCannon::BULLET_MAX_DISTANCE,
-	                                                "assets/img/minionbullet2.png", Constants::Bullet::FRAME_COUNT,
-	                                                Constants::Bullet::FRAME_TIME, false));
+	bulletGO->AddComponent<Bullet>(angle, Constants::PenguinCannon::BULLET_SPEED,
+	                               Constants::PenguinCannon::BULLET_DAMAGE, Constants::PenguinCannon::BULLET_MAX_DISTANCE,
+	                               "assets/img/minionbullet2.png", Constants::Bullet::FRAME_COUNT,
+	                               Constants::Bullet::FRAME_TIME, false);
 
 	bulletGO->box.SetCenter(cannonTip.x, cannonTip.y);
 	bulletGO->angleDeg = Util::RadToDeg(angle);

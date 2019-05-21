@@ -12,10 +12,6 @@ public:
 
 	void Shoot(Vec2 target) const;
 
-
-	ComponentType GetType() const override { return Type; };
-	static const ComponentType Type = ComponentType::Minion;
-
 private:
 	std::weak_ptr<GameObject> alienCenter;
 	float arc;

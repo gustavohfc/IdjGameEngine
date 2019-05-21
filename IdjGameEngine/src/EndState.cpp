@@ -11,7 +11,7 @@ EndState::EndState() {
 	// TODO: Add sound and text
 
 	auto background = std::make_shared<GameObject>();
-	background->AddComponent(std::make_shared<Sprite>(*background, GameData::playerVictory ? "assets/img/win.jpg" : "assets/img/lose.jpg"));
+	background->AddComponent<Sprite>(GameData::playerVictory ? "assets/img/win.jpg" : "assets/img/lose.jpg");
 	objectArray.push_back(background);
 }
 
