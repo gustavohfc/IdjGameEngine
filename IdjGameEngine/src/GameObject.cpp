@@ -10,8 +10,6 @@ GameObject::GameObject():
 
 
 GameObject::~GameObject() {
-	// TODO: Is it needed?
-	//components.clear();
 }
 
 

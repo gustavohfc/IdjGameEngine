@@ -20,9 +20,7 @@ Text::Text(GameObject& associated, std::string fontFile, int fontSize, TextStyle
 }
 
 
-Text::~Text() {
-	// TODO: destroy texture?
-}
+Text::~Text() {}
 
 
 void Text::Start() {}
@@ -63,6 +61,12 @@ void Text::SetText(std::string text) {
 
 void Text::SetColor(SDL_Color color) {
 	this->color = color;
+	RemakeTexture();
+}
+
+
+void Text::SetAlpha(Uint8 alpha) {
+	this->color.a = alpha;
 	RemakeTexture();
 }
 

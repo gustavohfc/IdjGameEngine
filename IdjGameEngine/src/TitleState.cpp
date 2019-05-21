@@ -14,12 +14,10 @@ TitleState::TitleState() {
 	background->AddComponent<Sprite>("assets/img/title.jpg");
 	objectArray.push_back(background);
 
-	auto text = std::make_shared<GameObject>();
+	text = std::make_shared<GameObject>();
 	text->AddComponent<Text>("assets/font/Call me maybe.ttf", 48, Text::BLENDED, "Pressione espaco para iniciar o jogo", Constants::Color::ORANGERED);
 	text->box.SetCenter(512, 525);
 	objectArray.push_back(text);
-
-	// TODO: Show and hide the text
 }
 
 
@@ -31,10 +29,17 @@ void TitleState::LoadAssets() {}
 void TitleState::Update(float dt) {
 	auto& inputManager = InputManager::GetInstance();
 
-	quitRequested = inputManager.QuitRequested();
+	quitRequested = inputManager.QuitRequested() || inputManager.KeyPress(SDLK_ESCAPE);
 
-	if (inputManager.IsKeyDown(SDLK_SPACE)) {
+	if (inputManager.KeyPress(SDLK_SPACE)) {
 		Game::GetInstance().Push(new StageState());
+	}
+
+	textTimer.Update(dt);
+	if (textTimer.Get() > 1) {
+		textTimer.Restart();
+		text->GetComponent<Text>()->SetAlpha(isTextTransparent);
+		isTextTransparent = !isTextTransparent;
 	}
 
 	UpdateArray(dt);

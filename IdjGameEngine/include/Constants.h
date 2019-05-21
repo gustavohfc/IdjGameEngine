@@ -71,6 +71,7 @@ namespace Constants {
 		const SDL_Color BLACK = { 0, 0, 0, 0 };
 		const SDL_Color RED = { 255, 0, 0, 0 };
 		const SDL_Color ORANGERED = { 255, 69, 0, 0 };
+		const SDL_Color TRANSPARENT = { 0, 0, 0, 1 };
 	}
 
 }

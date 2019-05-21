@@ -14,6 +14,7 @@ public:
 
 	void SetText(std::string text);
 	void SetColor(SDL_Color color);
+	void SetAlpha(Uint8 alpha);
 	void SetStyle(TextStyle style);
 	void SetFontFile(std::string fontFile);
 	void SetFontSize(int fontSize);
