@@ -59,8 +59,8 @@ void PenguinCannon::Shoot() {
 
 	bulletGO->AddComponent<Bullet>(angle, Constants::PenguinCannon::BULLET_SPEED,
 	                               Constants::PenguinCannon::BULLET_DAMAGE, Constants::PenguinCannon::BULLET_MAX_DISTANCE,
-	                               "assets/img/minionbullet2.png", Constants::Bullet::FRAME_COUNT,
-	                               Constants::Bullet::FRAME_TIME, false);
+	                               "assets/img/penguinbullet.png", 4,
+	                               1, false);
 
 	bulletGO->box.SetCenter(cannonTip.x, cannonTip.y);
 	bulletGO->angleDeg = Util::RadToDeg(angle);
